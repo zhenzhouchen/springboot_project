@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.sb.springboot_project.mapper.CouponMapper">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Coupon">
+    update cskaoyan_mall_coupon
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        desc = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="min != null">
+        min = #{min,jdbcType=DECIMAL},
+      </if>
+      <if test="limit != null">
+        limit = #{limit,jdbcType=SMALLINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="goodsType != null">
+        goods_type = #{goodsType,jdbcType=SMALLINT},
+      </if>
+      <if test="goodsValue != null">
+        goods_value = #{goodsValue,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="timeType != null">
+        time_type = #{timeType,jdbcType=SMALLINT},
+      </if>
+      <if test="days != null">
+        days = #{days,jdbcType=SMALLINT},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.sb.springboot_project.bean.Coupon">
+    update cskaoyan_mall_coupon
+    set name = #{name,jdbcType=VARCHAR},
+      desc = #{desc,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      total = #{total,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=DECIMAL},
+      min = #{min,jdbcType=DECIMAL},
+      limit = #{limit,jdbcType=SMALLINT},
+      type = #{type,jdbcType=SMALLINT},
+      status = #{status,jdbcType=SMALLINT},
+      goods_type = #{goodsType,jdbcType=SMALLINT},
+      goods_value = #{goodsValue,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      time_type = #{timeType,jdbcType=SMALLINT},
+      days = #{days,jdbcType=SMALLINT},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

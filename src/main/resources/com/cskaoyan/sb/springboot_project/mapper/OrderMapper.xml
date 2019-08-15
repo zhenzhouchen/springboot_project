@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.sb.springboot_project.mapper.OrderMapper">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Order">
+    update cskaoyan_mall_order
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderSn != null">
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="consignee != null">
+        consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="freightPrice != null">
+        freight_price = #{freightPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="couponPrice != null">
+        coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="integralPrice != null">
+        integral_price = #{integralPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="grouponPrice != null">
+        groupon_price = #{grouponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderPrice != null">
+        order_price = #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPrice != null">
+        actual_price = #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payId != null">
+        pay_id = #{payId,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipSn != null">
+        ship_sn = #{shipSn,jdbcType=VARCHAR},
+      </if>
+      <if test="shipChannel != null">
+        ship_channel = #{shipChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="shipTime != null">
+        ship_time = #{shipTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null">
+        confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comments != null">
+        comments = #{comments,jdbcType=SMALLINT},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.sb.springboot_project.bean.Order">
+    update cskaoyan_mall_order
+    set user_id = #{userId,jdbcType=INTEGER},
+      order_sn = #{orderSn,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=SMALLINT},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      freight_price = #{freightPrice,jdbcType=DECIMAL},
+      coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      integral_price = #{integralPrice,jdbcType=DECIMAL},
+      groupon_price = #{grouponPrice,jdbcType=DECIMAL},
+      order_price = #{orderPrice,jdbcType=DECIMAL},
+      actual_price = #{actualPrice,jdbcType=DECIMAL},
+      pay_id = #{payId,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      ship_sn = #{shipSn,jdbcType=VARCHAR},
+      ship_channel = #{shipChannel,jdbcType=VARCHAR},
+      ship_time = #{shipTime,jdbcType=TIMESTAMP},
+      confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      comments = #{comments,jdbcType=SMALLINT},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

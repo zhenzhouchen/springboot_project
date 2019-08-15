@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.sb.springboot_project.mapper.GoodsMapper">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Goods">
+    update cskaoyan_mall_goods
+    <set>
+      <if test="goodsSn != null">
+        goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="gallery != null">
+        gallery = #{gallery,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null">
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null">
+        brief = #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnSale != null">
+        is_on_sale = #{isOnSale,jdbcType=BIT},
+      </if>
+      <if test="sortOrder != null">
+        sort_order = #{sortOrder,jdbcType=SMALLINT},
+      </if>
+      <if test="picUrl != null">
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="shareUrl != null">
+        share_url = #{shareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isNew != null">
+        is_new = #{isNew,jdbcType=BIT},
+      </if>
+      <if test="isHot != null">
+        is_hot = #{isHot,jdbcType=BIT},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="counterPrice != null">
+        counter_price = #{counterPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="retailPrice != null">
+        retail_price = #{retailPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cskaoyan.sb.springboot_project.bean.Goods">
+    update cskaoyan_mall_goods
+    set goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      gallery = #{gallery,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      brief = #{brief,jdbcType=VARCHAR},
+      is_on_sale = #{isOnSale,jdbcType=BIT},
+      sort_order = #{sortOrder,jdbcType=SMALLINT},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      share_url = #{shareUrl,jdbcType=VARCHAR},
+      is_new = #{isNew,jdbcType=BIT},
+      is_hot = #{isHot,jdbcType=BIT},
+      unit = #{unit,jdbcType=VARCHAR},
+      counter_price = #{counterPrice,jdbcType=DECIMAL},
+      retail_price = #{retailPrice,jdbcType=DECIMAL},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT},
+      detail = #{detail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.sb.springboot_project.bean.Goods">
+    update cskaoyan_mall_goods
+    set goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      gallery = #{gallery,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      brief = #{brief,jdbcType=VARCHAR},
+      is_on_sale = #{isOnSale,jdbcType=BIT},
+      sort_order = #{sortOrder,jdbcType=SMALLINT},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      share_url = #{shareUrl,jdbcType=VARCHAR},
+      is_new = #{isNew,jdbcType=BIT},
+      is_hot = #{isHot,jdbcType=BIT},
+      unit = #{unit,jdbcType=VARCHAR},
+      counter_price = #{counterPrice,jdbcType=DECIMAL},
+      retail_price = #{retailPrice,jdbcType=DECIMAL},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
