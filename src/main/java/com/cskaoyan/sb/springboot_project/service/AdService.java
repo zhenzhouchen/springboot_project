@@ -3,9 +3,14 @@ package com.cskaoyan.sb.springboot_project.service;
 import com.cskaoyan.sb.springboot_project.bean.Ad;
 import com.cskaoyan.sb.springboot_project.bean.Popularize.PopPage;
 
-import java.util.List;
+import java.util.Map;
+
 
 public interface AdService {
 
-    List<Ad> listAd(PopPage popPage);
+    Map<String,Object> listAd(PopPage popPage);
+
+    Ad createAd(Ad ad);
+
+    Ad updateAd(Ad ad);
 }

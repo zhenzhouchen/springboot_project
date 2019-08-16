@@ -1,10 +1,12 @@
 package com.cskaoyan.sb.springboot_project.bean.Popularize;
 
+import java.util.List;
+
 public class PopBaseResp<T> {
 
     private T Data;
     private String errmsg;
-    private String errno;
+    private int errno;
 
     public T getData() {
         return Data;
@@ -22,11 +24,11 @@ public class PopBaseResp<T> {
         this.errmsg = errmsg;
     }
 
-    public String getErrno() {
+    public int getErrno() {
         return errno;
     }
 
-    public void setErrno(String errno) {
+    public void setErrno(int errno) {
         this.errno = errno;
     }
 }

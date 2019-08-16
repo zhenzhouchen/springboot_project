@@ -1,24 +1,24 @@
 package com.cskaoyan.sb.springboot_project.bean.Popularize;
 
 public class PopPage {
-    private String page;
-    private String limit;
+    private int page;
+    private int limit;
     private String sort;
     private String order;
 
-    public String getPage() {
+    public int getPage() {
         return page;
     }
 
-    public void setPage(String page) {
+    public void setPage(int page) {
         this.page = page;
     }
 
-    public String getLimit() {
+    public int getLimit() {
         return limit;
     }
 
-    public void setLimit(String limit) {
+    public void setLimit(int limit) {
         this.limit = limit;
     }
 
