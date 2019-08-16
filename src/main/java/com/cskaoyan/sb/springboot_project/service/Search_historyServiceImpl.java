@@ -13,12 +13,12 @@ public class Search_historyServiceImpl implements Search_historyService {
     Search_historyMapper search_historyMapper;
 
     @Override
-    public List<Search_history> queryAllHistoryList() {
-        return search_historyMapper.queryAllHistoryList();
+    public List<Search_history> queryAllHistoryList(String sort,String order) {
+        return search_historyMapper.queryAllHistoryList(sort,order);
     }
 
     @Override
-    public List<Search_history> queryHistoryList(Integer userId, String keyword) {
-        return search_historyMapper.queryHistoryList(userId, keyword);
+    public List<Search_history> queryHistoryList(Integer userId, String keyword,String sort,String order) {
+        return search_historyMapper.queryHistoryList(userId, keyword,sort,order);
     }
 }

@@ -20,16 +20,16 @@ public class FootprintController {
     FootprintService footprintService;
     @RequestMapping("/footprint/list")
     @ResponseBody
-    public Map<String,Object> query_footprint_list(int page,int limit,Integer userId,Integer goodsId){
+    public Map<String,Object> query_footprint_list(int page,int limit,Integer userId,Integer goodsId,String sort,String order){
         PageHelper.startPage(page,limit);
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> info_map = new HashMap<>();
         List<Footprint> items =null;
         if(userId == null && goodsId ==null){
-            items = footprintService.queryAllFootprintList();
+            items = footprintService.queryAllFootprintList(sort,order);
 
         }else{
-            items = footprintService.queryFootprintList(userId,goodsId);
+            items = footprintService.queryFootprintList(userId,goodsId,sort,order);
         }
         PageInfo<Footprint> userPageInfo = new PageInfo<>(items);info_map.put("items",items);
         long total = userPageInfo.getTotal();

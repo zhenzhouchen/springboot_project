@@ -21,15 +21,15 @@ public class CollectController {
     CollectService collectService;
     @RequestMapping("/collect/list")
     @ResponseBody
-    public Map<String,Object> query_collect_list(int page,int limit,Integer userId,Integer valueId){
+    public Map<String,Object> query_collect_list(int page,int limit,Integer userId,Integer valueId,String sort,String order){
         PageHelper.startPage(page,limit);
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> info_map = new HashMap<>();
         List<Collect> items = null;
         if(userId==null && valueId==null){
-            items = collectService.queryAllCollectList();
+            items = collectService.queryAllCollectList(sort,order);
         }else {
-            items = collectService.queryCollectList(userId,valueId);
+            items = collectService.queryCollectList(userId,valueId,sort,order);
 
         }
         PageInfo<Collect> userPageInfo = new PageInfo<>(items);info_map.put("items",items);

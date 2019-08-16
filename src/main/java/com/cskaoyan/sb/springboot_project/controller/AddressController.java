@@ -23,17 +23,17 @@ public class AddressController {
     //地址管理列表
     @RequestMapping("/address/list")
     @ResponseBody
-    public Map<String,Object> query_address_list(int page,int limit,String name,Integer userId){
+    public Map<String,Object> query_address_list(int page,int limit,String name,Integer userId,String sort,String order){
         //开启分页
         PageHelper.startPage(page,limit);
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> info_map = new HashMap<>();
         List<Address> items =null;
         if(name == null && userId ==null){
-            items = addressService.queryAllAddressList();
+            items = addressService.queryAllAddressList(sort,order);
 
         }else{
-            items = addressService.queryAddressList(name,userId);
+            items = addressService.queryAddressList(name,userId,sort,order);
         }
         //获取每页的总记录数
         PageInfo<Address> userPageInfo = new PageInfo<>(items);info_map.put("items",items);

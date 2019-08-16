@@ -13,12 +13,12 @@ public class FootprintServiceImpl implements FootprintService {
     FootprintMapper footprintMapper;
 
     @Override
-    public List<Footprint> queryAllFootprintList() {
-        return footprintMapper.queryAllFootprintList();
+    public List<Footprint> queryAllFootprintList(String sort,String order) {
+        return footprintMapper.queryAllFootprintList(sort, order);
     }
 
     @Override
-    public List<Footprint> queryFootprintList(Integer userId, Integer goodsId) {
-        return footprintMapper.queryFootprintList(userId,goodsId);
+    public List<Footprint> queryFootprintList(Integer userId, Integer goodsId,String sort,String order) {
+        return footprintMapper.queryFootprintList(userId,goodsId,sort,order);
     }
 }

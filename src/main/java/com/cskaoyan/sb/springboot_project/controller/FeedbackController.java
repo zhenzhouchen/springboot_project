@@ -20,15 +20,15 @@ public class FeedbackController {
     FeedbackService feedbackService;
     @RequestMapping("/feedback/list")
     @ResponseBody
-    public Map<String,Object> query_feedback_list(int page,int limit,String username,Integer id){
+    public Map<String,Object> query_feedback_list(int page,int limit,String username,Integer id,String sort,String order){
         PageHelper.startPage(page,limit);
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> info_map = new HashMap<>();
         List<Feedback> items = null;
         if(username==null && id==null){
-            items = feedbackService.queryAllFeedbackList();
+            items = feedbackService.queryAllFeedbackList(sort,order);
         }else {
-            items = feedbackService.queryFeedbackList(username,id);
+            items = feedbackService.queryFeedbackList(username,id,sort,order);
 
         }
         PageInfo<Feedback> userPageInfo = new PageInfo<>(items);info_map.put("items",items);

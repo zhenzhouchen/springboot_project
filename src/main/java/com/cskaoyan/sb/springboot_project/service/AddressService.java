@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface AddressService {
-    List<Address> queryAllAddressList();
-    List<Address> queryAddressList(String name, Integer userId);
+    List<Address> queryAllAddressList(String sort,String order);
+    List<Address> queryAddressList(String name, Integer userId,String sort,String order);
 
 }

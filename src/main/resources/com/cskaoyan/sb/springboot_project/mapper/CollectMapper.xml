@@ -11,6 +11,8 @@
         update_time as updateTime,
         deleted
     from cskaoyan_mall_collect
+    order by #{sort}
+    #{order}
   </select>
   <select id="queryCollectList" resultType="com.cskaoyan.sb.springboot_project.bean.Collect">
     select
@@ -30,6 +32,8 @@
               and value_id LIKE concat('%',#{valueId},'%')
           </if>
       </where>
+      order by #{sort}
+      #{order}
   </select>
 
 

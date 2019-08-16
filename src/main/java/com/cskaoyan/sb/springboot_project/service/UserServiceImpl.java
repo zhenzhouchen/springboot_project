@@ -14,12 +14,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> queryAllUserList() {
-        return userMapper.queryAllUserList();
+    public List<User> queryAllUserList(String sort,String order) {
+        return userMapper.queryAllUserList(sort,order);
     }
 
     @Override
-    public List<User> queryUserList(String username, String mobile) {
-        return userMapper.queryUserList(username, mobile);
+    public List<User> queryUserList(String username, String mobile,String sort,String order) {
+        return userMapper.queryUserList(username, mobile,sort,order);
     }
 }

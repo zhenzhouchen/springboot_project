@@ -26,6 +26,8 @@
         and mobile = #{mobile}
       </if>
     </where>
+    order by #{sort}
+    #{order}
   </select>
 
   <select id="queryAllUserList" resultType="com.cskaoyan.sb.springboot_project.bean.User">
@@ -45,6 +47,8 @@
     update_time as updateTime,
     deleted
     from cskaoyan_mall_user
+    order by #{sort}
+    #{order}
   </select>
 
 

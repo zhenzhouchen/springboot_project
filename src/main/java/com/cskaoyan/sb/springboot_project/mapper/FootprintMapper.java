@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface FootprintMapper {
-    List<Footprint> queryAllFootprintList();
-    List<Footprint> queryFootprintList(@Param("userId") Integer userId, @Param("goodsId") Integer goodsId);
+    List<Footprint> queryAllFootprintList(@Param("sort") String sort,@Param("order") String order);
+    List<Footprint> queryFootprintList(@Param("userId") Integer userId, @Param("goodsId") Integer goodsId,@Param("sort") String sort,@Param("order") String order);
 
 
 

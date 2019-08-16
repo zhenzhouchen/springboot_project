@@ -20,16 +20,16 @@ public class Search_historyController {
     Search_historyService search_historyService;
     @RequestMapping("/history/list")
     @ResponseBody
-    public Map<String,Object> query_search_history_list(int page,int limit,Integer userId,String keyword){
+    public Map<String,Object> query_search_history_list(int page,int limit,Integer userId,String keyword,String sort,String order){
         PageHelper.startPage(page,limit);
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> info_map = new HashMap<>();
         List<Search_history> items =null;
         if(userId == null && keyword ==null){
-            items = search_historyService.queryAllHistoryList();
+            items = search_historyService.queryAllHistoryList(sort,order);
 
         }else{
-            items = search_historyService.queryHistoryList(userId,keyword);
+            items = search_historyService.queryHistoryList(userId,keyword,sort,order);
         }
         PageInfo<Search_history> userPageInfo = new PageInfo<>(items);info_map.put("items",items);
         long total = userPageInfo.getTotal();

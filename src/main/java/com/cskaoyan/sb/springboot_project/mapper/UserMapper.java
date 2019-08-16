@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface UserMapper {
-    List<User> queryAllUserList();
-    List<User> queryUserList(@Param("username") String username, @Param("mobile") String mobile);
+    List<User> queryAllUserList(@Param("sort") String sort,@Param("order")String order);
+    List<User> queryUserList(@Param("username") String username, @Param("mobile") String mobile,@Param("sort") String sort,@Param("order")String order);
 
 
 

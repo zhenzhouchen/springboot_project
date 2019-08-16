@@ -12,12 +12,12 @@ public class CollectServiceImpl implements CollectService {
     CollectMapper collectMapper;
 
     @Override
-    public List<Collect> queryCollectList(Integer userId, Integer valueId) {
-        return collectMapper.queryCollectList(userId,valueId);
+    public List<Collect> queryCollectList(Integer userId, Integer valueId,String sort,String order) {
+        return collectMapper.queryCollectList(userId,valueId,sort,order);
     }
 
     @Override
-    public List<Collect> queryAllCollectList() {
-        return collectMapper.queryAllCollectList();
+    public List<Collect> queryAllCollectList(String sort,String order) {
+        return collectMapper.queryAllCollectList(sort, order);
     }
 }

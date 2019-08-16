@@ -10,6 +10,8 @@
     update_time as updateTime,
     deleted
     from cskaoyan_mall_footprint
+    order by #{sort}
+    #{order}
   </select>
 
   <select id="queryFootprintList" resultType="com.cskaoyan.sb.springboot_project.bean.Footprint">
@@ -29,6 +31,8 @@
         and goods_id LIKE concat('%',#{goodsId},'%')
       </if>
     </where>
+    order by #{sort}
+    #{order}
   </select>
 
 

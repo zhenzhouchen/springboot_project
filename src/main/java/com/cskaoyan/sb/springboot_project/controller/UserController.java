@@ -24,16 +24,16 @@ public class UserController {
 //会员管理列表
     @RequestMapping("/user/list")
     @ResponseBody
-    public Map<String,Object> query_user_list(int page,int limit,String username,String mobile){
+    public Map<String,Object> query_user_list(int page,int limit,String username,String mobile,String sort,String order){
         PageHelper.startPage(page,limit);
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> info_map = new HashMap<>();
         List<User> items = null;
         if(username==null && mobile ==null){
-            items = userService.queryAllUserList();
+            items = userService.queryAllUserList(sort,order);
 
         }else{
-            items = userService.queryUserList(username,mobile);
+            items = userService.queryUserList(username,mobile,sort,order);
         }
         PageInfo<User> userPageInfo = new PageInfo<>(items);
         long total = userPageInfo.getTotal();

@@ -13,12 +13,12 @@ public class FeedbackServiceImpl implements FeedbackService{
     FeedbackMapper feedbackMapper;
 
     @Override
-    public List<Feedback> queryAllFeedbackList() {
-        return feedbackMapper.queryAllFeedbackList();
+    public List<Feedback> queryAllFeedbackList(String sort,String order) {
+        return feedbackMapper.queryAllFeedbackList(sort, order);
     }
 
     @Override
-    public List<Feedback> queryFeedbackList(String username, Integer id) {
-        return feedbackMapper.queryFeedbackList(username,id);
+    public List<Feedback> queryFeedbackList(String username, Integer id,String sort,String order) {
+        return feedbackMapper.queryFeedbackList(username,id,sort,order);
     }
 }

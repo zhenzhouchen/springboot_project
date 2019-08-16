@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface Search_historyMapper {
-    List<Search_history> queryAllHistoryList();
-    List<Search_history> queryHistoryList(@Param("userId") Integer userId, @Param("keyword") String keyword);
+    List<Search_history> queryAllHistoryList(@Param("sort") String sort,@Param("order") String order);
+    List<Search_history> queryHistoryList(@Param("userId") Integer userId, @Param("keyword") String keyword,@Param("sort") String sort,@Param("order") String order);
 
 
     int updateByPrimaryKeySelective(Search_history record);

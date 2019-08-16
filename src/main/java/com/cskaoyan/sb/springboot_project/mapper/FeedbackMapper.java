@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface FeedbackMapper {
-    List<Feedback> queryAllFeedbackList();
-    List<Feedback> queryFeedbackList(@Param("username") String username,@Param("id") Integer id);
+    List<Feedback> queryAllFeedbackList(@Param("sort") String sort,@Param("order") String order);
+    List<Feedback> queryFeedbackList(@Param("username") String username,@Param("id") Integer id,@Param("sort") String sort,@Param("order") String order);
 
 
     int updateByPrimaryKeySelective(Feedback record);

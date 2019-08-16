@@ -11,6 +11,8 @@
     update_time as updateTime,
     deleted
     from cskaoyan_mall_search_history
+    order by #{sort}
+    #{order}
   </select>
 
   <select id="queryHistoryList" resultType="com.cskaoyan.sb.springboot_project.bean.Search_history">
@@ -31,6 +33,8 @@
         and user_id LIKE concat('%',#{userId},'%')
       </if>
     </where>
+    order by #{sort}
+    #{order}
   </select>
 
 

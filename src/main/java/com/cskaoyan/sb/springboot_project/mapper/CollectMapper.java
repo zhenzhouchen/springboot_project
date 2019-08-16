@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface CollectMapper {
-    List<Collect> queryAllCollectList();
-    List<Collect> queryCollectList(@Param("userId") Integer userId, @Param("valueId") Integer valueId);
+    List<Collect> queryAllCollectList(@Param("sort") String sort,@Param("order") String order);
+    List<Collect> queryCollectList(@Param("userId") Integer userId, @Param("valueId") Integer valueId,@Param("sort") String sort,@Param("order") String order);
 
 
 

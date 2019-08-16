@@ -14,12 +14,12 @@ public class AddressServiceImpl implements AddressService {
     AddressMapper addressMapper;
 
     @Override
-    public List<Address> queryAllAddressList() {
-        return addressMapper.queryAllAddressList();
+    public List<Address> queryAllAddressList(String sort,String order) {
+        return addressMapper.queryAllAddressList(sort,order);
     }
 
     @Override
-    public List<Address> queryAddressList(String name, Integer userId) {
-        return addressMapper.queryAddressList(name, userId);
+    public List<Address> queryAddressList(String name, Integer userId,String sort,String order) {
+        return addressMapper.queryAddressList(name, userId,sort,order);
     }
 }

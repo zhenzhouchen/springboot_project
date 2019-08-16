@@ -24,6 +24,8 @@
         and user_id LIKE concat('%',#{userId},'%')
       </if>
     </where>
+    order by #{sort}
+    #{order}
   </select>
 
   <select id="queryAllAddressList" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
@@ -41,6 +43,8 @@
     update_time as updateTime,
     deleted
     FROM cskaoyan_mall_address
+        order by #{sort}
+    #{order}
   </select>
 
 </mapper>
