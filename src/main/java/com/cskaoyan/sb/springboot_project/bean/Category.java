@@ -1,6 +1,7 @@
 package com.cskaoyan.sb.springboot_project.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Category {
     private Integer id;
@@ -26,6 +27,8 @@ public class Category {
     private Date updateTime;
 
     private Boolean deleted;
+
+    private List<Category> children;
 
     public Integer getId() {
         return id;
@@ -121,5 +124,13 @@ public class Category {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public List<Category> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Category> children) {
+        this.children = children;
     }
 }
