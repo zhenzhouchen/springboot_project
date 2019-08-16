@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.sb.springboot_project.mapper.ExpressMapper">
+    <select id="query_express" resultType="com.cskaoyan.sb.springboot_project.bean.Express">
+        select
+        cskaoyan_mall_express_freight_min,
+        cskaoyan_mall_express_freight_value
+        from cskaoyan_mall_express
+    </select>
+
+    <update id="update_express">
+        update cskaoyan_mall_express
+        set
+        cskaoyan_mall_express_freight_min = #{express.cskaoyan_mall_express_freight_min},
+        cskaoyan_mall_express_freight_value = #{express.cskaoyan_mall_express_freight_value}
+    </update>
+
+</mapper>
