@@ -21,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     Order_goodsMapper order_goodsMapper;
     @Autowired
-    User user;
+    UserService userService;
 
     @Override
     public Map<String, Object> selectOrderList(int page, int limit, Integer[] orderStatusArray, String add_time, String order, Integer userId, String orderSn) {
