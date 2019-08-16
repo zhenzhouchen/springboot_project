@@ -86,18 +86,18 @@
                    selectByExampleQueryId="false" ></table>-->
 
                <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
-                               <table  tableName="cskaoyan_mall_ad"
-                                       enableCountByExample="false"
-                                       enableUpdateByExample="false"
-                                       enableDeleteByExample="false"
-                                       enableSelectByExample="false"
-                                       enableInsert="false"
-                                       enableDeleteByPrimaryKey="false"
-                                       enableSelectByPrimaryKey="false"
-                                       selectByExampleQueryId="false"
+                              <table  tableName="cskaoyan_mall_ad"
+                                       enableCountByExample="true"
+                                       enableUpdateByExample="true"
+                                       enableDeleteByExample="true"
+                                       enableSelectByExample="true"
+                                       enableInsert="true"
+                                       enableDeleteByPrimaryKey="true"
+                                       enableSelectByPrimaryKey="true"
+                                       selectByExampleQueryId="true"
                                        domainObjectName="Ad"/>
 
-        <table  tableName="cskaoyan_mall_address"
+        <!--<table  tableName="cskaoyan_mall_address"
                 enableCountByExample="false"
                 enableUpdateByExample="false"
                 enableDeleteByExample="false"
@@ -172,21 +172,21 @@
                 enableDeleteByPrimaryKey="false"
                 enableSelectByPrimaryKey="false"
                 selectByExampleQueryId="false"
-                domainObjectName="Comment"/>
+                domainObjectName="Comment"/>-->
 
-
+<!--
         <table  tableName="cskaoyan_mall_coupon"
-                enableCountByExample="false"
-                enableUpdateByExample="false"
-                enableDeleteByExample="false"
-                enableSelectByExample="false"
-                enableInsert="false"
-                enableDeleteByPrimaryKey="false"
-                enableSelectByPrimaryKey="false"
-                selectByExampleQueryId="false"
-                domainObjectName="Coupon"/>
+                enableCountByExample="true"
+                enableUpdateByExample="true"
+                enableDeleteByExample="true"
+                enableSelectByExample="true"
+                enableInsert="true"
+                enableDeleteByPrimaryKey="true"
+                enableSelectByPrimaryKey="true"
+                selectByExampleQueryId="true"
+                domainObjectName="Coupon"/>-->
 
-        <table  tableName="cskaoyan_mall_coupon_user"
+   <!--     <table  tableName="cskaoyan_mall_coupon_user"
                 enableCountByExample="false"
                 enableUpdateByExample="false"
                 enableDeleteByExample="false"
@@ -261,33 +261,33 @@
                 enableDeleteByPrimaryKey="false"
                 enableSelectByPrimaryKey="false"
                 selectByExampleQueryId="false"
-                domainObjectName="Goods_specification"/>
+                domainObjectName="Goods_specification"/>-->
 
-        <table  tableName="cskaoyan_mall_groupon"
-                enableCountByExample="false"
-                enableUpdateByExample="false"
-                enableDeleteByExample="false"
-                enableSelectByExample="false"
-                enableInsert="false"
-                enableDeleteByPrimaryKey="false"
-                enableSelectByPrimaryKey="false"
-                selectByExampleQueryId="false"
-                domainObjectName="Groupon"/>
+       <!-- <table  tableName="cskaoyan_mall_groupon"
+                enableCountByExample="true"
+                enableUpdateByExample="true"
+                enableDeleteByExample="true"
+                enableSelectByExample="true"
+                enableInsert="true"
+                enableDeleteByPrimaryKey="true"
+                enableSelectByPrimaryKey="true"
+                selectByExampleQueryId="true"
+                domainObjectName="Groupon"/>-->
 
-        <table  tableName="cskaoyan_mall_groupon_rules"
-                enableCountByExample="false"
-                enableUpdateByExample="false"
-                enableDeleteByExample="false"
-                enableSelectByExample="false"
-                enableInsert="false"
-                enableDeleteByPrimaryKey="false"
-                enableSelectByPrimaryKey="false"
-                selectByExampleQueryId="false"
-                domainObjectName="Groupon_rules"/>
+       <!-- <table  tableName="cskaoyan_mall_groupon_rules"
+                enableCountByExample="true"
+                enableUpdateByExample="true"
+                enableDeleteByExample="true"
+                enableSelectByExample="true"
+                enableInsert="true"
+                enableDeleteByPrimaryKey="true"
+                enableSelectByPrimaryKey="true"
+                selectByExampleQueryId="true"
+                domainObjectName="Groupon_rules"/>-->
 
 
 
-        <table  tableName="cskaoyan_mall_issue"
+       <!-- <table  tableName="cskaoyan_mall_issue"
                 enableCountByExample="false"
                 enableUpdateByExample="false"
                 enableDeleteByExample="false"
@@ -407,21 +407,21 @@
                 enableDeleteByPrimaryKey="false"
                 enableSelectByPrimaryKey="false"
                 selectByExampleQueryId="false"
-                domainObjectName="System"/>
+                domainObjectName="System"/>-->
 
-        <table  tableName="cskaoyan_mall_topic"
-                enableCountByExample="false"
-                enableUpdateByExample="false"
-                enableDeleteByExample="false"
-                enableSelectByExample="false"
-                enableInsert="false"
-                enableDeleteByPrimaryKey="false"
-                enableSelectByPrimaryKey="false"
-                selectByExampleQueryId="false"
-                domainObjectName="Topic"/>
+        <!--<table  tableName="cskaoyan_mall_topic"
+                enableCountByExample="true"
+                enableUpdateByExample="true"
+                enableDeleteByExample="true"
+                enableSelectByExample="true"
+                enableInsert="true"
+                enableDeleteByPrimaryKey="true"
+                enableSelectByPrimaryKey="true"
+                selectByExampleQueryId="true"
+                domainObjectName="Topic"/>-->
 
-        <table  tableName="cskaoyan_mall_user"
-                enableCountByExample="false"
+        <!--<table  tableName="cskaoyan_mall_user"
+                enableCountByExample="true"
                 enableUpdateByExample="false"
                 enableDeleteByExample="false"
                 enableSelectByExample="false"
@@ -440,7 +440,7 @@
                 enableDeleteByPrimaryKey="false"
                 enableSelectByPrimaryKey="false"
                 selectByExampleQueryId="false"
-                domainObjectName="User_formid"/>
+                domainObjectName="User_formid"/>-->
 
 
     </context>

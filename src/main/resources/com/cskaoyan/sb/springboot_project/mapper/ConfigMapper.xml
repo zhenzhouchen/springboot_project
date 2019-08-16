@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.sb.springboot_project.mapper.ConfigMapper">
+    <select id="query_litemall" resultType="com.cskaoyan.sb.springboot_project.bean.Litemall">
+        select
+            cskaoyan_mall_mall_address,
+            cskaoyan_mall_mall_name,
+            cskaoyan_mall_mall_phone,
+            cskaoyan_mall_mall_qq
+        from cskaoyan_mall_litemall
+    </select>
+
+    <update id="update_litemall">
+        update cskaoyan_mall_litemall
+        set cskaoyan_mall_mall_address = #{litemall.cskaoyan_mall_mall_address},
+        cskaoyan_mall_mall_name = #{litemall.cskaoyan_mall_mall_name},
+        cskaoyan_mall_mall_phone = #{litemall.cskaoyan_mall_mall_phone},
+        cskaoyan_mall_mall_qq = #{litemall.cskaoyan_mall_mall_qq}
+    </update>
+</mapper>

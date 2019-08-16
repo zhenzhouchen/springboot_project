@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.sb.springboot_project.mapper.Order_configMapper">
+<select id="query_order_config" resultType="com.cskaoyan.sb.springboot_project.bean.Order_config">
+    select
+        cskaoyan_mall_order_comment,
+        cskaoyan_mall_order_unconfirm,
+        cskaoyan_mall_order_unpaid
+    from cskaoyan_mall_order_config
+</select>
+
+    <update id="update_order_config">
+        update cskaoyan_mall_order_config
+        set
+        cskaoyan_mall_order_comment = #{order_config.cskaoyan_mall_order_comment},
+        cskaoyan_mall_order_unconfirm = #{order_config.cskaoyan_mall_order_unconfirm},
+        cskaoyan_mall_order_unpaid = #{order_config.cskaoyan_mall_order_unpaid}
+    </update>
+</mapper>
