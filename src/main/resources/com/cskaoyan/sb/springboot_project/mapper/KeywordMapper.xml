@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.KeywordMapper">
+  <resultMap id="keywordBaseMap" type="com.cskaoyan.sb.springboot_project.bean.Keyword">
+    <id property="id" column="id"/>
+    <result property="keyword" column="keyword"/>
+    <result property="url" column="url"/>
+    <result property="isHot" column="is_hot"/>
+    <result property="isDefault" column="is_default"/>
+    <result property="sortOrder" column="sort_order"/>
+    <result property="addTime" column="add_time"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="deleted" column="deleted"/>
+  </resultMap>
+
+  <select id="selectKeywordList" resultMap="keywordBaseMap">
+    select
+    id,
+    keyword,
+    url,
+    is_hot,
+    is_default,
+    sort_order,
+    add_time,
+    update_time,
+    deleted
+    from cskaoyan_mall_keyword
+    <where>
+      <if test="keyword != null">
+        and keyword like CONCAT("%",#{keyword},"%")
+      </if>
+      <if test="url != null">
+        and url like CONCAT("%",#{url},"%")
+      </if>
+    </where>
+    order by #{sort} ${order}
+  </select>
+
+
+
+
+
+
+
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Keyword">
     update cskaoyan_mall_keyword
     <set>

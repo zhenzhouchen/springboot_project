@@ -67,6 +67,6 @@
         and name like CONCAT("%",#{name},"%")
       </if>
     </where>
-    order by #{add_time} ${order}
+    order by #{sort} ${order}
   </select>
 </mapper>

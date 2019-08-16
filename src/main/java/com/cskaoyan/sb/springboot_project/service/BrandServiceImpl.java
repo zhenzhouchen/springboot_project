@@ -17,9 +17,9 @@ public class BrandServiceImpl implements BrandService {
     BrandMapper brandMapper;
 
     @Override
-    public Map<String, Object> selectBrandList(int page, int limit, Integer id, String name, String add_time, String order) {
+    public Map<String, Object> selectBrandList(int page, int limit, Integer id, String name, String sort, String order) {
         PageHelper.startPage(page, limit);
-        List<Brand> brandList = brandMapper.selectBrandList(page, limit, id, name, add_time, order);
+        List<Brand> brandList = brandMapper.selectBrandList(page, limit, id, name, sort, order);
         PageInfo<Brand> brandPageInfo = new PageInfo<>(brandList);
         long total = brandPageInfo.getTotal();
         HashMap<String, Object> hashMap = new HashMap<>();

@@ -51,6 +51,9 @@
     #{order}
   </select>
 
+  <select id="selectUserDetailForOrderByUserId" resultType="com.cskaoyan.sb.springboot_project.bean.User">
+    select id,nickname from cskaoyan_mall_user where id = #{userId}
+  </select>
 
 
 

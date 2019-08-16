@@ -18,8 +18,8 @@ public class OrderController {
 
     @RequestMapping("/list")
     @ApiOperation("获取order列表")
-    public Map<String, Object> selectOrderList(int page, int limit, Integer[] orderStatusArray, String add_time, String order, Integer userId, String orderSn) {
-        Map<String, Object> orderMap = orderService.selectOrderList(page, limit, orderStatusArray, add_time, order, userId, orderSn);
+    public Map<String, Object> selectOrderList(int page, int limit, Integer[] orderStatusArray, String sort, String order, Integer userId, String orderSn) {
+        Map<String, Object> orderMap = orderService.selectOrderList(page, limit, orderStatusArray, sort, order, userId, orderSn);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("data", orderMap);
         hashMap.put("errno", 0);

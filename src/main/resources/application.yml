@@ -15,3 +15,6 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+mybatis:
+  type-handlers-package: com.cskaoyan.sb.springboot_project.handler

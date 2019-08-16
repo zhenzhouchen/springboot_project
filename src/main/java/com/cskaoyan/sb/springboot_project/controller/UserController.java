@@ -31,7 +31,6 @@ public class UserController {
         List<User> items = null;
         if(username==null && mobile ==null){
             items = userService.queryAllUserList(sort,order);
-
         }else{
             items = userService.queryUserList(username,mobile,sort,order);
         }

@@ -63,4 +63,41 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="orderGoodsBaseMap" type="com.cskaoyan.sb.springboot_project.bean.Order_goods">
+    <id property="id" column="id"/>
+    <result property="orderId" column="order_id"/>
+    <result property="goodsId" column="goods_id"/>
+    <result property="goodsName" column="goods_name"/>
+    <result property="goodsSn" column="goods_sn"/>
+    <result property="productId" column="product_id"/>
+    <result property="number" column="number"/>
+    <result property="price" column="price"/>
+    <result property="specifications" column="specifications"/>
+    <result property="picUrl" column="pic_url"/>
+    <result property="comment" column="comment"/>
+    <result property="addTime" column="add_time"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="deleted" column="deleted"/>
+  </resultMap>
+
+  <select id="selectOrderGoodsListByOrderId" resultMap="orderGoodsBaseMap">
+    select
+    id,
+    order_id,
+    goods_id,
+    goods_name,
+    goods_sn,
+    product_id,
+    `number`,
+    price,
+    specifications,
+    pic_url,
+    comment,
+    add_time,
+    update_time,
+    deleted
+    from cskaoyan_mall_order_goods
+    where order_id = #{id}
+  </select>
 </mapper>

@@ -12,5 +12,7 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
-    List<Order> selectOrderList(int page, int limit, @Param("statusArray") Integer[] orderStatusArray, @Param("addTime") String add_time, @Param("order") String order, @Param("userId") Integer userId, @Param("orderSn") String orderSn);
+    List<Order> selectOrderList(int page, int limit, @Param("statusArray") Integer[] orderStatusArray, @Param("sort") String sort, @Param("order") String order, @Param("userId") Integer userId, @Param("orderSn") String orderSn);
+
+    Order selectOrderDetailByOrderId(@Param("id") int id);
 }

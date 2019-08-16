@@ -18,8 +18,8 @@ public class BrandController {
 
     @RequestMapping("/list")
     @ApiOperation(value = "获取brand列表")
-    public Map<String, Object> selectBrandList(int page, int limit, Integer id, String name, String add_time, String order) {
-        Map<String, Object> brandMap = brandService.selectBrandList(page, limit, id, name, add_time, order);
+    public Map<String, Object> selectBrandList(int page, int limit, Integer id, String name, String sort, String order) {
+        Map<String, Object> brandMap = brandService.selectBrandList(page, limit, id, name, sort, order);
         HashMap<String, Object> msgMap = new HashMap<>();
         msgMap.put("data", brandMap);
         msgMap.put("errmsg", "成功");
