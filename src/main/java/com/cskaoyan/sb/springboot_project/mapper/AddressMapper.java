@@ -11,10 +11,4 @@ public interface AddressMapper {
 
     List<Address> queryAddressList(@Param("name") String name,@Param("userId") Integer userId);
 
-
-
-
-    int updateByPrimaryKeySelective(Address record);
-
-    int updateByPrimaryKey(Address record);
 }
