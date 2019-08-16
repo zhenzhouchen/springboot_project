@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/admin/auth")
 public class LoginAdminController {
 
     @RequestMapping("/login")
