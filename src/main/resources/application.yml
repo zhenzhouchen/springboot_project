@@ -1,7 +1,5 @@
 server:
   port: 80
-  servlet:
-    context-path: /admin
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -14,3 +12,8 @@ spring:
     static-locations: classpath:/img
 debug: true
 
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

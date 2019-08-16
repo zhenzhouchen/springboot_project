@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.FootprintMapper">
+  <select id="queryAllFootprintList" resultType="com.cskaoyan.sb.springboot_project.bean.Footprint">
+    select
+    id ,
+    user_id as userId,
+    goods_id as goodsId,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    from cskaoyan_mall_footprint
+  </select>
+
+  <select id="queryFootprintList" resultType="com.cskaoyan.sb.springboot_project.bean.Footprint">
+    select
+    id ,
+    user_id as userId,
+    goods_id as goodsId,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    from cskaoyan_mall_footprint
+    <where>
+      <if test="userId != null">
+        user_id like concat('%',#{userId},'%')
+      </if>
+      <if test="goodsId != null">
+        and goods_id LIKE concat('%',#{goodsId},'%')
+      </if>
+    </where>
+  </select>
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Footprint">
     update cskaoyan_mall_footprint
     <set>

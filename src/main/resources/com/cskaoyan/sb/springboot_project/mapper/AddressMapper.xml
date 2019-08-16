@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.AddressMapper">
+  <select id="queryAddressList" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
+    SELECT
+    id,
+    `name`,
+    user_id as userId,
+    province_id as provinceId,
+    city_id as cityId,
+    area_id as areaId,
+    address,
+    mobile,
+    is_default as isDefault,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    FROM cskaoyan_mall_address
+    <where>
+      <if test="name != null">
+        `name` like concat('%',#{name},'%')
+      </if>
+      <if test="userId != null">
+        and user_id LIKE concat('%',#{userId},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="queryAllAddressList" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
+    SELECT
+    id,
+    `name`,
+    user_id as userId,
+    province_id as provinceId,
+    city_id as cityId,
+    area_id as areaId,
+    address,
+    mobile,
+    is_default as isDefault,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    FROM cskaoyan_mall_address
+  </select>
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Address">
     update cskaoyan_mall_address
     <set>
