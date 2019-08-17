@@ -4,9 +4,11 @@ import com.cskaoyan.sb.springboot_project.bean.Storage;
 import com.cskaoyan.sb.springboot_project.mapper.StorageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -32,8 +34,19 @@ public class StorageServiceImpl implements StorageService {
         //文件上传路径
         /*String filePath = "http://localhost:80/wx/storage/fetch/" + key;*/
         /*String filePath = "http://yanxuan.nosdn.127.net/" + key;*/
-        String filePath = "http://192.168.2.100:8080/wx/storage/fetch/" + key;
-        File receiveFile = new File("E:/uploadTest", key);
+
+        String classpath = "";
+        try {
+            //获取输出目录中的classes目录绝对路径
+            classpath = ResourceUtils.getURL("classpath:").getPath();
+            classpath = classpath.substring(0, classpath.length() - "/classes".length() -1);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String filePath = classpath + "/static/" + key;
+        /*String filePath = "http://192.168.2.100:8080/wx/storage/fetch/" + key;*/
+        File receiveFile = new File(filePath);
+
         if(!receiveFile.getParentFile().exists()) {
             receiveFile.getParentFile().mkdirs();
         }
@@ -48,7 +61,7 @@ public class StorageServiceImpl implements StorageService {
             storage.setName(originalFilename);
             storage.setSize((int) file.getSize());
             storage.setType(file.getContentType());
-            storage.setUrl(filePath);
+            storage.setUrl("/static/" + key);
             storage.setDeleted(false);
             storageMapper.InsertUploadFileInfo(storage);
         } catch (IOException e) {

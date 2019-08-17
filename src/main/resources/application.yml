@@ -8,9 +8,9 @@ spring:
     password: 123456
 
   mvc:
-    static-path-pattern: /img/**
+    static-path-pattern: /static/**
   resources:
-    static-locations: classpath:/static/uploading/
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/
 
   #限制上传文件大小
   servlet:
