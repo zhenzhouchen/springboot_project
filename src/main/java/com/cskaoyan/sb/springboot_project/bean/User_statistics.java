@@ -1,39 +1,39 @@
 package com.cskaoyan.sb.springboot_project.bean;
 
-import java.util.Date;
+
 
 public class User_statistics {
-    Date day;
-    int users;
+    String day;
+    Integer users;
 
     public User_statistics() {
     }
 
-    public User_statistics(Date day, int users) {
+    public User_statistics(String day, Integer users) {
         this.day = day;
         this.users = users;
     }
 
-    public Date getDay() {
+    public String getDay() {
         return day;
     }
 
-    public void setDay(Date day) {
+    public void setDay(String day) {
         this.day = day;
     }
 
-    public int getUsers() {
+    public Integer getUsers() {
         return users;
     }
 
-    public void setUsers(int users) {
+    public void setUsers(Integer users) {
         this.users = users;
     }
 
     @Override
     public String toString() {
         return "User_statistics{" +
-                "day=" + day +
+                "day='" + day + '\'' +
                 ", users=" + users +
                 '}';
     }

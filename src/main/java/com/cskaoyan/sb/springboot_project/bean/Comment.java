@@ -3,6 +3,9 @@ package com.cskaoyan.sb.springboot_project.bean;
 import java.util.Date;
 
 public class Comment {
+
+    private Integer commentId;
+
     private Integer id;
 
     private Integer valueId;
@@ -24,6 +27,14 @@ public class Comment {
     private Date updateTime;
 
     private Boolean deleted;
+
+    public Integer getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
+    }
 
     public Integer getId() {
         return id;

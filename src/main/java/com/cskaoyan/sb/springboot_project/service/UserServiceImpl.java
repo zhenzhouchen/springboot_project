@@ -1,10 +1,12 @@
 package com.cskaoyan.sb.springboot_project.service;
 
 import com.cskaoyan.sb.springboot_project.bean.User;
+import com.cskaoyan.sb.springboot_project.bean.User_statistics;
 import com.cskaoyan.sb.springboot_project.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -25,12 +27,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Date query_user_statistics_day() {
-        return userMapper.query_user_statistics_day();
+    public List<User_statistics> query_user_statistics_bean() {
+        return userMapper.query_user_statistics_bean();
     }
 
-    @Override
-    public int query_user_statistics_users() {
-        return userMapper.query_user_statistics_users();
-    }
+
 }

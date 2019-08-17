@@ -22,7 +22,6 @@ public class AddressController {
 
     //地址管理列表
     @RequestMapping("/address/list")
-    @ResponseBody
     public Map<String,Object> query_address_list(int page,int limit,String name,Integer userId,String sort,String order){
         //开启分页
         PageHelper.startPage(page,limit);
