@@ -1,40 +1,38 @@
 package com.cskaoyan.sb.springboot_project.bean;
 
 public class AdminRoles {
-    private int id;
-    private int roleIds;
-    private String name;
+    int value;
+    String label;
 
-    public int getId() {
-        return id;
+    public AdminRoles() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public AdminRoles(int value, String label) {
+        this.value = value;
+        this.label = label;
     }
 
-    public int getRoleIds() {
-        return roleIds;
+    public int getValue() {
+        return value;
     }
 
-    public void setRoleIds(int roleIds) {
-        this.roleIds = roleIds;
+    public void setValue(int value) {
+        this.value = value;
     }
 
-    public String getName() {
-        return name;
+    public String getLabel() {
+        return label;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @Override
     public String toString() {
         return "AdminRoles{" +
-                "id=" + id +
-                ", roleIds=" + roleIds +
-                ", name='" + name + '\'' +
+                "value=" + value +
+                ", label='" + label + '\'' +
                 '}';
     }
 }

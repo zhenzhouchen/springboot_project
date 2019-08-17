@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.AdminMapper">
+    <resultMap id="adminMap" type="com.cskaoyan.sb.springboot_project.bean.Admin">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="avatar" property="avatar"/>
+        <result column="roleIds" property="roleIds" typeHandler="com.cskaoyan.sb.springboot_project.handler.String2ArrayHandler"/>
+    </resultMap>
+    <select id="queryAlladminlist" resultMap="adminMap">
+    select
+    id,
+    username,
+    avatar,
+    role_ids as roleIds
+    from cskaoyan_mall_admin
+    order by #{sort}
+    #{order}
+    </select>
+
+
+    <select id="queryAdminList" resultMap="adminMap">
+    select
+    id,
+    username,
+    avatar,
+    role_ids as roleIds
+    from cskaoyan_mall_admin
+        <where>
+            <if test="username != null">
+                username like concat('%',#{username},'%')
+            </if>
+
+        </where>
+    order by #{sort}
+    #{order}
+    </select>
+    <select id="queryAdminRole" resultType="com.cskaoyan.sb.springboot_project.bean.AdminRoles">
+        select
+            id as `value`,
+            name as label
+        from cskaoyan_mall_role
+    </select>
+
     <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Admin">
         <id column="role_ids" property="roleIds"/>
         <result column="username" property="username"/>

@@ -43,7 +43,7 @@
     update_time as updateTime,
     deleted
     FROM cskaoyan_mall_address
-        order by #{sort}
+    order by #{sort}
     #{order}
   </select>
 
