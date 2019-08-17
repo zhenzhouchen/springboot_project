@@ -13,4 +13,6 @@ public interface StorageMapper {
     int update_storage(@Param("storage") Storage storage);
 
     int delete_storage(@Param("storage") Storage storage);
+
+    void InsertUploadFileInfo(Storage storage);
 }
