@@ -8,15 +8,17 @@ public class Admin {
     String username;
     String avatar;
     int[] roleIds;
+    String password;
 
     public Admin() {
     }
 
-    public Admin(int id, String username, String avatar, int[] roleIds) {
+    public Admin(int id, String username, String avatar, int[] roleIds, String password) {
         this.id = id;
         this.username = username;
         this.avatar = avatar;
         this.roleIds = roleIds;
+        this.password = password;
     }
 
     public int getId() {
@@ -51,6 +53,14 @@ public class Admin {
         this.roleIds = roleIds;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "Admin{" +
@@ -58,6 +68,7 @@ public class Admin {
                 ", username='" + username + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", roleIds=" + Arrays.toString(roleIds) +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

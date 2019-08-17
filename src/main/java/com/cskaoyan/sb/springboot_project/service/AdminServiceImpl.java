@@ -1,6 +1,5 @@
 package com.cskaoyan.sb.springboot_project.service;
 
-import com.cskaoyan.sb.springboot_project.bean.Address;
 import com.cskaoyan.sb.springboot_project.bean.Admin;
 import com.cskaoyan.sb.springboot_project.bean.AdminRoles;
 import com.cskaoyan.sb.springboot_project.mapper.AdminMapper;
@@ -26,5 +25,20 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<AdminRoles> queryAdminRole() {
         return adminMapper.queryAdminRole();
+    }
+
+    @Override
+    public int upadte_admin(Admin admin) {
+        return adminMapper.upadte_admin(admin);
+    }
+
+    @Override
+    public int delete_admin(Admin admin) {
+        return adminMapper.delete_admin(admin);
+    }
+
+    @Override
+    public int create_admin(Admin admin) {
+        return adminMapper.create_admin(admin);
     }
 }

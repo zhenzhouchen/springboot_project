@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.AdminMapper">
+    <delete id="delete_admin">
+        delete from cskaoyan_mall_admin
+        where id = #{admin.id}
+    </delete>
+    <update id="upadte_admin">
+        update cskaoyan_mall_admin
+        set username = #{admin.username},
+        password = #{admin.password},
+        avatar = #{admin.avatar},
+        role_ids = #{admin.roleIds}
+        where id = #{admin.id}
+    </update>
     <resultMap id="adminMap" type="com.cskaoyan.sb.springboot_project.bean.Admin">
         <result column="id" property="id"/>
         <result column="username" property="username"/>
@@ -41,6 +53,17 @@
             name as label
         from cskaoyan_mall_role
     </select>
+    <insert id="create_admin">
+        insert into cskaoyan_mall_admin
+        (id,username,password,avatar,role_ids)
+        values (
+        #{admin.id},
+        #{admin.username},
+        #{admin.password},
+        #{admin.avatar},
+        #{admin.roleIds}
+        )
+    </insert>
 
     <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Admin">
         <id column="role_ids" property="roleIds"/>

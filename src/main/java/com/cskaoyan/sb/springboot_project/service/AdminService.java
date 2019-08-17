@@ -9,6 +9,7 @@ public interface AdminService {
     List<Admin> queryAlladminlist( String sort,String order);
     List<Admin> queryAdminList( String username, String sort, String order);
     List<AdminRoles> queryAdminRole();
-
-
+    int upadte_admin (Admin admin);
+    int delete_admin(Admin admin);
+    int create_admin(Admin admin);
 }

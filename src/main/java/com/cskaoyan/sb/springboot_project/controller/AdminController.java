@@ -7,11 +7,9 @@ import com.cskaoyan.sb.springboot_project.service.AdminService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,12 +44,45 @@ public class AdminController {
     }
 
     @RequestMapping("role/options")
-    public Map<String, Object> option(int[] id) {
+    public Map<String, Object> option() {
         Map<String, Object> map = new HashMap<>();
         List<AdminRoles> adminRolesList = adminService.queryAdminRole();
         map.put("data",adminRolesList);
         map.put("errmsg", "成功");
         map.put("errno", 0);
         return map;
+    }
+
+    @RequestMapping("admin/update")
+    public Map<String,Object> admin_update(@RequestBody Admin admin){
+        Map<String, Object> map = new HashMap<>();
+        int result = adminService.upadte_admin(admin);
+        if(result ==1) {
+            map.put("errmsg", "成功");
+        }
+        map.put("errno", 0);
+        return map;
+    }
+
+    @RequestMapping(value = "admin/delete")
+    public Map<String,Object> admin_delete(@RequestBody Admin admin){
+        Map<String, Object> map = new HashMap<>();
+        int result = adminService.delete_admin(admin);
+        if(result ==1) {
+            map.put("errmsg", "成功");
+        }
+        map.put("errno", 0);
+        return map;
+    }
+
+    @RequestMapping(value = "admin/create")
+    public Map<String,Object> admin_create(@RequestBody Admin admin){
+          Map<String, Object> map = new HashMap<>();
+          int result = adminService.create_admin(admin);
+          if(result ==1) {
+            map.put("errmsg", "成功");
+          }
+          map.put("errno", 0);
+          return map;
     }
 }
