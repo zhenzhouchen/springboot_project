@@ -69,4 +69,14 @@
     </where>
     order by #{sort} ${order}
   </select>
+
+  <resultMap id="brandListMap" type="com.cskaoyan.sb.springboot_project.bean.Brand">
+    <id column="id" property="value"/>
+    <result column="name" property="label"/>
+  </resultMap>
+
+  <select id="brandList" resultMap="brandListMap">
+    select id,`name`
+    from cskaoyan_mall_brand
+  </select>
 </mapper>

@@ -27,4 +27,10 @@ public class BrandServiceImpl implements BrandService {
         hashMap.put("total", total);
         return hashMap;
     }
+
+    @Override
+    public List<Brand> brandList() {
+        List<Brand> list = brandMapper.brandList();
+        return list;
+    }
 }
