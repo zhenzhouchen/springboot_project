@@ -5,7 +5,7 @@ import java.util.Date;
 public class Role {
     private Integer id;
 
-    private String name;
+    private String name;//管理员的名称
 
     private String desc;
 

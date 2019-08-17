@@ -1,40 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.AdminMapper">
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Admin">
-    update cskaoyan_mall_admin
-    <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="lastLoginIp != null">
-        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
-      </if>
-      <if test="lastLoginTime != null">
-        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="avatar != null">
-        avatar = #{avatar,jdbcType=VARCHAR},
-      </if>
-      <if test="addTime != null">
-        add_time = #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleted != null">
-        deleted = #{deleted,jdbcType=BIT},
-      </if>
-      <if test="roleIds != null">
-        role_ids = #{roleIds,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.sb.springboot_project.bean.Admin">
+    <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Admin">
+        <id column="role_ids" property="roleIds"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="last_login_ip" property="lastLoginIp"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="avatar" property="avatar"/>
+        <result column="add_time" property="addTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <resultMap id="BaseResultMap1" type="com.cskaoyan.sb.springboot_project.bean.Role">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="desc" property="desc"/>
+        <result column="enabled" property="enabled"/>
+        <result column="add_time" property="addTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="com.cskaoyan.sb.springboot_project.bean.AdminRoles">
+    <id column="id" property="id"/>
+        <result column="cskaoyan_mall_admin.role_ids" property="roleIds"/>
+        <result column="cskaoyan_mall_role.name" property="name"/>
+    </resultMap>
+    <select id="queryRoles" resultMap="BaseResultMap2">
+  select cskaoyan_mall_admin.id,cskaoyan_mall_admin.role_ids,
+  cskaoyan_mall_role.name from cskaoyan_mall_admin
+  LEFT JOIN cskaoyan_mall_role  on cskaoyan_mall_admin.id=cskaoyan_mall_role.id
+  </select>
+    <select id="returnList" resultMap="BaseResultMap">
+select * from cskaoyan_mall_admin
+  </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Admin">
+        update cskaoyan_mall_admin
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginIp != null">
+                last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=BIT},
+            </if>
+            <if test="roleIds != null">
+                role_ids = #{roleIds,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cskaoyan.sb.springboot_project.bean.Admin">
     update cskaoyan_mall_admin
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -47,4 +81,5 @@
       role_ids = #{roleIds,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>
