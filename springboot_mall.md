@@ -41,17 +41,44 @@
     `修改广告`
         同上
         
+    `删除广告`
+        其实是 update，将 deleted 设置成 1即可，搜索时要加上 WHERE deleted = 0        
+        
     `搜索广告`
         传入一个 page bean 的同时，传入其他内容会如何？
         和 page bean 变量名对应才会传入？
         如果有 name 和 content，值传入 其中有一个会如何？
         
         和查询 list 一个请求，只能一起传入然后判断参数条件    
-        - 加入 name 和 content 之后，出现无法回显的情况
+        - 加入 name 和 content 之后，出现无法回显的情况 
+            —— *后证实，debug时出现问题*
         
         先 pull 然后解决冲突吧
     `pull merge 解决冲突`
-        先 merge                    
+        先 merge    
+
+- *优惠券*
+    `查询数据库`
+        数据库字段与 关键字重复，只能加 `` 来解除
+    `新增优惠券`
+        传入后端数据全是 null，前端有数据
+        前端 content-type 是 json，需要用 json传
+        出现 json parsing error —— *需要将 array(json) 转成 String(bean)*    
+        转换成 array 才能供前端使用 —— *需要使用 TypeHandler？那不是转换数据库的吗* 
+        需要将 String 改成 String[]，然后再转换到数据库  
+        RequestBody 只需要写一次，过后流就关闭了          
+        新增需要返回 id，只能用 *useGeneratedKeys="true" keyProperty="id"*
+            但是返回空数据，暂未解决
+    
+    `更新优惠券`
+        更新页需要返回 id   
+        同上，也返回空数据
+        —— *据说是 String[] 接收才行，明天试试*
+        
+    `删除优惠券`
+        同上，需要 RquestBody                
+        
+                              
                                                 
         
         

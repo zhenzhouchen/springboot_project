@@ -15,6 +15,8 @@ public interface BrandMapper {
 
     List<Brand> selectBrandList(int page, int limit, @Param("id") Integer id, @Param("name") String name, @Param("sort") String sort, @Param("order") String order);
 
+    List<Brand> brandList();
+
     int insertBrand(Brand brand);
 
     @Update("update cskaoyan_mall_brand set deleted = 1 where id = #{id}")

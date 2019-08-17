@@ -111,6 +111,25 @@
     select id,`name` from cskaoyan_mall_category where `level` = 'L1';
   </select>
 
+  <resultMap id="CategoryList" type="com.cskaoyan.sb.springboot_project.bean.CategoryList">
+    <id property="value" column="id"/>
+    <result property="label" column="name"/>
+    <collection property="children" column="id" select="com.cskaoyan.sb.springboot_project.mapper.CategoryMapper.CategoryListlevel2"/>
+  </resultMap>
+
+  <select id="CategoryListlevel1" resultMap="CategoryList">
+    select id,`name` from cskaoyan_mall_category where `level` = 'L1';
+  </select>
+
+  <resultMap id="CategoryList2" type="com.cskaoyan.sb.springboot_project.bean.CategoryList_children">
+    <id property="value" column="id"/>
+    <result property="label" column="name"/>
+  </resultMap>
+
+  <select id="CategoryListlevel2" resultMap="CategoryList2">
+    select id,`name` from cskaoyan_mall_category where pid = #{id}
+  </select>
+
   <insert id="insertCategory" useGeneratedKeys="true" keyProperty="id">
     insert into cskaoyan_mall_category
     (`name`,keywords,`desc`,pid,icon_url,pic_url,`level`,add_time,update_time,deleted)

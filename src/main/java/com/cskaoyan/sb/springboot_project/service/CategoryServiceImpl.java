@@ -1,6 +1,7 @@
 package com.cskaoyan.sb.springboot_project.service;
 
 import com.cskaoyan.sb.springboot_project.bean.Category;
+import com.cskaoyan.sb.springboot_project.bean.CategoryList;
 import com.cskaoyan.sb.springboot_project.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,12 @@ public class CategoryServiceImpl implements CategoryService {
             mapList.add(hashMap);
         }
         return mapList;
+    }
+
+    @Override
+    public List<CategoryList> CategoryListlevel1() {
+        List<CategoryList> list = categoryMapper.CategoryListlevel1();
+        return list;
     }
 
     @Override

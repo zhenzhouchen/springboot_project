@@ -5,8 +5,10 @@ import java.util.Date;
 
 public class Brand {
     private Integer id;
+    private Integer value;
 
     private String name;
+    private String label;
 
     private String desc;
 
@@ -21,6 +23,22 @@ public class Brand {
     private Date updateTime;
 
     private Boolean deleted;
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
     public Integer getId() {
         return id;

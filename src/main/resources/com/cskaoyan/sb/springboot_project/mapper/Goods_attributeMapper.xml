@@ -35,4 +35,21 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Goods_attribute">
+    <id column="id" property="id" />
+    <result column="goods_id" property="goodsId" />
+    <result column="attribute" property="attribute" />
+    <result column="value" property="value" />
+    <result column="add_time" property="addTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="deleted" property="deleted" />
+  </resultMap>
+
+  <select id="queryByGoodsId" resultMap="BaseResultMap">
+    select id,goods_id,attribute,value,add_time,update_time,deleted
+    from cskaoyan_mall_goods_attribute
+    where goods_id = #{id}
+  </select>
+
 </mapper>

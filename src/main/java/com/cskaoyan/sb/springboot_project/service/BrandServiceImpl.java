@@ -30,6 +30,12 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public List<Brand> brandList() {
+        List<Brand> list = brandMapper.brandList();
+        return list;
+    }
+
+    @Override
     public Brand insertBrand(Brand brand) {
         brand.setDeleted(false);
         Date date = new Date();

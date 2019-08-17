@@ -25,7 +25,6 @@ public class CommentController {
         Map<String, Object> info_map = new HashMap<>();
         List<Comment> items = commentService.queryAllCommentList(userId,valueId);
         PageInfo<Comment> userPageInfo = new PageInfo<>(items);
-        info_map.put("items", items);
         long total = userPageInfo.getTotal();
         info_map.put("total", total);
         info_map.put("items", items);
