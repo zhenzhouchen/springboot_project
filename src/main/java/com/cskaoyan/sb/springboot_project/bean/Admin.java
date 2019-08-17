@@ -1,33 +1,31 @@
 package com.cskaoyan.sb.springboot_project.bean;
 
-import java.util.Date;
+
+import java.util.Arrays;
 
 public class Admin {
-    private Integer id;
+    int id;
+    String username;
+    String avatar;
+    int[] roleIds;
+    String password;
 
-    private String username;
+    public Admin() {
+    }
 
-    private String password;
+    public Admin(int id, String username, String avatar, int[] roleIds, String password) {
+        this.id = id;
+        this.username = username;
+        this.avatar = avatar;
+        this.roleIds = roleIds;
+        this.password = password;
+    }
 
-    private String lastLoginIp;
-
-    private Date lastLoginTime;
-
-    private String avatar;
-
-    private Date addTime;
-
-    private Date updateTime;
-
-    private Boolean deleted;
-
-    private String roleIds;
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -36,31 +34,7 @@ public class Admin {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
-    }
-
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
+        this.username = username;
     }
 
     public String getAvatar() {
@@ -68,38 +42,33 @@ public class Admin {
     }
 
     public void setAvatar(String avatar) {
-        this.avatar = avatar == null ? null : avatar.trim();
+        this.avatar = avatar;
     }
 
-    public Date getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
-
-    public String getRoleIds() {
+    public int[] getRoleIds() {
         return roleIds;
     }
 
-    public void setRoleIds(String roleIds) {
-        this.roleIds = roleIds == null ? null : roleIds.trim();
+    public void setRoleIds(int[] roleIds) {
+        this.roleIds = roleIds;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", roleIds=" + Arrays.toString(roleIds) +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

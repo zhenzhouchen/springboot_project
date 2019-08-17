@@ -5,7 +5,7 @@ import java.util.Date;
 public class Role {
     private Integer id;
 
-    private String name;
+    private String name;//管理员的名称
 
     private String desc;
 
@@ -16,6 +16,19 @@ public class Role {
     private Date updateTime;
 
     private Boolean deleted;
+
+    public Role() {
+    }
+
+    public Role(Integer id, String name, String desc, Boolean enabled, Date addTime, Date updateTime, Boolean deleted) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.enabled = enabled;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+    }
 
     public Integer getId() {
         return id;
@@ -30,7 +43,7 @@ public class Role {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getDesc() {
@@ -38,7 +51,7 @@ public class Role {
     }
 
     public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+        this.desc = desc;
     }
 
     public Boolean getEnabled() {
@@ -71,5 +84,18 @@ public class Role {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", enabled=" + enabled +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
     }
 }

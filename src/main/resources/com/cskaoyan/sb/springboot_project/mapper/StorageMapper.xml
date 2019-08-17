@@ -1,53 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.StorageMapper">
-  <insert id="InsertUploadFileInfo" useGeneratedKeys="true" keyProperty="id">
-    insert into cskaoyan_mall_storage
-    (`key`,`name`,`type`,`size`,url,add_time,update_time,deleted)
-    values
-    (#{key},#{name},#{type},#{size},#{url},#{addTime},#{updateTime},#{deleted})
-  </insert>
+    <update id="update_storage">
+        update cskaoyan_mall_storage
+        set `name` = #{storage.name}
+        where id = #{storage.id}
+    </update>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Storage">
-    update cskaoyan_mall_storage
-    <set>
-      <if test="key != null">
-        key = #{key,jdbcType=VARCHAR},
-      </if>
+  <select id="queryAllStorageList" resultType="com.cskaoyan.sb.springboot_project.bean.Storage">
+    select
+        id,
+        `key`,
+        `name`,
+        `type`,
+        `size`,
+        url,
+        add_time as addTime,
+        update_time as updateTime,
+        deleted
+        from cskaoyan_mall_storage
+  </select>
+
+  <select id="queryStorageList" resultType="com.cskaoyan.sb.springboot_project.bean.Storage">
+        select
+        id,
+        `key`,
+        `name`,
+        `type`,
+        `size`,
+         url,
+        add_time as addTime,
+        update_time as updateTime,
+        deleted
+        from cskaoyan_mall_storage
+    <where>
       <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+        `name` like concat('%',#{name},'%')
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
+      <if test="key != null">
+        and `key` LIKE concat('%',#{key},'%')
       </if>
-      <if test="size != null">
-        size = #{size,jdbcType=INTEGER},
-      </if>
-      <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="addTime != null">
-        add_time = #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleted != null">
-        deleted = #{deleted,jdbcType=BIT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.sb.springboot_project.bean.Storage">
-    update cskaoyan_mall_storage
-    set key = #{key,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      size = #{size,jdbcType=INTEGER},
-      url = #{url,jdbcType=VARCHAR},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      deleted = #{deleted,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    </where>
+  </select>
+
+    <delete id="delete_storage">
+        delete from cskaoyan_mall_storage
+        where id = #{storage.id}
+    </delete>
 </mapper>

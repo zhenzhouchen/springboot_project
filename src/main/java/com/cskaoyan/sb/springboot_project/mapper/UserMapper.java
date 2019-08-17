@@ -1,8 +1,12 @@
 package com.cskaoyan.sb.springboot_project.mapper;
 
 import com.cskaoyan.sb.springboot_project.bean.User;
+import com.cskaoyan.sb.springboot_project.bean.User_statistics;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public interface UserMapper {
@@ -11,9 +15,7 @@ public interface UserMapper {
 
     User selectUserDetailForOrderByUserId(@Param("userId") Integer userId);
 
-
-
-
+    List<User_statistics> query_user_statistics_bean();
 
 
 
