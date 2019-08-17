@@ -36,13 +36,20 @@
     order by #{sort} ${order}
   </select>
 
-
-
-
-
-
-
-
+  <select id="selectKeywordById" resultMap="keywordBaseMap">
+    select
+    id,
+    keyword,
+    url,
+    is_hot,
+    is_default,
+    sort_order,
+    add_time,
+    update_time,
+    deleted
+    from cskaoyan_mall_keyword
+    where id = #{id}
+  </select>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Keyword">
     update cskaoyan_mall_keyword
@@ -86,4 +93,11 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <insert id="insertKeyword" useGeneratedKeys="true" keyProperty="id">
+    insert into cskaoyan_mall_keyword
+    (keyword,url,is_hot,is_default,sort_order,add_time,update_time,deleted)
+    values
+    (#{keyword},#{url},#{isHot},#{isDefault},#{sortOrder},#{addTime},#{updateTime},#{deleted})
+  </insert>
 </mapper>

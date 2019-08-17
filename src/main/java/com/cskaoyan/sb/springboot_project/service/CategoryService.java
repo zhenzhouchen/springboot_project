@@ -12,4 +12,10 @@ public interface CategoryService {
     List<Map<String, Object>> selectLevel1List();
 
     List<CategoryList> CategoryListlevel1();
+
+    Category insertCategory(Category category);
+
+    int updateCategoryById(Category category);
+
+    int deleteCategoryById(Category category);
 }

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.LogMapper">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Log">
+  <id column="id" property="id"/>
+    <result column="" property=""/>
+    <result column="" property=""/>
+    <result column="" property=""/>
+    <result column="" property=""/>
+    <result column="" property=""/>
+    <result column="" property=""/>
+    <result column="" property=""/>
+    <result column="" property=""/>
+  </resultMap>
+  <!--<select id="returnList" resultMap="">-->
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Log">
     update cskaoyan_mall_log
     <set>

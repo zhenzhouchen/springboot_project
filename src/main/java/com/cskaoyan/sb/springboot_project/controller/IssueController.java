@@ -1,8 +1,10 @@
 package com.cskaoyan.sb.springboot_project.controller;
 
+import com.cskaoyan.sb.springboot_project.bean.Issue;
 import com.cskaoyan.sb.springboot_project.service.IssueService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +26,44 @@ public class IssueController {
         hashMap.put("data", issueMap);
         hashMap.put("errmsg", "成功");
         hashMap.put("errno", 0);
+        return hashMap;
+    }
+
+    @RequestMapping("update")
+    @ApiOperation("updateIssue")
+    public Map<String, Object> updateIssue(@RequestBody Issue issue) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        int i = issueService.updateIssueById(issue);
+        if(i == 1) {
+            hashMap.put("data", issue);
+            hashMap.put("errmsg", "成功");
+            hashMap.put("errno", 0);
+        }
+        return hashMap;
+    }
+
+    @RequestMapping("delete")
+    @ApiOperation("deleteIssue")
+    public Map<String, Object> deleteIssue(@RequestBody Issue issue) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        int i = issueService.deleteIssueById(issue);
+        if(i == 1) {
+            hashMap.put("errmsg", "成功");
+            hashMap.put("errno", 0);
+        }
+        return hashMap;
+    }
+
+    @RequestMapping("create")
+    @ApiOperation("createIssue")
+    public Map<String, Object> createIssue(@RequestBody Issue issue) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        Issue iss = issueService.insertIssue(issue);
+        if(iss != null) {
+            hashMap.put("data", iss);
+            hashMap.put("errmsg", "成功");
+            hashMap.put("errno", 0);
+        }
         return hashMap;
     }
 }

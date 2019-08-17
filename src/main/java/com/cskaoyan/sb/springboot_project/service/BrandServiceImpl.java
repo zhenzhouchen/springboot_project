@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,5 +33,30 @@ public class BrandServiceImpl implements BrandService {
     public List<Brand> brandList() {
         List<Brand> list = brandMapper.brandList();
         return list;
+    }
+
+    @Override
+    public Brand insertBrand(Brand brand) {
+        brand.setDeleted(false);
+        Date date = new Date();
+        brand.setAddTime(date);
+        brand.setUpdateTime(date);
+        int i = brandMapper.insertBrand(brand);
+        if(i == 1) {
+            return brand;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public int deleteBrandById(Brand brand) {
+        return brandMapper.deleteBrandById(brand);
+    }
+
+    @Override
+    public int updateBrandById(Brand brand) {
+        brand.setUpdateTime(new Date());
+        return brandMapper.updateBrandById(brand);
     }
 }

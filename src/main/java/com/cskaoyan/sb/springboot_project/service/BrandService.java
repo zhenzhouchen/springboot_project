@@ -9,4 +9,10 @@ public interface BrandService {
     Map<String, Object> selectBrandList(int page, int limit, Integer id, String name, String sort, String order);
 
     List<Brand> brandList();
+
+    Brand insertBrand(Brand brand);
+
+    int deleteBrandById(Brand brand);
+
+    int updateBrandById(Brand brand);
 }

@@ -2,6 +2,7 @@ package com.cskaoyan.sb.springboot_project.service;
 
 import com.cskaoyan.sb.springboot_project.bean.Order;
 import com.cskaoyan.sb.springboot_project.bean.Order_goods;
+import com.cskaoyan.sb.springboot_project.bean.Order_statistics;
 import com.cskaoyan.sb.springboot_project.bean.User;
 import com.cskaoyan.sb.springboot_project.mapper.OrderMapper;
 import com.cskaoyan.sb.springboot_project.mapper.Order_goodsMapper;
@@ -47,5 +48,10 @@ public class OrderServiceImpl implements OrderService {
         hashMap.put("orderGoods", order_goodsList);
         hashMap.put("user", user);
         return hashMap;
+    }
+
+    @Override
+    public List<Order_statistics> query_order_statistics() {
+        return orderMapper.query_order_statistics();
     }
 }

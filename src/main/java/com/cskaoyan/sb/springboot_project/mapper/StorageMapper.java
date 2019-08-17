@@ -1,9 +1,18 @@
 package com.cskaoyan.sb.springboot_project.mapper;
 
 import com.cskaoyan.sb.springboot_project.bean.Storage;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface StorageMapper {
-    int updateByPrimaryKeySelective(Storage record);
+    List<Storage> queryAllStorageList(@Param("sort") String sort,@Param("order") String order);
 
-    int updateByPrimaryKey(Storage record);
+    List<Storage> queryStorageList(@Param("key") String key, @Param("name") String name, @Param("sort") String sort, @Param("order") String order);
+
+    int update_storage(@Param("storage") Storage storage);
+
+    int delete_storage(@Param("storage") Storage storage);
+
+    void InsertUploadFileInfo(Storage storage);
 }

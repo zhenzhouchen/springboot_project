@@ -1,6 +1,7 @@
 package com.cskaoyan.sb.springboot_project.service;
 
 import com.cskaoyan.sb.springboot_project.bean.Goods;
+import com.cskaoyan.sb.springboot_project.bean.Goods_statistics;
 import com.cskaoyan.sb.springboot_project.mapper.GoodsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,10 @@ public class GoodsServiceImpl implements GoodsService {
     public List<String> queryCategoryIds(Integer id) {
         List<String> list = goodsMapper.queryCategoryIds(id);
         return list;
+    }
+
+    @Override
+    public List<Goods_statistics> query_goods_statistics() {
+        return goodsMapper.query_goods_statistics();
     }
 }
