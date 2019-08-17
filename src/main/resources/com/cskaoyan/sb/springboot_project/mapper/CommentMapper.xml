@@ -51,4 +51,70 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Comment">
+    <id column="id" property="id" />
+    <result column="value_id" property="valueId" />
+    <result column="type" property="type" />
+    <result column="content" property="content" />
+    <result column="user_id" property="userId" />
+    <result column="has_picture" property="hasPicture" />
+    <result column="pic_urls" property="picUrls" />
+    <result column="star" property="star" />
+    <result column="add_time" property="addTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="deleted" property="deleted" />
+  </resultMap>
+
+  <select id="queryAllCommentList" resultMap="BaseResultMap">
+        select
+        id,
+        value_id,
+        type,
+        content,
+        user_id,
+        has_picture,
+        pic_urls,
+        star,
+        add_time,
+        update_time,
+        deleted
+        from cskaoyan_mall_comment
+        <where>
+          deleted = 0
+          <if test="userId != null">
+            and user_id like concat('%',#{userId},'%')
+          </if>
+          <if test="valueId != null ">
+            and value_id like concat('%',#{valueId},'%')
+          </if>
+        </where>
+    </select>
+
+  <update id="updateDeleteById" >
+    update cskaoyan_mall_comment set deleted = 1 where id = #{id}
+  </update>
+
+  <update id="replyComment">
+    update cskaoyan_mall_comment set content = #{content} where id = #{commentId}
+  </update>
+
+  <resultMap id="ReplyResultMap" type="com.cskaoyan.sb.springboot_project.bean.Comment">
+    <id column="id" property="commentId" />
+    <result column="value_id" property="valueId" />
+    <result column="type" property="type" />
+    <result column="content" property="content" />
+    <result column="user_id" property="userId" />
+    <result column="has_picture" property="hasPicture" />
+    <result column="pic_urls" property="picUrls" />
+    <result column="star" property="star" />
+    <result column="add_time" property="addTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="deleted" property="deleted" />
+  </resultMap>
+
+  <select id="queryCommentById" resultMap="ReplyResultMap">
+    select content from cskaoyan_mall_comment where id = #{commentId}
+  </select>
+
 </mapper>

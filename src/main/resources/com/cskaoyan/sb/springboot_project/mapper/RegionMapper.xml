@@ -27,4 +27,42 @@
       code = #{code,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="regionBaseMap" type="com.cskaoyan.sb.springboot_project.bean.Region">
+    <id property="id" column="id"/>
+    <result property="pid" column="pid"/>
+    <result property="name" column="name"/>
+    <result property="type" column="type"/>
+    <result property="code" column="code"/>
+    <collection property="children" column="code" select="com.cskaoyan.sb.springboot_project.mapper.RegionMapper.selectCityListByCode"/>
+  </resultMap>
+
+  <resultMap id="regionCityMap" type="com.cskaoyan.sb.springboot_project.bean.Region">
+    <id property="id" column="id"/>
+    <result property="pid" column="pid"/>
+    <result property="name" column="name"/>
+    <result property="type" column="type"/>
+    <result property="code" column="code"/>
+    <collection property="children" column="code" select="com.cskaoyan.sb.springboot_project.mapper.RegionMapper.selectCountyListByCode"/>
+  </resultMap>
+
+  <resultMap id="regionCountyMap" type="com.cskaoyan.sb.springboot_project.bean.Region">
+    <id property="id" column="id"/>
+    <result property="name" column="name"/>
+    <result property="type" column="type"/>
+    <result property="code" column="code"/>
+  </resultMap>
+
+
+  <select id="selectRegionList" resultMap="regionBaseMap">
+    select id,pid,`name`,`type`,code from cskaoyan_mall_region where `type` = 1
+  </select>
+
+  <select id="selectCityListByCode" resultMap="regionCityMap">
+    select id,pid,`name`,`type`,code from cskaoyan_mall_region where code like CONCAT(#{code},"%") and `type` = 2
+  </select>
+
+  <select id="selectCountyListByCode" resultMap="regionCountyMap">
+    select id,`name`,`type`,code from cskaoyan_mall_region where code like CONCAT(#{code},"%") and `type` = 3
+  </select>
 </mapper>

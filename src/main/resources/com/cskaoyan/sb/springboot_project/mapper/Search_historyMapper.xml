@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.Search_historyMapper">
+  <select id="queryAllHistoryList" resultType="com.cskaoyan.sb.springboot_project.bean.Search_history">
+    select
+    id,
+    user_id as userId,
+    keyword,
+    `from`,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    from cskaoyan_mall_search_history
+    order by #{sort}
+    #{order}
+  </select>
+
+  <select id="queryHistoryList" resultType="com.cskaoyan.sb.springboot_project.bean.Search_history">
+    select
+    id,
+    user_id as userId,
+    keyword,
+    `from`,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    from cskaoyan_mall_search_history
+    <where>
+      <if test="keyword != null">
+        keyword like concat('%',#{keyword},'%')
+      </if>
+      <if test="userId != null">
+        and user_id LIKE concat('%',#{userId},'%')
+      </if>
+    </where>
+    order by #{sort}
+    #{order}
+  </select>
+
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Search_history">
     update cskaoyan_mall_search_history
     <set>

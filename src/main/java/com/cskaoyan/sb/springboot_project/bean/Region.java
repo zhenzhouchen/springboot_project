@@ -1,5 +1,9 @@
 package com.cskaoyan.sb.springboot_project.bean;
 
+import java.util.List;
+import java.util.Map;
+
+
 public class Region {
     private Integer id;
 
@@ -10,6 +14,8 @@ public class Region {
     private Byte type;
 
     private Integer code;
+
+    private List<Map> children;
 
     public Integer getId() {
         return id;
@@ -49,5 +55,13 @@ public class Region {
 
     public void setCode(Integer code) {
         this.code = code;
+    }
+
+    public List<Map> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Map> children) {
+        this.children = children;
     }
 }

@@ -20,7 +20,7 @@ public class Order_goods {
 
     private BigDecimal price;
 
-    private String specifications;
+    private String[] specifications;
 
     private String picUrl;
 
@@ -96,12 +96,12 @@ public class Order_goods {
         this.price = price;
     }
 
-    public String getSpecifications() {
+    public String[] getSpecifications() {
         return specifications;
     }
 
-    public void setSpecifications(String specifications) {
-        this.specifications = specifications == null ? null : specifications.trim();
+    public void setSpecifications(String[] specifications) {
+        this.specifications = specifications;
     }
 
     public String getPicUrl() {

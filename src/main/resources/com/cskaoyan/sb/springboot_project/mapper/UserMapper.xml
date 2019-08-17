@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.UserMapper">
+
+<resultMap id="User_statistic_Map" type="com.cskaoyan.sb.springboot_project.bean.User_statistics">
+  <result column="day" property="day"/>
+  <result column="users" property="users"/>
+</resultMap>
+<select id="query_user_statistics_bean" resultMap="User_statistic_Map">
+  select
+  last_login_time as `day`,
+  count(id) as users
+  from cskaoyan_mall_user
+  group by last_login_time
+</select>
+
+
+
+  <select id="queryUserList" resultType="com.cskaoyan.sb.springboot_project.bean.User">
+    select
+    id,
+    username,
+    password,
+    gender,
+    birthday,
+    last_login_time as lastLoginTime,
+    user_level as userLevel,
+    nickname,
+    mobile,
+    avatar,
+    status,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    from cskaoyan_mall_user
+    <where>
+      <if test="username != null">
+        username = #{username}
+      </if>
+      <if test="mobile != null">
+        and mobile = #{mobile}
+      </if>
+    </where>
+    order by #{sort}
+    #{order}
+  </select>
+
+  <select id="queryAllUserList" resultType="com.cskaoyan.sb.springboot_project.bean.User">
+    select
+    id,
+    username,
+    password,
+    gender,
+    birthday,
+    last_login_time as lastLoginTime,
+    user_level as userLevel,
+    nickname,
+    mobile,
+    avatar,
+    status,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    from cskaoyan_mall_user
+    order by #{sort}
+    #{order}
+  </select>
+
+  <select id="selectUserDetailForOrderByUserId" resultType="com.cskaoyan.sb.springboot_project.bean.User">
+    select id,nickname from cskaoyan_mall_user where id = #{userId}
+  </select>
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.User">
     update cskaoyan_mall_user
     <set>

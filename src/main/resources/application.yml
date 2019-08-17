@@ -6,12 +6,15 @@ spring:
     url: jdbc:mysql://localhost:3306/cskaoyanmall?useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
-    pagehelper:
-      helperDialect:mysql
-      reasonable:true
-      supportMethodArguments:true
-      params:count=countSql
+
   resources:
     static-locations: classpath:/img
-debug: true
 
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+mybatis:
+  type-handlers-package: com.cskaoyan.sb.springboot_project.handler

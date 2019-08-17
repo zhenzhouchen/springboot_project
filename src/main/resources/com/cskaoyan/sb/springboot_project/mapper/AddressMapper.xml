@@ -1,58 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.AddressMapper">
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Address">
-    update cskaoyan_mall_address
-    <set>
+  <select id="queryAddressList" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
+    SELECT
+    id,
+    `name`,
+    user_id as userId,
+    province_id as provinceId,
+    city_id as cityId,
+    area_id as areaId,
+    address,
+    mobile,
+    is_default as isDefault,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    FROM cskaoyan_mall_address
+    <where>
       <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+        `name` like concat('%',#{name},'%')
       </if>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        and user_id LIKE concat('%',#{userId},'%')
       </if>
-      <if test="provinceId != null">
-        province_id = #{provinceId,jdbcType=INTEGER},
-      </if>
-      <if test="cityId != null">
-        city_id = #{cityId,jdbcType=INTEGER},
-      </if>
-      <if test="areaId != null">
-        area_id = #{areaId,jdbcType=INTEGER},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null">
-        mobile = #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="isDefault != null">
-        is_default = #{isDefault,jdbcType=BIT},
-      </if>
-      <if test="addTime != null">
-        add_time = #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleted != null">
-        deleted = #{deleted,jdbcType=BIT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.sb.springboot_project.bean.Address">
-    update cskaoyan_mall_address
-    set name = #{name,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=INTEGER},
-      province_id = #{provinceId,jdbcType=INTEGER},
-      city_id = #{cityId,jdbcType=INTEGER},
-      area_id = #{areaId,jdbcType=INTEGER},
-      address = #{address,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      is_default = #{isDefault,jdbcType=BIT},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      deleted = #{deleted,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    </where>
+    order by #{sort}
+    #{order}
+  </select>
+
+  <select id="queryAllAddressList" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
+    SELECT
+    id,
+    `name`,
+    user_id as userId,
+    province_id as provinceId,
+    city_id as cityId,
+    area_id as areaId,
+    address,
+    mobile,
+    is_default as isDefault,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    FROM cskaoyan_mall_address
+        order by #{sort}
+    #{order}
+  </select>
+
 </mapper>
