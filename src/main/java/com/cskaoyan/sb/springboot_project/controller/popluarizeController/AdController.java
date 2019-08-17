@@ -1,4 +1,4 @@
-package com.cskaoyan.sb.springboot_project.controller;
+package com.cskaoyan.sb.springboot_project.controller.popluarizeController;
 
 import com.cskaoyan.sb.springboot_project.bean.Ad;
 import com.cskaoyan.sb.springboot_project.bean.Popularize.PopBaseResp;
@@ -90,6 +90,7 @@ public class AdController {
     @RequestMapping("ad/delete")
     public PopBaseResp<Ad> deleteAd(Ad ad) {
         Ad deleteAd = adService.updateAd(ad);
+        ad.setDeleted(true);
 
         PopBaseResp<Ad> mapPopBaseResp = new PopBaseResp<>();
         if (deleteAd != null) {

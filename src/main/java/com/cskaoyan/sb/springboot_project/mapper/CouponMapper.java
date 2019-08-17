@@ -1,9 +1,11 @@
 package com.cskaoyan.sb.springboot_project.mapper;
 
+import com.cskaoyan.sb.springboot_project.bean.Ad;
 import com.cskaoyan.sb.springboot_project.bean.Coupon;
 import com.cskaoyan.sb.springboot_project.bean.CouponExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.SelectKey;
 
 public interface CouponMapper {
     long countByExample(CouponExample example);
@@ -27,4 +29,7 @@ public interface CouponMapper {
     int updateByPrimaryKeySelective(Coupon record);
 
     int updateByPrimaryKey(Coupon record);
+
+
+    List<Coupon> listCouponByCondition(@Param("sort") String sort, @Param("order") String order);
 }
