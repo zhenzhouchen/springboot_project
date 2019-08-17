@@ -44,6 +44,18 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <update id="updateBrandById" useGeneratedKeys="true" keyProperty="id">
+    update cskaoyan_mall_brand
+    set
+      `name` = #{name},
+      `desc` = #{desc},
+      pic_url = #{picUrl},
+      floor_price = #{floorPrice},
+      add_time = #{addTime},
+      update_time = #{updateTime}
+    where id = #{id}
+  </update>
+
   <resultMap id="brandBaseMap" type="com.cskaoyan.sb.springboot_project.bean.Brand">
     <id property="id" column="id"/>
     <result property="name" column="name"/>
@@ -69,4 +81,20 @@
     </where>
     order by #{sort} ${order}
   </select>
+
+  <insert id="insertBrand" useGeneratedKeys="true" keyProperty="id">
+    insert into
+    cskaoyan_mall_brand
+    (`name`,`desc`,
+    <if test="picUrl != null">
+      pic_url,
+    </if>
+    floor_price,add_time,update_time,deleted)
+    values
+    (#{name},#{desc},
+    <if test="picUrl != null">
+      #{picUrl},
+    </if>
+    #{floorPrice},#{addTime},#{updateTime},#{deleted})
+  </insert>
 </mapper>

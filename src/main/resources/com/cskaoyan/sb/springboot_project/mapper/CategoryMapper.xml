@@ -56,6 +56,19 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <update id="updateCategoryById">
+    update cskaoyan_mall_category
+    set
+    `name` = #{name},
+    keywords = #{keywords},
+    `desc` = #{desc},
+    icon_url = #{iconUrl},
+    pic_url = #{picUrl},
+    `level` = #{level},
+    update_time = #{updateTime}
+    where id = #{id}
+  </update>
+
   <resultMap id="categoryLevel1Map" type="com.cskaoyan.sb.springboot_project.bean.Category">
     <id property="id" column="id"/>
     <result property="name" column="name"/>
@@ -80,12 +93,13 @@
   <select id="selectCategoryList" resultMap="categoryLevel1Map">
     select id,`name`,keywords,`desc`,icon_url,pic_url,`level`
     from cskaoyan_mall_category
+    where `level` = 'L1' and deleted = 0
   </select>
 
   <select id="selectCategoryLevel2List" resultMap="categoryLevel2Map">
     select id,`name`,keywords,`desc`,icon_url,pic_url,`level`
     from cskaoyan_mall_category
-    where pid = #{id}
+    where pid = #{id} and `level` = 'L2' and deleted = 0
   </select>
 
   <resultMap id="Level1EntryMap" type="com.cskaoyan.sb.springboot_project.bean.Category">
@@ -96,4 +110,11 @@
   <select id="selectLevel1List" resultMap="Level1EntryMap">
     select id,`name` from cskaoyan_mall_category where `level` = 'L1';
   </select>
+
+  <insert id="insertCategory" useGeneratedKeys="true" keyProperty="id">
+    insert into cskaoyan_mall_category
+    (`name`,keywords,`desc`,pid,icon_url,pic_url,`level`,add_time,update_time,deleted)
+    values
+    (#{name},#{keywords},#{desc},#{pid},#{iconUrl},#{picUrl},#{level},#{addTime},#{updateTime},#{deleted})
+  </insert>
 </mapper>

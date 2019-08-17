@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,13 @@ public class IssueServiceImpl implements IssueService {
     IssueMapper issueMapper;
 
     @Override
+    public int updateIssueById(Issue issue) {
+        Date date = new Date();
+        issue.setUpdateTime(date);
+        return issueMapper.updateByPrimaryKey(issue);
+    }
+
+    @Override
     public Map<String, Object> selectIssueList(int page, int limit, String sort, String order, String question) {
         PageHelper.startPage(page, limit);
         List<Issue> issueList = issueMapper.selectIssueList(page, limit, sort, order, question);
@@ -27,5 +35,24 @@ public class IssueServiceImpl implements IssueService {
         hashMap.put("items", issueList);
         hashMap.put("total", total);
         return hashMap;
+    }
+
+    @Override
+    public int deleteIssueById(Issue issue) {
+        return issueMapper.deleteIssueById(issue);
+    }
+
+    @Override
+    public Issue insertIssue(Issue issue) {
+        issue.setDeleted(false);
+        Date date = new Date();
+        issue.setAddTime(date);
+        issue.setUpdateTime(date);
+        int i = issueMapper.insertIssue(issue);
+        if(i == 1) {
+            return issue;
+        } else {
+            return null;
+        }
     }
 }

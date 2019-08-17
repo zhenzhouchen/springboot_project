@@ -27,6 +27,13 @@
     order by #{sort} ${order}
   </select>
 
+  <insert id="insertIssue"  useGeneratedKeys="true" keyProperty="id">
+    insert into cskaoyan_mall_issue
+    (question,answer,add_time,update_time,deleted)
+    values
+    (#{question},#{answer},#{addTime},#{updateTime},#{deleted})
+  </insert>
+
 
 
 

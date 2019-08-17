@@ -5,10 +5,7 @@ import com.cskaoyan.sb.springboot_project.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -32,5 +29,31 @@ public class CategoryServiceImpl implements CategoryService {
             mapList.add(hashMap);
         }
         return mapList;
+    }
+
+    @Override
+    public Category insertCategory(Category category) {
+        category.setDeleted(false);
+        Date date = new Date();
+        category.setAddTime(date);
+        category.setUpdateTime(date);
+        int i = categoryMapper.insertCategory(category);
+        if(i == 1) {
+            return category;
+        } {
+            return null;
+        }
+    }
+
+    @Override
+    public int updateCategoryById(Category category) {
+        Date date = new Date();
+        category.setUpdateTime(date);
+        return categoryMapper.updateCategoryById(category);
+    }
+
+    @Override
+    public int deleteCategoryById(Category category) {
+        return categoryMapper.deleteCategoryById(category);
     }
 }
