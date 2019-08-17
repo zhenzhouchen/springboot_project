@@ -15,7 +15,7 @@
     add_time as addTime,
     update_time as updateTime,
     deleted
-    FROM cskaoyan_mall_address
+    from cskaoyan_mall_address
     <where>
       <if test="name != null">
         `name` like concat('%',#{name},'%')
