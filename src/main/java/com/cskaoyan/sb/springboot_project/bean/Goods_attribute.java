@@ -17,6 +17,10 @@ public class Goods_attribute {
 
     private Boolean deleted;
 
+    public Goods_attribute() {
+    }
+
+
     public Integer getId() {
         return id;
     }
@@ -38,7 +42,7 @@ public class Goods_attribute {
     }
 
     public void setAttribute(String attribute) {
-        this.attribute = attribute == null ? null : attribute.trim();
+        this.attribute = attribute;
     }
 
     public String getValue() {
@@ -46,7 +50,7 @@ public class Goods_attribute {
     }
 
     public void setValue(String value) {
-        this.value = value == null ? null : value.trim();
+        this.value = value;
     }
 
     public Date getAddTime() {
@@ -71,5 +75,18 @@ public class Goods_attribute {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods_attribute{" +
+                "id=" + id +
+                ", goodsId=" + goodsId +
+                ", attribute='" + attribute + '\'' +
+                ", value='" + value + '\'' +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
     }
 }

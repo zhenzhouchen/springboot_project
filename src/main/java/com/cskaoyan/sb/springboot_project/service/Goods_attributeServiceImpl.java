@@ -1,5 +1,6 @@
 package com.cskaoyan.sb.springboot_project.service;
 
+import com.cskaoyan.sb.springboot_project.bean.Goods;
 import com.cskaoyan.sb.springboot_project.bean.Goods_attribute;
 import com.cskaoyan.sb.springboot_project.mapper.Goods_attributeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,12 @@ public class Goods_attributeServiceImpl implements Goods_attributeService {
     public List<Goods_attribute> queryByGoodsId(Integer goodsId) {
         List<Goods_attribute> list = goodsAttributeMapper.queryByGoodsId(goodsId);
         return list;
+    }
+
+    public int insertAttribute(List<Goods_attribute> attributes, Goods goods) {
+        for (Goods_attribute attribute : attributes){
+            attribute.setGoodsId(Integer.valueOf(goods.getGoodsSn()));
+        }
+        return goodsAttributeMapper.insertAttribute(attributes);
     }
 }

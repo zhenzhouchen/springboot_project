@@ -39,4 +39,8 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods_statistics> query_goods_statistics() {
         return goodsMapper.query_goods_statistics();
     }
+
+    public int insertGoods(Goods goods) {
+        return goodsMapper.insertGoods(goods);
+    }
 }

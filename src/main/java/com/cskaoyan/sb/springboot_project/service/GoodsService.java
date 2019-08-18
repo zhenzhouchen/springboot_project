@@ -13,4 +13,6 @@ public interface GoodsService {
     List<String> queryCategoryIds(Integer id);
 
     List<Goods_statistics> query_goods_statistics();
+
+    int insertGoods(Goods goods);
 }
