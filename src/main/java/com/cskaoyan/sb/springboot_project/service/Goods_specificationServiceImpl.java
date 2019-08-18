@@ -27,3 +27,4 @@ public class Goods_specificationServiceImpl implements Goods_specificationServic
         return goodsSpecificationMapper.insertSpecification(specifications);
     }
 }
+

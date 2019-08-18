@@ -106,7 +106,7 @@ public class GoodsController {
         int j = goodsAttributeService.insertAttribute(create.getAttributes(), create.getGoods());
         int k = goodsProductService.insertProduct(create.getProducts(), create.getGoods());
         int m = goodsSpecificationService.insertSpecification(create.getSpecifications(), create.getGoods());
-        if (i == 1 && j == 1 && k == 1 && m == 1) {
+        if (i == 1 && j > 0 && k > 0 && m > 0) {
             map.put("errmsg", "成功");
             map.put("errno", 0);
         }

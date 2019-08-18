@@ -46,8 +46,6 @@ public class Goods {
 
     private String detail;
 
-    private String gallery_string;
-
     public Integer getId() {
         return id;
     }
@@ -215,4 +213,5 @@ public class Goods {
     public void setDetail(String detail) {
         this.detail = detail;
     }
+
 }

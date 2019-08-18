@@ -9,5 +9,4 @@ public interface Goods_productService {
     List<Goods_product> queryByGoodsId(Integer id);
 
     int insertProduct(List<Goods_product> products, Goods goods);
-
 }

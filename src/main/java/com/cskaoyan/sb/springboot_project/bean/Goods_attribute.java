@@ -20,15 +20,6 @@ public class Goods_attribute {
     public Goods_attribute() {
     }
 
-    public Goods_attribute(Integer id, Integer goodsId, String attribute, String value, Date addTime, Date updateTime, Boolean deleted) {
-        this.id = id;
-        this.goodsId = goodsId;
-        this.attribute = attribute;
-        this.value = value;
-        this.addTime = addTime;
-        this.updateTime = updateTime;
-        this.deleted = deleted;
-    }
 
     public Integer getId() {
         return id;

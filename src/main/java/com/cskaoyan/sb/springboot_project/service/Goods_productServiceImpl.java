@@ -21,7 +21,7 @@ public class Goods_productServiceImpl implements Goods_productService {
 
     @Override
     public int insertProduct(List<Goods_product> products, Goods goods) {
-        for (Goods_product product : products){
+        for (Goods_product product : products) {
             product.setGoodsId(Integer.valueOf(goods.getGoodsSn()));
         }
         return goodsProductMapper.insertProduct(products);
