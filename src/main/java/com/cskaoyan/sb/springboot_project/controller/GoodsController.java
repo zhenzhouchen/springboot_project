@@ -7,11 +7,11 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.System;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//@MapperScan("com.cskaoyan.sb.springboot_project.mapper")
 @RestController
 @RequestMapping("/admin")
 public class GoodsController {
@@ -98,25 +98,18 @@ public class GoodsController {
         return map;
     }
 
-//    @PostMapping("goods/create")
-//    public Map<String, Object> create_goods( @RequestBody Param param){
-//        param.getGoods().setGallery_string(param.getGoods().getGallery().toString());
-//        Map<String, Object> map = new HashMap<>();
-//        int goods_result = goodsService.insert_goods(param.getGoods());
-//        if(param.getProducts()!=null) {
-//            int products_result = goodsProductService.insert_products(param.getProducts());
-//        }
-//        if(param.getAttributes()!=null) {
-//            int attributes_result = goodsAttributeService.insert_attributes(param.getAttributes());
-//        }
-//        if(param.getSpecifications()!=null) {
-//            int specification_result = goodsSpecificationService.insert_specification(param.getSpecifications());
-//        }
-//        if(goods_result == 1) {
-//            map.put("errmsg", "成功");
-//        }
-//        map.put("errno", 0);
-//        return map;
-//    }
-
+    @ResponseBody
+    @RequestMapping("goods/create")
+    public Map<String, Object> goodsCreate(@RequestBody Goods_create create) {
+        Map<String, Object> map = new HashMap<>();
+        int i = goodsService.insertGoods(create.getGoods());
+        int j = goodsAttributeService.insertAttribute(create.getAttributes(), create.getGoods());
+        int k = goodsProductService.insertProduct(create.getProducts(), create.getGoods());
+        int m = goodsSpecificationService.insertSpecification(create.getSpecifications(), create.getGoods());
+        if (i == 1 && j == 1 && k == 1 && m == 1) {
+            map.put("errmsg", "成功");
+            map.put("errno", 0);
+        }
+        return map;
+    }
 }

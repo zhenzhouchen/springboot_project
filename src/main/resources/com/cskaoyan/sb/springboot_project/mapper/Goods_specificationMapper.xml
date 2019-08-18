@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.Goods_specificationMapper">
-  <insert id="insert_specification">
-    insert into cskaoyan_mall_goods_specification
-     (pic_url,specification,`value`)
-     values
-    <foreach collection="specifications" item="specification"  separator=",">
-      (
-      #{specification.picUrl},
-      #{specification.specification},
-      #{specification.value}
-      )
-    </foreach>
-  </insert>
   
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Goods_specification">
     update cskaoyan_mall_goods_specification
@@ -69,5 +57,14 @@
     from cskaoyan_mall_goods_specification
     where goods_id = #{id}
   </select>
+
+  <insert id="insertSpecification">
+    insert into cskaoyan_mall_goods_specification
+    (goods_id,specification,value,pic_url)
+    values
+    <foreach collection="specifications" item="item" separator=",">
+      (#{item.goodsId},#{item.specification},#{item.value},#{item.picUrl})
+    </foreach>
+  </insert>
 
 </mapper>

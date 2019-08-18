@@ -12,5 +12,6 @@ public interface Goods_attributeMapper {
 
     List<Goods_attribute> queryByGoodsId(Integer goodsId);
 
-    int insert_attributes(@Param("attributes") Goods_attribute[] attributes);
+    int insertAttribute(@Param("attributes") List<Goods_attribute> attributes);
+
 }
