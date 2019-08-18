@@ -47,34 +47,8 @@ public class Goods {
 
     private String detail;
 
-    private String gallery_string;
 
     public Goods() {
-    }
-
-    public Goods(Integer id, String goodsSn, String name, Integer categoryId, Integer brandId, String gallery, String keywords, String brief, Boolean isOnSale, Short sortOrder, String picUrl, String shareUrl, Boolean isNew, Boolean isHot, String unit, BigDecimal counterPrice, BigDecimal retailPrice, Date addTime, Date updateTime, Boolean deleted, String detail, String gallery_string) {
-        this.id = id;
-        this.goodsSn = goodsSn;
-        this.name = name;
-        this.categoryId = categoryId;
-        this.brandId = brandId;
-        this.gallery = gallery;
-        this.keywords = keywords;
-        this.brief = brief;
-        this.isOnSale = isOnSale;
-        this.sortOrder = sortOrder;
-        this.picUrl = picUrl;
-        this.shareUrl = shareUrl;
-        this.isNew = isNew;
-        this.isHot = isHot;
-        this.unit = unit;
-        this.counterPrice = counterPrice;
-        this.retailPrice = retailPrice;
-        this.addTime = addTime;
-        this.updateTime = updateTime;
-        this.deleted = deleted;
-        this.detail = detail;
-        this.gallery_string = gallery_string;
     }
 
     public Integer getId() {
@@ -245,14 +219,6 @@ public class Goods {
         this.detail = detail;
     }
 
-    public String getGallery_string() {
-        return gallery_string;
-    }
-
-    public void setGallery_string(String gallery_string) {
-        this.gallery_string = gallery_string;
-    }
-
     @Override
     public String toString() {
         return "Goods{" +
@@ -277,7 +243,6 @@ public class Goods {
                 ", updateTime=" + updateTime +
                 ", deleted=" + deleted +
                 ", detail='" + detail + '\'' +
-                ", gallery_string='" + gallery_string + '\'' +
                 '}';
     }
 }

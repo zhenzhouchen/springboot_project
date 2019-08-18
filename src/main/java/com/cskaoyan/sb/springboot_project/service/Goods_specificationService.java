@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface Goods_specificationService {
     List<Goods_specification> queryByGoodsId(Integer id);
-
-    int insert_specification(Goods_specification[] specifications);
 }

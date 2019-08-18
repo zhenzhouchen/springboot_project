@@ -14,5 +14,4 @@ public interface GoodsService {
 
     List<Goods_statistics> query_goods_statistics();
 
-    int insert_goods(Goods goods);
 }

@@ -18,8 +18,4 @@ public class Goods_productServiceImpl implements Goods_productService {
         return list;
     }
 
-    @Override
-    public int insert_products(Goods_product[] products) {
-        return goodsProductMapper.insert_products(products);
-    }
 }

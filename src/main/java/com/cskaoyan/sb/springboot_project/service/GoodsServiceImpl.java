@@ -40,8 +40,4 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.query_goods_statistics();
     }
 
-    @Override
-    public int insert_goods(Goods goods) {
-        return goodsMapper.insert_goods(goods);
-    }
 }

@@ -26,17 +26,6 @@ public class Goods_product {
     public Goods_product() {
     }
 
-    public Goods_product(Integer id, Integer goodsId, String specifications, BigDecimal price, Integer number, String url, Date addTime, Date updateTime, Boolean deleted) {
-        this.id = id;
-        this.goodsId = goodsId;
-        this.specifications = specifications;
-        this.price = price;
-        this.number = number;
-        this.url = url;
-        this.addTime = addTime;
-        this.updateTime = updateTime;
-        this.deleted = deleted;
-    }
 
     public Integer getId() {
         return id;

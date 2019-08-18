@@ -18,8 +18,5 @@ public class Goods_specificationServiceImpl implements Goods_specificationServic
         return list;
     }
 
-    @Override
-    public int insert_specification(Goods_specification[] specifications) {
-        return goodsSpecificationMapper.insert_specification(specifications);
-    }
 }
+

@@ -12,5 +12,4 @@ public interface Goods_specificationMapper {
 
     List<Goods_specification> queryByGoodsId(Integer id);
 
-    int insert_specification(@Param("specifications") Goods_specification[] specifications);
 }

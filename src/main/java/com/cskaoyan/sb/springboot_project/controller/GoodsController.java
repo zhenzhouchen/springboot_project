@@ -97,26 +97,4 @@ public class GoodsController {
         map.put("data", info_map);
         return map;
     }
-
-//    @PostMapping("goods/create")
-//    public Map<String, Object> create_goods( @RequestBody Param param){
-//        param.getGoods().setGallery_string(param.getGoods().getGallery().toString());
-//        Map<String, Object> map = new HashMap<>();
-//        int goods_result = goodsService.insert_goods(param.getGoods());
-//        if(param.getProducts()!=null) {
-//            int products_result = goodsProductService.insert_products(param.getProducts());
-//        }
-//        if(param.getAttributes()!=null) {
-//            int attributes_result = goodsAttributeService.insert_attributes(param.getAttributes());
-//        }
-//        if(param.getSpecifications()!=null) {
-//            int specification_result = goodsSpecificationService.insert_specification(param.getSpecifications());
-//        }
-//        if(goods_result == 1) {
-//            map.put("errmsg", "成功");
-//        }
-//        map.put("errno", 0);
-//        return map;
-//    }
-
 }

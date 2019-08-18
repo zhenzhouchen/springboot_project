@@ -23,6 +23,4 @@ public interface GoodsMapper {
 
     List<String> queryCategoryIds(Integer id);
 
-    int insert_goods(@Param("goods") Goods goods);
-
 }

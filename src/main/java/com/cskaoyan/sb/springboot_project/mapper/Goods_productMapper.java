@@ -12,5 +12,4 @@ public interface Goods_productMapper {
 
     List<Goods_product> queryByGoodsId(Integer id);
 
-    int insert_products(@Param("products") Goods_product[] products);
 }

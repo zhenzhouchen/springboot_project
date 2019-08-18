@@ -18,8 +18,5 @@ public class Goods_attributeServiceImpl implements Goods_attributeService {
         return list;
     }
 
-    @Override
-    public int insert_attributes(Goods_attribute[] attributes) {
-        return goodsAttributeMapper.insert_attributes(attributes);
-    }
+
 }
