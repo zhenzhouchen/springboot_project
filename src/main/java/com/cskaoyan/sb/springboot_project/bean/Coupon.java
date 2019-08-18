@@ -132,11 +132,11 @@ public class Coupon {
         this.goodsType = goodsType;
     }
 
-    public int[] getGoodsValue() {
+    public String[] getGoodsValue() {
         return goodsValue;
     }
 
-    public void setGoodsValue(int[] goodsValue) {
+    public void setGoodsValue(String[] goodsValue) {
         this.goodsValue = goodsValue;
     }
 
