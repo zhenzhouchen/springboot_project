@@ -1,6 +1,7 @@
 package com.cskaoyan.sb.springboot_project.bean;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Goods_product {
@@ -8,7 +9,7 @@ public class Goods_product {
 
     private Integer goodsId;
 
-    private String specifications;
+    private String[] specifications;
 
     private BigDecimal price;
 
@@ -21,6 +22,21 @@ public class Goods_product {
     private Date updateTime;
 
     private Boolean deleted;
+
+    public Goods_product() {
+    }
+
+    public Goods_product(Integer id, Integer goodsId, String[] specifications, BigDecimal price, Integer number, String url, Date addTime, Date updateTime, Boolean deleted) {
+        this.id = id;
+        this.goodsId = goodsId;
+        this.specifications = specifications;
+        this.price = price;
+        this.number = number;
+        this.url = url;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+    }
 
     public Integer getId() {
         return id;
@@ -38,12 +54,12 @@ public class Goods_product {
         this.goodsId = goodsId;
     }
 
-    public String getSpecifications() {
+    public String[] getSpecifications() {
         return specifications;
     }
 
-    public void setSpecifications(String specifications) {
-        this.specifications = specifications == null ? null : specifications.trim();
+    public void setSpecifications(String[] specifications) {
+        this.specifications = specifications;
     }
 
     public BigDecimal getPrice() {
@@ -67,7 +83,7 @@ public class Goods_product {
     }
 
     public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+        this.url = url;
     }
 
     public Date getAddTime() {
@@ -92,5 +108,20 @@ public class Goods_product {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods_product{" +
+                "id=" + id +
+                ", goodsId=" + goodsId +
+                ", specifications=" + Arrays.toString(specifications) +
+                ", price=" + price +
+                ", number=" + number +
+                ", url='" + url + '\'' +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
     }
 }

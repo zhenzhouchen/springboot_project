@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface Goods_productService {
     List<Goods_product> queryByGoodsId(Integer id);
+
+    int insert_products(Goods_product[] products);
 }

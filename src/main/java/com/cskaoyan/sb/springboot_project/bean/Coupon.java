@@ -1,6 +1,7 @@
 package com.cskaoyan.sb.springboot_project.bean;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Coupon {
@@ -44,6 +45,32 @@ public class Coupon {
 
     private Boolean deleted;
 
+    public Coupon() {
+    }
+
+    public Coupon(Integer id, String name, String desc, String tag, Integer total, BigDecimal discount, BigDecimal min, Short limit, Short type, Short status, Short goodsType, String[] goodsValue, String code, Short timeType, Short days, Date startTime, Date endTime, Date addTime, Date updateTime, Boolean deleted) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.tag = tag;
+        this.total = total;
+        this.discount = discount;
+        this.min = min;
+        this.limit = limit;
+        this.type = type;
+        this.status = status;
+        this.goodsType = goodsType;
+        this.goodsValue = goodsValue;
+        this.code = code;
+        this.timeType = timeType;
+        this.days = days;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -57,7 +84,7 @@ public class Coupon {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getDesc() {
@@ -65,7 +92,7 @@ public class Coupon {
     }
 
     public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+        this.desc = desc;
     }
 
     public String getTag() {
@@ -73,7 +100,7 @@ public class Coupon {
     }
 
     public void setTag(String tag) {
-        this.tag = tag == null ? null : tag.trim();
+        this.tag = tag;
     }
 
     public Integer getTotal() {
@@ -132,11 +159,11 @@ public class Coupon {
         this.goodsType = goodsType;
     }
 
-    public int[] getGoodsValue() {
+    public String[] getGoodsValue() {
         return goodsValue;
     }
 
-    public void setGoodsValue(int[] goodsValue) {
+    public void setGoodsValue(String[] goodsValue) {
         this.goodsValue = goodsValue;
     }
 
@@ -145,7 +172,7 @@ public class Coupon {
     }
 
     public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+        this.code = code;
     }
 
     public Short getTimeType() {
@@ -204,6 +231,29 @@ public class Coupon {
         this.deleted = deleted;
     }
 
-    public void setCoupondTime(Date date) {
+    @Override
+    public String toString() {
+        return "Coupon{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", tag='" + tag + '\'' +
+                ", total=" + total +
+                ", discount=" + discount +
+                ", min=" + min +
+                ", limit=" + limit +
+                ", type=" + type +
+                ", status=" + status +
+                ", goodsType=" + goodsType +
+                ", goodsValue=" + Arrays.toString(goodsValue) +
+                ", code='" + code + '\'' +
+                ", timeType=" + timeType +
+                ", days=" + days +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
     }
 }

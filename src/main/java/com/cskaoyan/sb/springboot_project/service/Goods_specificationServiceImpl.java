@@ -17,4 +17,9 @@ public class Goods_specificationServiceImpl implements Goods_specificationServic
         List<Goods_specification> list = goodsSpecificationMapper.queryByGoodsId(id);
         return list;
     }
+
+    @Override
+    public int insert_specification(Goods_specification[] specifications) {
+        return goodsSpecificationMapper.insert_specification(specifications);
+    }
 }

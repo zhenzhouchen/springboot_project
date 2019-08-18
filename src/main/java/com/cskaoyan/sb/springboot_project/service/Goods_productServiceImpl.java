@@ -17,4 +17,9 @@ public class Goods_productServiceImpl implements Goods_productService {
         List<Goods_product> list = goodsProductMapper.queryByGoodsId(id);
         return list;
     }
+
+    @Override
+    public int insert_products(Goods_product[] products) {
+        return goodsProductMapper.insert_products(products);
+    }
 }

@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.System;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,4 +97,21 @@ public class GoodsController {
         map.put("data", info_map);
         return map;
     }
+
+    //goods/create
+    @PostMapping("goods/create")
+    public Map<String, Object> create_goods( @RequestBody Param param){
+        param.getGoods().setGallery_string(param.getGoods().getGallery().toString());
+        Map<String, Object> map = new HashMap<>();
+        int goods_result = goodsService.insert_goods(param.getGoods());
+        int products_result = goodsProductService.insert_products(param.getProducts());
+        int attributes_result = goodsAttributeService.insert_attributes(param.getAttributes());
+        int specification_result = goodsSpecificationService.insert_specification(param.getSpecifications());
+        if(goods_result == 1) {
+            map.put("errmsg", "成功");
+        }
+        map.put("errno", 0);
+        return map;
+    }
+
 }
