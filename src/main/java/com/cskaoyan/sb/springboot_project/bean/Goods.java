@@ -15,7 +15,7 @@ public class Goods {
 
     private Integer brandId;
 
-    private String[] gallery;
+    private String gallery;
 
     private String keywords;
 
@@ -52,7 +52,7 @@ public class Goods {
     public Goods() {
     }
 
-    public Goods(Integer id, String goodsSn, String name, Integer categoryId, Integer brandId, String[] gallery, String keywords, String brief, Boolean isOnSale, Short sortOrder, String picUrl, String shareUrl, Boolean isNew, Boolean isHot, String unit, BigDecimal counterPrice, BigDecimal retailPrice, Date addTime, Date updateTime, Boolean deleted, String detail, String gallery_string) {
+    public Goods(Integer id, String goodsSn, String name, Integer categoryId, Integer brandId, String gallery, String keywords, String brief, Boolean isOnSale, Short sortOrder, String picUrl, String shareUrl, Boolean isNew, Boolean isHot, String unit, BigDecimal counterPrice, BigDecimal retailPrice, Date addTime, Date updateTime, Boolean deleted, String detail, String gallery_string) {
         this.id = id;
         this.goodsSn = goodsSn;
         this.name = name;
@@ -117,11 +117,11 @@ public class Goods {
         this.brandId = brandId;
     }
 
-    public String[] getGallery() {
+    public String getGallery() {
         return gallery;
     }
 
-    public void setGallery(String[] gallery) {
+    public void setGallery(String gallery) {
         this.gallery = gallery;
     }
 
@@ -261,7 +261,7 @@ public class Goods {
                 ", name='" + name + '\'' +
                 ", categoryId=" + categoryId +
                 ", brandId=" + brandId +
-                ", gallery=" + Arrays.toString(gallery) +
+                ", gallery='" + gallery + '\'' +
                 ", keywords='" + keywords + '\'' +
                 ", brief='" + brief + '\'' +
                 ", isOnSale=" + isOnSale +
