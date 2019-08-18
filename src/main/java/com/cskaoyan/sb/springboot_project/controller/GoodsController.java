@@ -112,4 +112,19 @@ public class GoodsController {
         }
         return map;
     }
+
+//    @ResponseBody
+//    @RequestMapping("goods/update")
+//    public Map<String, Object> goodsUpdate(@RequestBody Goods_create update) {
+//        Map<String, Object> map = new HashMap<>();
+//        int i = goodsService.insertGoods(create.getGoods());
+//        int j = goodsAttributeService.insertAttribute(create.getAttributes(), create.getGoods());
+//        int k = goodsProductService.insertProduct(create.getProducts(), create.getGoods());
+//        int m = goodsSpecificationService.insertSpecification(create.getSpecifications(), create.getGoods());
+//        if (i == 1 && j == 1 && k == 1 && m == 1) {
+//            map.put("errmsg", "成功");
+//            map.put("errno", 0);
+//        }
+//        return map;
+//    }
 }
