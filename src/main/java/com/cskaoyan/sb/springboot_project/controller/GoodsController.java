@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//@MapperScan("com.cskaoyan.sb.springboot_project.mapper")
 @RestController
 @RequestMapping("/admin")
 public class GoodsController {
@@ -96,4 +97,34 @@ public class GoodsController {
         map.put("data", info_map);
         return map;
     }
+
+    @ResponseBody
+    @RequestMapping("goods/create")
+    public Map<String, Object> goodsCreate(@RequestBody Goods_create create) {
+        Map<String, Object> map = new HashMap<>();
+        int i = goodsService.insertGoods(create.getGoods());
+        int j = goodsAttributeService.insertAttribute(create.getAttributes(), create.getGoods());
+        int k = goodsProductService.insertProduct(create.getProducts(), create.getGoods());
+        int m = goodsSpecificationService.insertSpecification(create.getSpecifications(), create.getGoods());
+        if (i == 1 && j > 0 && k > 0 && m > 0) {
+            map.put("errmsg", "成功");
+            map.put("errno", 0);
+        }
+        return map;
+    }
+
+//    @ResponseBody
+//    @RequestMapping("goods/update")
+//    public Map<String, Object> goodsUpdate(@RequestBody Goods_create update) {
+//        Map<String, Object> map = new HashMap<>();
+//        int i = goodsService.insertGoods(create.getGoods());
+//        int j = goodsAttributeService.insertAttribute(create.getAttributes(), create.getGoods());
+//        int k = goodsProductService.insertProduct(create.getProducts(), create.getGoods());
+//        int m = goodsSpecificationService.insertSpecification(create.getSpecifications(), create.getGoods());
+//        if (i == 1 && j == 1 && k == 1 && m == 1) {
+//            map.put("errmsg", "成功");
+//            map.put("errno", 0);
+//        }
+//        return map;
+//    }
 }

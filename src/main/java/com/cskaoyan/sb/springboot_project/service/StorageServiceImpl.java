@@ -1,13 +1,17 @@
 package com.cskaoyan.sb.springboot_project.service;
 
+import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.model.PutObjectRequest;
 import com.cskaoyan.sb.springboot_project.bean.Storage;
 import com.cskaoyan.sb.springboot_project.mapper.StorageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -21,34 +25,46 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public Storage uploadFile(MultipartFile file) {
-        String uuid = UUID.randomUUID().toString();
-        //获取文件名
-        String originalFilename = file.getOriginalFilename();
-        /*String hexString = Integer.toHexString((uuid + originalFilename).hashCode());*/
-        //获取扩展名
-        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-        //获取随机key(生成文件名及扩展名)
-        String key = uuid + suffix;
-        //文件上传路径
-        /*String filePath = "http://localhost:80/wx/storage/fetch/" + key;*/
-        /*String filePath = "http://yanxuan.nosdn.127.net/" + key;*/
-        String filePath = "http://192.168.2.100:8080/wx/storage/fetch/" + key;
-        File receiveFile = new File("E:/uploadTest", key);
-        if(!receiveFile.getParentFile().exists()) {
-            receiveFile.getParentFile().mkdirs();
-        }
-        Storage storage = null;
+        Storage storage = new Storage();
         try {
-            file.transferTo(receiveFile);
-            storage = new Storage();
+            String uuid = UUID.randomUUID().toString();
+            //获取文件名
+            String originalFilename = file.getOriginalFilename();
+            //获取文件格式
+            String contentType = file.getContentType();
+            //获取文件大小
+            long size = file.getSize();
+            //获取扩展名
+            String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+            //获取文件信息
+            InputStream inputStream = file.getInputStream();
+            //创建objectMetaData，并设置文件格式和大小
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentLength(size);
+            objectMetadata.setContentType(contentType);
+            //设置AccessKeyID
+            String accessKeyId = "LTAII6EdJxcTawlQ";
+            String secretAccessKey = "WPoDAvl5NMkxHvFToJ1M8YzAfmjnF3";
+            String endPoint = "oss-cn-beijing.aliyuncs.com";
+            String buckeyName = "molycloud";
+            String key = uuid.replace("-", "");//去掉uuid中的"-"，作为文件名
+            //创建节点信息对象
+            PutObjectRequest putObjectRequest = new PutObjectRequest(buckeyName, key, inputStream, objectMetadata);
+            //创建上传地址及秘钥信息对象
+            OSSClient ossClient = new OSSClient(endPoint, accessKeyId, secretAccessKey);
+            //执行上传操作
+            ossClient.putObject(putObjectRequest);
+            //图片访问URL
+            String url = "https://molycloud.oss-cn-beijing.aliyuncs.com/" + key;
+            //存储上传信息
             Date date = new Date();
             storage.setAddTime(date);
             storage.setUpdateTime(date);
             storage.setKey(key);
             storage.setName(originalFilename);
-            storage.setSize((int) file.getSize());
-            storage.setType(file.getContentType());
-            storage.setUrl(filePath);
+            storage.setSize((int) size);
+            storage.setType(contentType);
+            storage.setUrl(url);
             storage.setDeleted(false);
             storageMapper.InsertUploadFileInfo(storage);
         } catch (IOException e) {

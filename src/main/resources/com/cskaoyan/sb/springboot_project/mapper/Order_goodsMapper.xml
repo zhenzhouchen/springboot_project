@@ -73,7 +73,7 @@
     <result property="productId" column="product_id"/>
     <result property="number" column="number"/>
     <result property="price" column="price"/>
-    <result property="specifications" column="specifications"/>
+    <result property="specifications" column="specifications" typeHandler="com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler"/>
     <result property="picUrl" column="pic_url"/>
     <result property="comment" column="comment"/>
     <result property="addTime" column="add_time"/>

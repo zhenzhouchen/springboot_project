@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,35 +56,52 @@ public class AdminController {
     }
 
     @RequestMapping("admin/update")
-    public Map<String,Object> admin_update(@RequestBody Admin admin){
+    public Map<String,Object> admin_update(@RequestBody Admin admin, HttpServletRequest request){
         Map<String, Object> map = new HashMap<>();
         int result = adminService.upadte_admin(admin);
         if(result ==1) {
             map.put("errmsg", "成功");
+            map.put("errno", 0);
+            request.setAttribute("errno", "0");
+            request.setAttribute("result", admin.getUsername());
+        } else  {
+            request.setAttribute("errno", "1");
+            request.setAttribute("result", admin.getUsername());
         }
-        map.put("errno", 0);
         return map;
     }
 
     @RequestMapping(value = "admin/delete")
-    public Map<String,Object> admin_delete(@RequestBody Admin admin){
+    public Map<String,Object> admin_delete(@RequestBody Admin admin, HttpServletRequest request){
         Map<String, Object> map = new HashMap<>();
         int result = adminService.delete_admin(admin);
         if(result ==1) {
+            request.setAttribute("errno", "0");
+            request.setAttribute("result", admin.getUsername());
             map.put("errmsg", "成功");
+            map.put("errno", 0);
+        } else {
+            request.setAttribute("errno", "1");
+            request.setAttribute("result", admin.getUsername());
         }
-        map.put("errno", 0);
         return map;
     }
 
     @RequestMapping(value = "admin/create")
-    public Map<String,Object> admin_create(@RequestBody Admin admin){
+    public Map<String,Object> admin_create(@RequestBody Admin admin, HttpServletRequest request){
           Map<String, Object> map = new HashMap<>();
           int result = adminService.create_admin(admin);
           if(result ==1) {
-            map.put("errmsg", "成功");
+              map.put("errmsg", "成功");
+              map.put("errno", 0);
+              request.setAttribute("errno", "0");
+              request.setAttribute("result", admin.getUsername());
+          } else {
+              map.put("errmsg", "失败");
+              map.put("errno", 1);
+              request.setAttribute("errno", "1");
+              request.setAttribute("result", admin.getUsername());
           }
-          map.put("errno", 0);
           return map;
     }
 }
