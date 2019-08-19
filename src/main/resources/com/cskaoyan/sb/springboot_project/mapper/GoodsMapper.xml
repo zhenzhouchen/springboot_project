@@ -214,10 +214,10 @@
    </select>
 
   <select id="queryByIdReturnInt" resultType="java.lang.Integer">
-    select id from cskaoyan_mall_goods where id = #{id}
+    select count(id) from cskaoyan_mall_goods where id = #{id}
   </select>
 
-  <select id="queryCategoryIds" resultType="java.lang.String">
+  <select id="queryCategoryIds" resultType="java.lang.Integer">
     select category_id from cskaoyan_mall_goods where id = #{id}
   </select>
 

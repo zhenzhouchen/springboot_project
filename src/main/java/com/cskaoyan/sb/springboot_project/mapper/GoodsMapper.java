@@ -21,7 +21,7 @@ public interface GoodsMapper {
 
     Goods queryById(Integer id);//编辑回显
 
-    List<String> queryCategoryIds(Integer id);
+    Integer queryCategoryIds(Integer id);
 
     int insertGoods(@Param("good") Goods goods);//商品上架
 

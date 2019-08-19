@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,11 @@ public class GoodsController {
         List<Goods_attribute> attributes = goodsAttributeService.queryByGoodsId(id);
         List<Goods_product> products = goodsProductService.queryByGoodsId(id);
         List<Goods_specification> specifications = goodsSpecificationService.queryByGoodsId(id);
-        List<String> categoryIds = goodsService.queryCategoryIds(id);
+        Integer categorySonId = goodsService.queryCategoryIds(id);
+        Integer categoryfatherId = categoryService.queryCategoryIds(categorySonId);
+        List<Integer> categoryIds = new ArrayList<>();
+        categoryIds.add(categoryfatherId);
+        categoryIds.add(categorySonId);
         info_map.put("goods", goods);
         info_map.put("attributes", attributes);
         info_map.put("products", products);

@@ -52,9 +52,8 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<String> queryCategoryIds(Integer id) {
-        List<String> list = goodsMapper.queryCategoryIds(id);
-        return list;
+    public Integer queryCategoryIds(Integer id) {
+        return goodsMapper.queryCategoryIds(id);
     }
 
     @Override
