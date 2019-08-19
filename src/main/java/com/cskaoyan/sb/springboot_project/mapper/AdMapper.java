@@ -28,5 +28,5 @@ public interface AdMapper {
 
     int updateByPrimaryKey(Ad record);
 
-    List<Ad> listAdByCondition(@Param("sort") String sort,@Param("order") String order);
+    List<Ad> listAdByCondition(@Param("sort") String sort, @Param("order") String order, @Param("name") String name,@Param("content") String content);
 }
