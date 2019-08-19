@@ -16,6 +16,7 @@
     <resultMap id="adminMap" type="com.cskaoyan.sb.springboot_project.bean.Admin">
         <result column="id" property="id"/>
         <result column="username" property="username"/>
+        <result column="password" property="password"/>
         <result column="avatar" property="avatar"/>
         <result column="roleIds" property="roleIds" typeHandler="com.cskaoyan.sb.springboot_project.handler.String2ArrayHandler"/>
     </resultMap>
@@ -23,6 +24,7 @@
     select
     id,
     username,
+    password,
     avatar,
     role_ids as roleIds
     from cskaoyan_mall_admin

@@ -8,6 +8,10 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+/**
+ * 查询order_goods的list时需要将specification字符串转换为String[]的形式
+ */
 @MappedTypes(String[].class)
 public class String2StringArrayHandler implements TypeHandler<String[]> {
     @Override
@@ -16,8 +20,9 @@ public class String2StringArrayHandler implements TypeHandler<String[]> {
         for (String string : strings) {
             stringBuffer.append(i).append(",");
         }
-        String substring = stringBuffer.substring(0, stringBuffer.length() - 1);
-        preparedStatement.setString(i, substring);
+//        String substring = stringBuffer.substring(0, stringBuffer.length() - 1);
+        String s = stringBuffer.toString();
+        preparedStatement.setString(i, s);
     }
 
     @Override

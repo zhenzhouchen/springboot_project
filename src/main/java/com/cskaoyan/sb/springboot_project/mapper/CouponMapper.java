@@ -32,4 +32,6 @@ public interface CouponMapper {
 
 
     List<Coupon> listCouponByCondition(@Param("sort") String sort, @Param("order") String order);
+
+    List<Coupon> searchCouponByCondition(@Param("sort") String sort,@Param("order") String order,@Param("name") String name,@Param("type") String type,@Param("status") String status);
 }

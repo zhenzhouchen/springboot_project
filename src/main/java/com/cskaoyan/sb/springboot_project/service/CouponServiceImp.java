@@ -1,10 +1,10 @@
 package com.cskaoyan.sb.springboot_project.service;
 
-import com.cskaoyan.sb.springboot_project.bean.Ad;
 import com.cskaoyan.sb.springboot_project.bean.Coupon;
+import com.cskaoyan.sb.springboot_project.bean.CouponExample;
 import com.cskaoyan.sb.springboot_project.bean.Popularize.PopPage;
-import com.cskaoyan.sb.springboot_project.mapper.AdMapper;
 import com.cskaoyan.sb.springboot_project.mapper.CouponMapper;
+import com.cskaoyan.sb.springboot_project.mapper.UserMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,9 @@ public class CouponServiceImp implements CouponService {
 
     @Autowired
     CouponMapper couponMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     /**
      * —— 查询所有 coupon ——
@@ -38,8 +41,6 @@ public class CouponServiceImp implements CouponService {
         Map<String, Object> data = new HashMap<>();
         data.put("items", coupons);
         data.put("total",total);
-
-
 
         return data;
     }
@@ -71,4 +72,50 @@ public class CouponServiceImp implements CouponService {
         } else
             return null;
     }
+
+    @Override
+    public Map<String, Object> searchCoupon(PopPage popPage, String name, String type, String status) {
+
+        PageHelper.startPage(popPage.getPage(), popPage.getLimit());
+        List<Coupon> coupons = couponMapper.searchCouponByCondition(popPage.getSort(),popPage.getOrder(),"%"+name+"%",type,status);
+
+        PageInfo<Coupon> pageInfo = new PageInfo<>(coupons);
+        long total = pageInfo.getTotal();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("items", coupons);
+        data.put("total",total);
+
+        return data;
+    }
+
+    @Override
+    public Coupon readCouponById(String id) {
+
+        Coupon coupon = couponMapper.selectByPrimaryKey(Integer.valueOf(id));
+
+        return coupon;
+    }
+
+    @Override
+    public Map<String, Object> listUserById(PopPage popPage, String couponId) {
+        return null;
+    }
+
+    /*@Override
+    public Map<String, Object> listUserById(PopPage popPage, String couponId) {
+
+        PageHelper.startPage(popPage.getPage(), popPage.getLimit());
+
+
+        PageInfo<Coupon> pageInfo = new PageInfo<>();
+        long total = pageInfo.getTotal();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("items", coupons);
+        data.put("total",total);
+
+        return null;
+    }*/
+
 }

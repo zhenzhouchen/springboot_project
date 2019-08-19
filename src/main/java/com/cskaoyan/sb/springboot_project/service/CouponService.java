@@ -11,4 +11,10 @@ public interface CouponService {
     Coupon createCoupon(Coupon coupon);
 
     Coupon updateCoupon(Coupon coupon);
+
+    Map<String, Object> searchCoupon(PopPage popPage, String name, String type,String status);
+
+    Coupon readCouponById(String id);
+
+    Map<String, Object> listUserById(PopPage popPage, String couponId);
 }

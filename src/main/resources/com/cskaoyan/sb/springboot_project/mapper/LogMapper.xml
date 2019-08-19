@@ -1,18 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.LogMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Log">
+  <resultMap id="baseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Log">
   <id column="id" property="id"/>
-    <result column="" property=""/>
-    <result column="" property=""/>
-    <result column="" property=""/>
-    <result column="" property=""/>
-    <result column="" property=""/>
-    <result column="" property=""/>
-    <result column="" property=""/>
-    <result column="" property=""/>
+    <result column="id" property="id"/>
+    <result column="admin" property="admin"/>
+    <result column="ip" property="ip"/>
+    <result column="type" property="type"/>
+    <result column="action" property="action"/>
+    <result column="status" property="status"/>
+    <result column="result" property="result"/>
+    <result column="comment" property="comment"/>
+    <result column="add_time" property="addTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="deleted" property="deleted"/>
   </resultMap>
-  <!--<select id="returnList" resultMap="">-->
+  <select id="selectLogList" resultMap="baseResultMap">
+    select
+    id,
+    admin,
+    ip,
+    `type`,
+    `action`,
+    status,
+    result,
+    comment,
+    add_time,
+    update_time,
+    deleted
+    from cskaoyan_mall_log
+    <where>
+      <if test="admin != null">
+        admin like CONCAT("%",#{admin},"%")
+      </if>
+    </where>
+    order by #{sort} ${order}
+  </select>
+
+  <insert id="insertLog">
+    insert into cskaoyan_mall_log
+    set
+    admin = #{admin},
+    ip = #{ip},
+    `type` = #{type},
+    `action` = #{action},
+    status = #{status},
+    result = #{result},
+    comment = #{comment},
+    add_time = #{addTime},
+    update_time = #{updateTime},
+    deleted = #{deleted}
+  </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Log">
     update cskaoyan_mall_log
     <set>

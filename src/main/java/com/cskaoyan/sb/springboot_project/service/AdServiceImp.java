@@ -26,10 +26,10 @@ public class AdServiceImp implements AdService {
      * 2、利用 mapper 进行查询
      */
     @Override
-    public Map<String,Object> listAd(PopPage popPage) {
+    public Map<String,Object> listAdByCondition(PopPage popPage,String name,String content) {
 
         PageHelper.startPage(popPage.getPage(), popPage.getLimit());
-        List<Ad> ads = adMapper.listAdByCondition(popPage.getSort(),popPage.getOrder());
+        List<Ad> ads = adMapper.listAdByCondition(popPage.getSort(),popPage.getOrder(),"%"+name+"%","%"+content+"%");
 
         PageInfo<Ad> pageInfo = new PageInfo<>(ads);
         long total = pageInfo.getTotal();

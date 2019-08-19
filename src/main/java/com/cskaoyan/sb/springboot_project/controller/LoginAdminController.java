@@ -31,4 +31,9 @@ public class LoginAdminController {
         map.put("errno",0);
         return map;
     }
+
+    @RequestMapping("logout")
+    public Map<String, Object> logout() {
+        return null;
+    }
 }

@@ -25,10 +25,23 @@
       #{order}
     </if>
   </sql>
+  <!--搜索按参数-->
+  <sql id="searchCondition">
+    <where>
+      <if test="name != null">
+        AND `name` LIKE #{name}
+      </if>
+      <if test="content != null">
+        AND `content` LIKE #{content}
+      </if>
+      AND deleted = 0
+    </where>
+  </sql>
   <select id="listAdByCondition" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
     FROM cskaoyan_mall_ad
+    <include refid="searchCondition"/>
     <include refid="listCondition"/>
   </select>
   
