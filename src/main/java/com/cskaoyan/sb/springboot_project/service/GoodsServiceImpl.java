@@ -47,6 +47,11 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public int queryByIdReturnInt(Integer id) {
+        return goodsMapper.queryByIdReturnInt(id);
+    }
+
+    @Override
     public List<String> queryCategoryIds(Integer id) {
         List<String> list = goodsMapper.queryCategoryIds(id);
         return list;

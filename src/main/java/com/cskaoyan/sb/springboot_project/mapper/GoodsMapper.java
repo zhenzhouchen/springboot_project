@@ -24,4 +24,6 @@ public interface GoodsMapper {
     List<String> queryCategoryIds(Integer id);
 
     int insertGoods(@Param("good") Goods goods);//商品上架
+
+    int queryByIdReturnInt(Integer id);//插入前判断是否已经存在
 }

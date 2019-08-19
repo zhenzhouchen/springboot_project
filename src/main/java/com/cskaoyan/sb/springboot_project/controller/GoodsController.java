@@ -102,13 +102,25 @@ public class GoodsController {
     @RequestMapping("goods/create")
     public Map<String, Object> goodsCreate(@RequestBody Goods_create create) {
         Map<String, Object> map = new HashMap<>();
-        int i = goodsService.insertGoods(create.getGoods());
-        int j = goodsAttributeService.insertAttribute(create.getAttributes(), create.getGoods());
-        int k = goodsProductService.insertProduct(create.getProducts(), create.getGoods());
-        int m = goodsSpecificationService.insertSpecification(create.getSpecifications(), create.getGoods());
-        if (i == 1 && j > 0 && k > 0 && m > 0) {
-            map.put("errmsg", "成功");
-            map.put("errno", 0);
+        int tag = goodsService.queryByIdReturnInt(Integer.valueOf(create.getGoods().getGoodsSn()));
+        if (tag != 0){
+            map.put("errmsg", "商品名已经存在");
+            map.put("errno", 611);
+        }else {
+            int i = goodsService.insertGoods(create.getGoods());
+            if (i == 1) {
+                if (create.getAttributes().size() > 0) {
+                    goodsAttributeService.insertAttribute(create.getAttributes(), create.getGoods());
+                }
+                if (create.getProducts().size() > 0) {
+                    goodsProductService.insertProduct(create.getProducts(), create.getGoods());
+                }
+                if (create.getSpecifications().size() > 0) {
+                    goodsSpecificationService.insertSpecification(create.getSpecifications(), create.getGoods());
+                }
+                map.put("errmsg", "成功");
+                map.put("errno", 0);
+            }
         }
         return map;
     }
@@ -118,7 +130,7 @@ public class GoodsController {
     public Map<String, Object> goodsUpdate(@RequestBody Goods_create update) {
         Map<String, Object> map = new HashMap<>();
         int i = goodsService.updateGoods(update.getGoods());
-        int j = goodsAttributeService.updateAttribute(update.getAttributes(),update.getGoods());
+        int j = goodsAttributeService.updateAttribute(update.getAttributes(), update.getGoods());
         int k = goodsSpecificationService.updateSpecification(update.getSpecifications(), update.getGoods());
         int m = goodsProductService.updateProduct(update.getProducts(), update.getGoods());
         if (i == 1 && j > 0 && k > 0 && m > 0) {

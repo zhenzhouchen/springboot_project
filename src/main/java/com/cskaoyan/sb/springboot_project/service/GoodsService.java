@@ -10,6 +10,8 @@ public interface GoodsService {
 
     Goods queryById(Integer id);
 
+    int queryByIdReturnInt(Integer id);
+
     List<String> queryCategoryIds(Integer id);
 
     List<Goods_statistics> query_goods_statistics();

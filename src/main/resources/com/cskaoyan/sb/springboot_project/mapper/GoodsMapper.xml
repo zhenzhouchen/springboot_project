@@ -213,24 +213,128 @@
     where id = #{id}
    </select>
 
+  <select id="queryByIdReturnInt" resultType="java.lang.Integer">
+    select id from cskaoyan_mall_goods where id = #{id}
+  </select>
+
   <select id="queryCategoryIds" resultType="java.lang.String">
     select category_id from cskaoyan_mall_goods where id = #{id}
   </select>
 
+  <!--<insert id="insertGoods">-->
+     <!--insert into cskaoyan_mall_goods (id, goods_sn, `name`,-->
+      <!--category_id, brand_id, gallery,-->
+      <!--keywords, brief, is_on_sale,-->
+      <!--sort_order, pic_url, share_url,-->
+      <!--is_new, is_hot, unit, counter_price,-->
+      <!--retail_price ,detail)-->
+    <!--values (#{good.goodsSn}, #{good.goodsSn}, #{good.name},-->
+      <!--#{good.categoryId}, #{good.brandId},-->
+      <!--#{good.gallery,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},-->
+      <!--#{good.keywords}, #{good.brief}, #{good.isOnSale},-->
+      <!--#{good.sortOrder}, #{good.picUrl}, #{good.shareUrl},-->
+      <!--#{good.isNew}, #{good.isHot}, #{good.unit}, #{good.counterPrice},-->
+      <!--#{good.retailPrice}, #{good.detail})-->
+  <!--</insert>-->
+
   <insert id="insertGoods">
-     insert into cskaoyan_mall_goods (id, goods_sn, `name`,
-      category_id, brand_id, gallery,
-      keywords, brief, is_on_sale,
-      sort_order, pic_url, share_url,
-      is_new, is_hot, unit, counter_price,
-      retail_price ,detail)
-    values (#{good.goodsSn}, #{good.goodsSn}, #{good.name},
-      #{good.categoryId}, #{good.brandId},
-      #{good.gallery,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},
-      #{good.keywords}, #{good.brief}, #{good.isOnSale},
-      #{good.sortOrder}, #{good.picUrl}, #{good.shareUrl},
-      #{good.isNew}, #{good.isHot}, #{good.unit}, #{good.counterPrice},
-      #{good.retailPrice}, #{good.detail})
+     insert into cskaoyan_mall_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id, goods_sn,`name`,
+      <if test="good.categoryId != null">
+        category_id,
+      </if>
+      <if test="good.brandId != null">
+        brand_id,
+      </if>
+      <if test="good.gallery != null">
+        gallery,
+      </if>
+      <if test="good.keywords != null">
+        keywords,
+      </if>
+      <if test="good.brief != null">
+        brief,
+      </if>
+      <if test="good.isOnSale != null">
+        is_on_sale,
+      </if>
+      <if test="good.sortOrder != null">
+        sort_order,
+      </if>
+      <if test="good.picUrl != null">
+        pic_url,
+      </if>
+      <if test="good.shareUrl != null">
+        share_url,
+      </if>
+      <if test="good.isNew != null">
+        is_new,
+      </if>
+      <if test="good.isHot != null">
+        is_hot,
+      </if>
+      <if test="good.unit != null">
+        unit,
+      </if>
+      <if test="good.counterPrice != null">
+        counter_price,
+      </if>
+      <if test="good.retailPrice != null">
+        retail_price,
+      </if>
+      <if test="good.detail != null">
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{good.goodsSn},#{good.goodsSn},#{good.name},
+      <if test="good.categoryId != null">
+        #{good.categoryId},
+      </if>
+      <if test="good.brandId != null">
+        #{good.brandId},
+      </if>
+      <if test="good.gallery != null">
+        #{good.gallery,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},
+      </if>
+      <if test="good.keywords != null">
+        #{good.keywords},
+      </if>
+      <if test="good.brief != null">
+        #{good.brief},
+      </if>
+      <if test="good.isOnSale != null">
+        #{good.isOnSale},
+      </if>
+      <if test="good.sortOrder != null">
+        #{good.sortOrder},
+      </if>
+      <if test="good.picUrl != null">
+        #{good.picUrl},
+      </if>
+      <if test="good.shareUrl != null">
+        #{good.shareUrl},
+      </if>
+      <if test="good.isNew != null">
+        #{good.isNew},
+      </if>
+      <if test="good.isHot != null">
+        #{good.isHot},
+      </if>
+      <if test="good.unit != null">
+        #{good.unit},
+      </if>
+      <if test="good.counterPrice != null">
+        #{good.counterPrice},
+      </if>
+      <if test="good.retailPrice != null">
+        #{good.retailPrice},
+      </if>
+      <if test="good.detail != null">
+        #{good.detail},
+      </if>
+    </trim>
   </insert>
 
 </mapper>
