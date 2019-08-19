@@ -135,10 +135,10 @@ public class GoodsController {
     public Map<String, Object> goodsUpdate(@RequestBody Goods_create update) {
         Map<String, Object> map = new HashMap<>();
         int i = goodsService.updateGoods(update.getGoods());
-        int j = goodsAttributeService.updateAttribute(update.getAttributes(), update.getGoods());
-        int k = goodsSpecificationService.updateSpecification(update.getSpecifications(), update.getGoods());
-        int m = goodsProductService.updateProduct(update.getProducts(), update.getGoods());
-        if (i == 1 && j > 0 && k > 0 && m > 0) {
+        if (i == 1) {
+            goodsAttributeService.updateAttribute(update);
+            goodsSpecificationService.updateSpecification(update);
+            goodsProductService.updateProduct(update);
             map.put("errmsg", "成功");
             map.put("errno", 0);
         }

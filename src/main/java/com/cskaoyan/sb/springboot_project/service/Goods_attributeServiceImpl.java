@@ -2,6 +2,7 @@ package com.cskaoyan.sb.springboot_project.service;
 
 import com.cskaoyan.sb.springboot_project.bean.Goods;
 import com.cskaoyan.sb.springboot_project.bean.Goods_attribute;
+import com.cskaoyan.sb.springboot_project.bean.Goods_create;
 import com.cskaoyan.sb.springboot_project.mapper.Goods_attributeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class Goods_attributeServiceImpl implements Goods_attributeService {
     }
 
     @Override
-    public int updateAttribute(List<Goods_attribute> attributes, Goods goods) {
+    public void updateAttribute(Goods_create update) {
 //        List<Integer> before = goodsAttributeMapper.queryDeleteId(goods);
 //        List<Integer> after = new ArrayList<>();
 //        for (Goods_attribute attribute:attributes){
@@ -36,14 +37,21 @@ public class Goods_attributeServiceImpl implements Goods_attributeService {
 //            after.add(id);
 //        }
 //        List<Integer> delete = new ArrayList<>();
-        int i = goodsAttributeMapper.deleteAttribute(goods);
-        for (Goods_attribute attribute : attributes) {
-            attribute.setGoodsId(goods.getId());
+        if (goodsAttributeMapper.queryByGoodsId(update.getGoods().getId()).size() != 0) {
+            goodsAttributeMapper.deleteAttribute(update.getGoods());
+            if (update.getAttributes().size() != 0) {
+                for (Goods_attribute attribute : update.getAttributes()) {
+                    attribute.setGoodsId(update.getGoods().getId());
+                }
+                goodsAttributeMapper.insertAttribute(update.getAttributes());
+            }
+        } else {
+            if (update.getAttributes().size() != 0) {
+                for (Goods_attribute attribute : update.getAttributes()) {
+                    attribute.setGoodsId(update.getGoods().getId());
+                }
+                goodsAttributeMapper.insertAttribute(update.getAttributes());
+            }
         }
-        int j = goodsAttributeMapper.insertAttribute(attributes);
-        if (i > 0 && j > 0) {
-            return 1;
-        }
-        return 0;
     }
 }
