@@ -55,7 +55,7 @@ public class GoodsController {
     public Map<String, Object> queryAllGoodsListAfterDelete(@RequestBody Goods Goods) {
         Map<String, Object> map = new HashMap<>();
         int i = goodsService.updateDeleteById(Goods);
-        if (i == 1) {
+        if (i > 0) {
             map.put("errmsg", "成功");
             map.put("errno", 0);
         }
@@ -113,18 +113,18 @@ public class GoodsController {
         return map;
     }
 
-//    @ResponseBody
-//    @RequestMapping("goods/update")
-//    public Map<String, Object> goodsUpdate(@RequestBody Goods_create update) {
-//        Map<String, Object> map = new HashMap<>();
-//        int i = goodsService.insertGoods(create.getGoods());
-//        int j = goodsAttributeService.insertAttribute(create.getAttributes(), create.getGoods());
-//        int k = goodsProductService.insertProduct(create.getProducts(), create.getGoods());
-//        int m = goodsSpecificationService.insertSpecification(create.getSpecifications(), create.getGoods());
-//        if (i == 1 && j == 1 && k == 1 && m == 1) {
-//            map.put("errmsg", "成功");
-//            map.put("errno", 0);
-//        }
-//        return map;
-//    }
+    @ResponseBody
+    @RequestMapping("goods/update")
+    public Map<String, Object> goodsUpdate(@RequestBody Goods_create update) {
+        Map<String, Object> map = new HashMap<>();
+        int i = goodsService.updateGoods(update.getGoods());
+        int j = goodsAttributeService.updateAttribute(update.getAttributes(),update.getGoods());
+        int k = goodsSpecificationService.updateSpecification(update.getSpecifications(), update.getGoods());
+        int m = goodsProductService.updateProduct(update.getProducts(), update.getGoods());
+        if (i == 1 && j > 0 && k > 0 && m > 0) {
+            map.put("errmsg", "成功");
+            map.put("errno", 0);
+        }
+        return map;
+    }
 }

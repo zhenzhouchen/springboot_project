@@ -9,4 +9,6 @@ public interface Goods_attributeService {
     List<Goods_attribute> queryByGoodsId(Integer goodsId);
 
     int insertAttribute(List<Goods_attribute> attributes, Goods goods);
+
+    int updateAttribute(List<Goods_attribute> attributes, Goods goods);
 }

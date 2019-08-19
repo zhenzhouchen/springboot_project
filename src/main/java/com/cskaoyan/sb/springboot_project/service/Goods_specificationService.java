@@ -10,4 +10,5 @@ public interface Goods_specificationService {
 
     int insertSpecification(List<Goods_specification> specifications, Goods goods);
 
+    int updateSpecification(List<Goods_specification> specifications, Goods goods);
 }

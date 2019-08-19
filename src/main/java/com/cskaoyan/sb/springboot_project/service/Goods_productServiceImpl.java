@@ -26,4 +26,18 @@ public class Goods_productServiceImpl implements Goods_productService {
         }
         return goodsProductMapper.insertProduct(products);
     }
+
+    @Override
+    public int updateProduct(List<Goods_product> products, Goods goods) {
+        int i = goodsProductMapper.deleteProduct(goods);
+        for (Goods_product product : products) {
+            product.setGoodsId(goods.getId());
+        }
+        int j = goodsProductMapper.insertProduct(products);
+        if (i > 0 && j > 0) {
+            return 1;
+        }
+        return 0;
+    }
+
 }

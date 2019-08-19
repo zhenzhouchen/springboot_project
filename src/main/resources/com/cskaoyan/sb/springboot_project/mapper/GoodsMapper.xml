@@ -102,28 +102,27 @@
       detail = #{detail,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.sb.springboot_project.bean.Goods">
+
+  <update id="updateByPrimaryKey">
     update cskaoyan_mall_goods
-    set goods_sn = #{goodsSn,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      category_id = #{categoryId,jdbcType=INTEGER},
-      brand_id = #{brandId,jdbcType=INTEGER},
-      gallery = #{gallery,jdbcType=VARCHAR},
-      keywords = #{keywords,jdbcType=VARCHAR},
-      brief = #{brief,jdbcType=VARCHAR},
-      is_on_sale = #{isOnSale,jdbcType=BIT},
-      sort_order = #{sortOrder,jdbcType=SMALLINT},
-      pic_url = #{picUrl,jdbcType=VARCHAR},
-      share_url = #{shareUrl,jdbcType=VARCHAR},
-      is_new = #{isNew,jdbcType=BIT},
-      is_hot = #{isHot,jdbcType=BIT},
-      unit = #{unit,jdbcType=VARCHAR},
-      counter_price = #{counterPrice,jdbcType=DECIMAL},
-      retail_price = #{retailPrice,jdbcType=DECIMAL},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      deleted = #{deleted,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
+    set goods_sn = #{good.goodsSn},
+      `name` = #{good.name},
+      category_id = #{good.categoryId},
+      brand_id = #{good.brandId},
+      gallery = #{good.gallery,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},
+      keywords = #{good.keywords},
+      brief = #{good.brief},
+      is_on_sale = #{good.isOnSale},
+      sort_order = #{good.sortOrder},
+      pic_url = #{good.picUrl},
+      share_url = #{good.shareUrl},
+      is_new = #{good.isNew},
+      is_hot = #{good.isHot},
+      unit = #{good.unit},
+      counter_price = #{good.counterPrice},
+      retail_price = #{good.retailPrice},
+      detail = #{good.detail}
+    where id = #{good.id}
   </update>
 
   <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Goods">
@@ -144,6 +143,7 @@
     <result column="unit" property="unit" />
     <result column="counter_price" property="counterPrice" />
     <result column="retail_price" property="retailPrice" />
+    <result column="detail" property="detail" />
     <result column="add_time" property="addTime" />
     <result column="update_time" property="updateTime" />
     <result column="deleted" property="deleted" />
@@ -167,6 +167,7 @@
     unit,
     counter_price,
     retail_price,
+    detail,
     add_time,
     update_time,
     deleted
@@ -204,6 +205,7 @@
     unit,
     counter_price,
     retail_price,
+    detail,
     add_time,
     update_time,
     deleted
@@ -221,14 +223,14 @@
       keywords, brief, is_on_sale,
       sort_order, pic_url, share_url,
       is_new, is_hot, unit, counter_price,
-      retail_price)
+      retail_price ,detail)
     values (#{good.goodsSn}, #{good.goodsSn}, #{good.name},
       #{good.categoryId}, #{good.brandId},
       #{good.gallery,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},
       #{good.keywords}, #{good.brief}, #{good.isOnSale},
       #{good.sortOrder}, #{good.picUrl}, #{good.shareUrl},
       #{good.isNew}, #{good.isHot}, #{good.unit}, #{good.counterPrice},
-      #{good.retailPrice})
+      #{good.retailPrice}, #{good.detail})
   </insert>
 
 </mapper>

@@ -13,15 +13,15 @@ public interface GoodsMapper {
 
     int updateByPrimaryKeyWithBLOBs(Goods record);
 
-    int updateByPrimaryKey(Goods record);
+    int updateByPrimaryKey(@Param("good")Goods record);//更新商品信息
 
     List<Goods> queryAllGoodsList(@Param("goodsSn") Integer goodsSn, @Param("name") String name);//加载列表+模糊查询
 
     int updateDeleteById(Goods goods);//假删除
 
-    Goods queryById(Integer id);
+    Goods queryById(Integer id);//编辑回显
 
     List<String> queryCategoryIds(Integer id);
 
-    int insertGoods(@Param("good") Goods goods);
+    int insertGoods(@Param("good") Goods goods);//商品上架
 }

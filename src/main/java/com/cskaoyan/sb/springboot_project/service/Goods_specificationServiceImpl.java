@@ -26,5 +26,18 @@ public class Goods_specificationServiceImpl implements Goods_specificationServic
         }
         return goodsSpecificationMapper.insertSpecification(specifications);
     }
+
+    @Override
+    public int updateSpecification(List<Goods_specification> specifications, Goods goods) {
+        int i = goodsSpecificationMapper.deleteSpecification(goods);
+        for (Goods_specification specification : specifications) {
+            specification.setGoodsId(goods.getId());
+        }
+        int j = goodsSpecificationMapper.insertSpecification(specifications);
+        if (i > 0 && j > 0) {
+            return 1;
+        }
+        return 0;
+    }
 }
 
