@@ -10,7 +10,8 @@ public class String2DateConverter implements Converter<String, Date> {
     @Override
     public Date convert(String value) {
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        // 8.19 由于日期有 YYYY-MM-dd HH:mm：SS 的格式
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
         try {
             Date parse = simpleDateFormat.parse(value);
             return parse;

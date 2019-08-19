@@ -16,8 +16,9 @@ public class String2StringArrayHandler implements TypeHandler<String[]> {
         for (String string : strings) {
             stringBuffer.append(i).append(",");
         }
-        String substring = stringBuffer.substring(0, stringBuffer.length() - 1);
-        preparedStatement.setString(i, substring);
+//        String substring = stringBuffer.substring(0, stringBuffer.length() - 1);
+        String s = stringBuffer.toString();
+        preparedStatement.setString(i, s);
     }
 
     @Override

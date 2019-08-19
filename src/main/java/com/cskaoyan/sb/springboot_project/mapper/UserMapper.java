@@ -17,10 +17,6 @@ public interface UserMapper {
 
     List<User_statistics> query_user_statistics_bean();
 
-
-
-
-
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);

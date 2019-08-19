@@ -84,6 +84,14 @@ public class Coupon {
         this.total = total;
     }
 
+    public String[] getGoodsValue() {
+        return goodsValue;
+    }
+
+    public void setGoodsValue(String[] goodsValue) {
+        this.goodsValue = goodsValue;
+    }
+
     public BigDecimal getDiscount() {
         return discount;
     }
@@ -130,14 +138,6 @@ public class Coupon {
 
     public void setGoodsType(Short goodsType) {
         this.goodsType = goodsType;
-    }
-
-    public int[] getGoodsValue() {
-        return goodsValue;
-    }
-
-    public void setGoodsValue(int[] goodsValue) {
-        this.goodsValue = goodsValue;
     }
 
     public String getCode() {

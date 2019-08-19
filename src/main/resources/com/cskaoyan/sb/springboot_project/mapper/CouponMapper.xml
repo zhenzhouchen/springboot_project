@@ -27,17 +27,42 @@
   <!-- 搜索按条件排序 -->
   <sql id="listCondition">
     <if test="sort">
-      ORDER BY #{sort}
+      ORDER BY ${sort}
     </if>
     <if test="order">
-      #{order}
+      ${order}
     </if>
   </sql>
+
   <select id="listCouponByCondition" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
     FROM cskaoyan_mall_coupon
     WHERE deleted = 0
+    <include refid="listCondition"/>
+
+  </select>
+
+  <!-- 搜索按条件-->
+  <sql id="searchCondition">
+    <where>
+      <if test="name != null">
+        AND `name` LIKE #{name}
+      </if>
+      <if test="type != null">
+        AND `type` = #{type}
+      </if>
+      <if test="status != null">
+        AND `status` = #{status}
+      </if>
+      AND deleted = 0
+    </where>
+  </sql>
+  <select id="searchCouponByCondition" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM cskaoyan_mall_coupon
+    <include refid="searchCondition"/>
     <include refid="listCondition"/>
 
   </select>
