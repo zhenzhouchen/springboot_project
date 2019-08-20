@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.sb.springboot_project.mapper.AdminLoginInfoMapper">
+    <resultMap id="AdminInfoMap" type="com.cskaoyan.sb.springboot_project.bean.AdminLoginInfo">
+        <result column="name" property="name" />
+        <result column="avatar" property="avatar"/>
+        <result column="roleIds" property="roleIds" typeHandler="com.cskaoyan.sb.springboot_project.handler.IntArray2StringHandler"/>
+    </resultMap>
+    <select id="queryAdminLoginInfo" resultMap="AdminInfoMap">
+    select
+    username as `name` ,
+    avatar,
+    role_ids as roleIds
+    from cskaoyan_mall_admin
+    where username = #{username}
+</select>
+
+</mapper>

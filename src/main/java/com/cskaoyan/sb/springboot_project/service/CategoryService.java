@@ -18,4 +18,6 @@ public interface CategoryService {
     int updateCategoryById(Category category);
 
     int deleteCategoryById(Category category);
+
+    Integer queryCategoryIds(Integer id);
 }

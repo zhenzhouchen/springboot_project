@@ -58,14 +58,14 @@
   </resultMap>
 
   <select id="queryByGoodsId" resultMap="BaseResultMap">
-    select id,goods_id,specifications,price,number,url,add_time,update_time,deleted
+    select id,goods_id,specifications,price,`number`,url,add_time,update_time,deleted
     from cskaoyan_mall_goods_product
-    where goods_id = #{id}
+    where goods_id = #{id} and deleted = 0
   </select>
 
   <insert id="insertProduct">
     insert into cskaoyan_mall_goods_product
-    (goods_id,specifications,price,number,url)
+    (goods_id,specifications,price,`number`,url)
     values
     <foreach collection="products" item="item" separator=",">
       (#{item.goodsId},
@@ -73,5 +73,22 @@
       #{item.price},#{item.number},#{item.url})
     </foreach>
   </insert>
+
+  <!--<update id="updateProduct">-->
+    <!--<foreach collection="products" item="item">-->
+      <!--update cskaoyan_mall_goods_product-->
+      <!--set specifications = #{item.specifications,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},-->
+      <!--price = #{item.price},-->
+      <!--`number` = #{item.number},-->
+      <!--url = #{item.url}-->
+      <!--where goods_id = #{item.goodsId}-->
+    <!--</foreach>-->
+  <!--</update>-->
+
+    <update id="deleteProduct">
+        update cskaoyan_mall_goods_product
+        set deleted = 1
+        where goods_id = #{goods.id}
+    </update>
 
 </mapper>

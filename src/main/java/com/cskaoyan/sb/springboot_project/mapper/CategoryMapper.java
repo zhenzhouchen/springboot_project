@@ -25,4 +25,6 @@ public interface CategoryMapper {
 
     @Update("update cskaoyan_mall_category set deleted = 1 where id = #{id}")
     int deleteCategoryById(Category category);
+
+    Integer queryCategoryIds(Integer id);
 }
