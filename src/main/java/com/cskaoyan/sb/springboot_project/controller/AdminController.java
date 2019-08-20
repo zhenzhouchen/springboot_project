@@ -104,4 +104,19 @@ public class AdminController {
           }
           return map;
     }
+
+    //没有写完！未完成查询数据库
+    @RequestMapping(value = "dashboard")
+    public Map<String, Object> dashboard() {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> inner = new HashMap<>();
+        inner.put("goodsTotal", 246);
+        inner.put("orderTotal", 12);
+        inner.put("productTotal", 132);
+        inner.put("userTotal", 13);
+        hashMap.put("data", inner);
+        hashMap.put("errmsg", "成功");
+        hashMap.put("errno", 0);
+        return hashMap;
+    }
 }

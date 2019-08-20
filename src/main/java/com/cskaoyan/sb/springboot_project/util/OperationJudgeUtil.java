@@ -10,6 +10,10 @@ public class OperationJudgeUtil {
                 return "删除管理员账户";
             case "/admin/admin/create":
                 return "新增管理员账户";
+            case "/admin/auth/login":
+                return "登录";
+            case "/admin/auth/logout":
+                return "退出";
             default:
                 return "ignore";
         }
