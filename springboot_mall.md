@@ -95,16 +95,39 @@
         
 - *专题管理*
     `新增专题`
-        会用到文件上传，明天再弄
+        会用到文件上传，明天再弄       
+        做完团购规则 pull 之后准备文件上传
+        *图片上传*
+            create 或 update 用于更新，storage 返回 文件路径即可
+            storage 完成所有的 文件上传
+        *返回 id*
+            insert 最好返回 id，这样可以当场修改，否则需要刷新       
+    `更新专题`
+        *goods[]*
+            数据库保存是带 [] 的？如果要带这个 json 只能用 String 接收，但明显 json 是数组
+            到底用 String[] 接收还是 String 接收？                                                 
         
 - *团购规则*
     `增删改查`
         - 没有图片，直接搬砖即可，有，但是不需要上传和修改 
         
     `增加`
-        - 需要多表查询，商品ID 查 —— 名称、图片
-        - 添加 add_time update_time                              
-                                                               
+        - 需要多表查询，商品ID 查 —— 名称、图片    
+        - 添加 add_time update_time
+        
+- *团购活动*
+    `多表查询`
+        根据 rulesId 查询 group_rules，再根据其查 goodsId
+        还要返回 subGroupons        
+        bean 需要继承，能够接收 goods 和 rules
+        resultMap 也继承，association 能接收 goods 和 rules，然后连接查询               
+        *多次连接查询*
+            - resultMap 一次连接三样查询            
+                *连接了2个，搜不出来*
+            - 先根据 groupon 排列查询，然后再一个一个查询其他内容
+                groupons 放在 list，遍历，然后一个一个 封装成 GrouponDetail
+                查不出，使用 Logger 来查看
+    `没有增删改，只有查`
         
 ## 疑难与解答
 
@@ -114,6 +137,18 @@
     
 - `springboot 下注入内容`        
     *springboot 怎么注入 sqlsession、mapScanner等？怎么运行的？* 
+    
+- `1——goods[] 是 json 数组？返回的时候不是不应该带 [] 转换成数组还是 String？`
+
+## 心得体会
+
+- `输入与输出的数据类型`
+    - 输入的时候，都是 sql 语句，类型 String 都可以
+    - 输出的时候，mybatis 数据类型要用指定的类型来接收
+        比如 varchar 用 int
+        但是查询的时候反正都是 sql 语句，无所谓
+    
+        
     
     
     

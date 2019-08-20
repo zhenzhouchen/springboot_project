@@ -166,13 +166,13 @@ public class Coupon {
     public void setGoodsType(Short goodsType) {
         this.goodsType = goodsType;
     }
-    public String[] getGoodsValue() {
+   /* public String[] getGoodsValue() {
         return goodsValue;
     }
 
     public void setGoodsValue(String[] goodsValue) {
         this.goodsValue = goodsValue;
-    }
+    }*/
 
     public String getCode() {
         return code;

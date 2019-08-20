@@ -1,6 +1,7 @@
 package com.cskaoyan.sb.springboot_project.mapper;
 
 import com.cskaoyan.sb.springboot_project.bean.Topic;
+import com.cskaoyan.sb.springboot_project.bean.Topic;
 import com.cskaoyan.sb.springboot_project.bean.TopicExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -33,4 +34,8 @@ public interface TopicMapper {
     int updateByPrimaryKeyWithBLOBs(Topic record);
 
     int updateByPrimaryKey(Topic record);
+
+    List<Topic> listTopicByCondition(@Param("sort") String sort, @Param("order") String order);
+
+    List<Topic> searchTopicByCondition(@Param("sort") String sort, @Param("order") String order, @Param("title") String title,@Param("subtitle") String subtitle);
 }

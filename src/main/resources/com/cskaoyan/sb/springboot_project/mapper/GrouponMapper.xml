@@ -14,6 +14,50 @@
     <result column="payed" jdbcType="BIT" property="payed" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
+
+  <!-- 搜索按条件排序 -->
+  <sql id="listCondition">
+    <if test="sort">
+      ORDER BY ${sort}
+    </if>
+    <if test="order">
+      ${order}
+    </if>
+  </sql>
+
+  <select id="listGrouponByCondition" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+      FROM cskaoyan_mall_groupon
+      WHERE deleted = 0
+    <include refid="listCondition"/>
+
+  </select>
+
+  <!-- 搜索按条件-->
+  <sql id="searchCondition">
+    <where>
+      <if test="rulesIds != null">
+        rules_id IN
+        <foreach collection="rulesIds" open="(" close=")" separator="," item="id">
+          #{id}
+        </foreach>
+      </if>
+      AND deleted = 0
+    </where>
+  </sql>
+
+  <select id="listGrouponByRulesId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM cskaoyan_mall_groupon
+    <include refid="searchCondition"/>
+    <!--<include refid="listCondition"/> 没有按排序来搜索，这个应该是前端的干，否则就要再装载一次 GoodsDetail了-->
+
+  </select>
+
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

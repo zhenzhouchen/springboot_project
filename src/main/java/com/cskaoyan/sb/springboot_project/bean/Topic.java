@@ -2,6 +2,7 @@ package com.cskaoyan.sb.springboot_project.bean;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Topic {
     private Integer id;
@@ -18,7 +19,7 @@ public class Topic {
 
     private Integer sortOrder;
 
-    private String goods;
+    private String[]  goods;
 
     private Date addTime;
 
@@ -84,12 +85,12 @@ public class Topic {
         this.sortOrder = sortOrder;
     }
 
-    public String getGoods() {
+    public String[] getGoods() {
         return goods;
     }
 
-    public void setGoods(String goods) {
-        this.goods = goods == null ? null : goods.trim();
+    public void setGoods(String[] goods) {
+        this.goods = goods;
     }
 
     public Date getAddTime() {
