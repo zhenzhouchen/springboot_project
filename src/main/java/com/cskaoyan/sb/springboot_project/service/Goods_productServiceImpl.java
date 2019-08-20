@@ -1,6 +1,7 @@
 package com.cskaoyan.sb.springboot_project.service;
 
 import com.cskaoyan.sb.springboot_project.bean.Goods;
+import com.cskaoyan.sb.springboot_project.bean.Goods_create;
 import com.cskaoyan.sb.springboot_project.bean.Goods_product;
 import com.cskaoyan.sb.springboot_project.mapper.Goods_productMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,16 @@ public class Goods_productServiceImpl implements Goods_productService {
             product.setGoodsId(Integer.valueOf(goods.getGoodsSn()));
         }
         return goodsProductMapper.insertProduct(products);
+    }
+
+    @Override
+    public void updateProduct(Goods_create update) {
+        goodsProductMapper.deleteProduct(update.getGoods());
+        if (update.getProducts().size()!=0){
+            for (Goods_product product : update.getProducts()) {
+                product.setGoodsId(update.getGoods().getId());
+            }
+            goodsProductMapper.insertProduct(update.getProducts());
+        }
     }
 }

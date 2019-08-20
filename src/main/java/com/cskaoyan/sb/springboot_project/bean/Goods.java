@@ -214,4 +214,27 @@ public class Goods {
         this.detail = detail;
     }
 
+    public Boolean getOnSale() {
+        return isOnSale;
+    }
+
+    public void setOnSale(Boolean onSale) {
+        isOnSale = onSale;
+    }
+
+    public Boolean getNew() {
+        return isNew;
+    }
+
+    public void setNew(Boolean aNew) {
+        isNew = aNew;
+    }
+
+    public Boolean getHot() {
+        return isHot;
+    }
+
+    public void setHot(Boolean hot) {
+        isHot = hot;
+    }
 }

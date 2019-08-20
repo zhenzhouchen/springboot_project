@@ -55,16 +55,32 @@
   <select id="queryByGoodsId" resultMap="BaseResultMap">
     select id,goods_id,specification,value,pic_url,add_time,update_time,deleted
     from cskaoyan_mall_goods_specification
-    where goods_id = #{id}
+    where goods_id = #{id} and deleted = 0
   </select>
 
   <insert id="insertSpecification">
     insert into cskaoyan_mall_goods_specification
-    (goods_id,specification,value,pic_url)
+    (goods_id,specification,`value`,pic_url)
     values
     <foreach collection="specifications" item="item" separator=",">
       (#{item.goodsId},#{item.specification},#{item.value},#{item.picUrl})
     </foreach>
   </insert>
+
+  <!--<update id="updateSpecification">-->
+    <!--<foreach collection="specifications" item="item">-->
+      <!--update cskaoyan_mall_goods_specification-->
+      <!--set specification = #{item.specification},-->
+      <!--`value` = #{item.value},-->
+      <!--pic_url = #{item.picUrl}-->
+      <!--where goods_id = #{item.goodsId}-->
+    <!--</foreach>-->
+  <!--</update>-->
+
+  <update id="deleteSpecification">
+        update cskaoyan_mall_goods_specification
+        set deleted = 1
+        where goods_id = #{goods.id}
+    </update>
 
 </mapper>

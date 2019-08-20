@@ -1,5 +1,6 @@
 package com.cskaoyan.sb.springboot_project.mapper;
 
+import com.cskaoyan.sb.springboot_project.bean.Goods;
 import com.cskaoyan.sb.springboot_project.bean.Goods_product;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,4 +14,6 @@ public interface Goods_productMapper {
     List<Goods_product> queryByGoodsId(Integer id);
 
     int insertProduct(@Param("products") List<Goods_product> products);
+
+    int deleteProduct(@Param("goods") Goods goods);
 }

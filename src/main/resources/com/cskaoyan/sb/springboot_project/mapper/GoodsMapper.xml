@@ -78,6 +78,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cskaoyan.sb.springboot_project.bean.Goods">
     update cskaoyan_mall_goods
     set goods_sn = #{goodsSn,jdbcType=VARCHAR},
@@ -102,28 +103,34 @@
       detail = #{detail,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.sb.springboot_project.bean.Goods">
+
+  <update id="updateByPrimaryKey">
     update cskaoyan_mall_goods
-    set goods_sn = #{goodsSn,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      category_id = #{categoryId,jdbcType=INTEGER},
-      brand_id = #{brandId,jdbcType=INTEGER},
-      gallery = #{gallery,jdbcType=VARCHAR},
-      keywords = #{keywords,jdbcType=VARCHAR},
-      brief = #{brief,jdbcType=VARCHAR},
-      is_on_sale = #{isOnSale,jdbcType=BIT},
-      sort_order = #{sortOrder,jdbcType=SMALLINT},
-      pic_url = #{picUrl,jdbcType=VARCHAR},
-      share_url = #{shareUrl,jdbcType=VARCHAR},
-      is_new = #{isNew,jdbcType=BIT},
-      is_hot = #{isHot,jdbcType=BIT},
-      unit = #{unit,jdbcType=VARCHAR},
-      counter_price = #{counterPrice,jdbcType=DECIMAL},
-      retail_price = #{retailPrice,jdbcType=DECIMAL},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      deleted = #{deleted,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
+    <set>
+      goods_sn = #{good.goodsSn},
+      `name` = #{good.name},
+      category_id = #{good.categoryId},
+      brand_id = #{good.brandId},
+      <if test="good.gallery != null">
+      gallery = #{good.gallery,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},
+      </if>
+      <if test="good.gallery == null">
+      gallery = "",
+      </if>
+      keywords = #{good.keywords},
+      brief = #{good.brief},
+      is_on_sale = #{good.isOnSale},
+      sort_order = #{good.sortOrder},
+      pic_url = #{good.picUrl},
+      share_url = #{good.shareUrl},
+      is_new = #{good.isNew},
+      is_hot = #{good.isHot},
+      unit = #{good.unit},
+      counter_price = #{good.counterPrice},
+      retail_price = #{good.retailPrice},
+      detail = #{good.detail}
+    </set>
+    where id = #{good.id}
   </update>
 
   <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Goods">
@@ -144,6 +151,7 @@
     <result column="unit" property="unit" />
     <result column="counter_price" property="counterPrice" />
     <result column="retail_price" property="retailPrice" />
+    <result column="detail" property="detail" />
     <result column="add_time" property="addTime" />
     <result column="update_time" property="updateTime" />
     <result column="deleted" property="deleted" />
@@ -167,6 +175,7 @@
     unit,
     counter_price,
     retail_price,
+    detail,
     add_time,
     update_time,
     deleted
@@ -204,6 +213,7 @@
     unit,
     counter_price,
     retail_price,
+    detail,
     add_time,
     update_time,
     deleted
@@ -211,24 +221,128 @@
     where id = #{id}
    </select>
 
-  <select id="queryCategoryIds" resultType="java.lang.String">
+  <select id="queryByIdReturnInt" resultType="java.lang.Integer">
+    select count(id) from cskaoyan_mall_goods where id = #{id}
+  </select>
+
+  <select id="queryCategoryIds" resultType="java.lang.Integer">
     select category_id from cskaoyan_mall_goods where id = #{id}
   </select>
 
+  <!--<insert id="insertGoods">-->
+     <!--insert into cskaoyan_mall_goods (id, goods_sn, `name`,-->
+      <!--category_id, brand_id, gallery,-->
+      <!--keywords, brief, is_on_sale,-->
+      <!--sort_order, pic_url, share_url,-->
+      <!--is_new, is_hot, unit, counter_price,-->
+      <!--retail_price ,detail)-->
+    <!--values (#{good.goodsSn}, #{good.goodsSn}, #{good.name},-->
+      <!--#{good.categoryId}, #{good.brandId},-->
+      <!--#{good.gallery,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},-->
+      <!--#{good.keywords}, #{good.brief}, #{good.isOnSale},-->
+      <!--#{good.sortOrder}, #{good.picUrl}, #{good.shareUrl},-->
+      <!--#{good.isNew}, #{good.isHot}, #{good.unit}, #{good.counterPrice},-->
+      <!--#{good.retailPrice}, #{good.detail})-->
+  <!--</insert>-->
+
   <insert id="insertGoods">
-     insert into cskaoyan_mall_goods (id, goods_sn, `name`,
-      category_id, brand_id, gallery,
-      keywords, brief, is_on_sale,
-      sort_order, pic_url, share_url,
-      is_new, is_hot, unit, counter_price,
-      retail_price)
-    values (#{good.goodsSn}, #{good.goodsSn}, #{good.name},
-      #{good.categoryId}, #{good.brandId},
-      #{good.gallery,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},
-      #{good.keywords}, #{good.brief}, #{good.isOnSale},
-      #{good.sortOrder}, #{good.picUrl}, #{good.shareUrl},
-      #{good.isNew}, #{good.isHot}, #{good.unit}, #{good.counterPrice},
-      #{good.retailPrice})
+     insert into cskaoyan_mall_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id, goods_sn,`name`,
+      <if test="good.categoryId != null">
+        category_id,
+      </if>
+      <if test="good.brandId != null">
+        brand_id,
+      </if>
+      <if test="good.gallery != null">
+        gallery,
+      </if>
+      <if test="good.keywords != null">
+        keywords,
+      </if>
+      <if test="good.brief != null">
+        brief,
+      </if>
+      <if test="good.isOnSale != null">
+        is_on_sale,
+      </if>
+      <if test="good.sortOrder != null">
+        sort_order,
+      </if>
+      <if test="good.picUrl != null">
+        pic_url,
+      </if>
+      <if test="good.shareUrl != null">
+        share_url,
+      </if>
+      <if test="good.isNew != null">
+        is_new,
+      </if>
+      <if test="good.isHot != null">
+        is_hot,
+      </if>
+      <if test="good.unit != null">
+        unit,
+      </if>
+      <if test="good.counterPrice != null">
+        counter_price,
+      </if>
+      <if test="good.retailPrice != null">
+        retail_price,
+      </if>
+      <if test="good.detail != null">
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{good.goodsSn},#{good.goodsSn},#{good.name},
+      <if test="good.categoryId != null">
+        #{good.categoryId},
+      </if>
+      <if test="good.brandId != null">
+        #{good.brandId},
+      </if>
+      <if test="good.gallery != null">
+        #{good.gallery,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},
+      </if>
+      <if test="good.keywords != null">
+        #{good.keywords},
+      </if>
+      <if test="good.brief != null">
+        #{good.brief},
+      </if>
+      <if test="good.isOnSale != null">
+        #{good.isOnSale},
+      </if>
+      <if test="good.sortOrder != null">
+        #{good.sortOrder},
+      </if>
+      <if test="good.picUrl != null">
+        #{good.picUrl},
+      </if>
+      <if test="good.shareUrl != null">
+        #{good.shareUrl},
+      </if>
+      <if test="good.isNew != null">
+        #{good.isNew},
+      </if>
+      <if test="good.isHot != null">
+        #{good.isHot},
+      </if>
+      <if test="good.unit != null">
+        #{good.unit},
+      </if>
+      <if test="good.counterPrice != null">
+        #{good.counterPrice},
+      </if>
+      <if test="good.retailPrice != null">
+        #{good.retailPrice},
+      </if>
+      <if test="good.detail != null">
+        #{good.detail},
+      </if>
+    </trim>
   </insert>
 
 </mapper>

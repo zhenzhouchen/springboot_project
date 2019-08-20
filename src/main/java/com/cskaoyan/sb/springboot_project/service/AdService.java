@@ -8,9 +8,9 @@ import java.util.Map;
 
 public interface AdService {
 
-    Map<String,Object> listAd(PopPage popPage);
-
     Ad createAd(Ad ad);
 
     Ad updateAd(Ad ad);
+
+    Map<String, Object> listAdByCondition(PopPage popPage, String name, String content);
 }
