@@ -41,10 +41,10 @@
   <sql id="searchCondition">
     <where>
       <if test="title != null">
-        AND `title` LIKE #{title}
+        AND `title` LIKE CONCAT('%',#{title},'%')
       </if>
       <if test="subtitle != null">
-        AND `subtitle` LIKE #{subtitle}
+        AND `subtitle` LIKE CONCAT('%',#{subtitle},'%')
       </if>
       AND deleted = 0
     </where>

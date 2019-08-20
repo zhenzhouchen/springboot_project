@@ -80,7 +80,7 @@ public class TopicServiceImp implements TopicService {
     public Map<String, Object> searchTopic(PopPage popPage, String title, String subtitle) {
 
         PageHelper.startPage(popPage.getPage(), popPage.getLimit());
-        List<Topic> topics = topicMapper.searchTopicByCondition(popPage.getSort(),popPage.getOrder(),"%"+title+"%","%"+subtitle+"%");
+        List<Topic> topics = topicMapper.searchTopicByCondition(popPage.getSort(),popPage.getOrder(),title,subtitle);
 
         PageInfo<Topic> pageInfo = new PageInfo<>(topics);
         long total = pageInfo.getTotal();

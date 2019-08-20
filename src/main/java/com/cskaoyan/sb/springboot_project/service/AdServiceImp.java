@@ -29,7 +29,8 @@ public class AdServiceImp implements AdService {
     public Map<String,Object> listAdByCondition(PopPage popPage,String name,String content) {
 
         PageHelper.startPage(popPage.getPage(), popPage.getLimit());
-        List<Ad> ads = adMapper.listAdByCondition(popPage.getSort(),popPage.getOrder(),"%"+name+"%","%"+content+"%");
+        String a = "%" + name + "%";
+        List<Ad> ads = adMapper.listAdByCondition(popPage.getSort(),popPage.getOrder(),name,content);
 
         PageInfo<Ad> pageInfo = new PageInfo<>(ads);
         long total = pageInfo.getTotal();
@@ -49,6 +50,7 @@ public class AdServiceImp implements AdService {
         Date date = new Date();
         ad.setAddTime(date);
         ad.setUpdateTime(date);
+        ad.setDeleted(false);
 
         int insert = adMapper.insert(ad);
 

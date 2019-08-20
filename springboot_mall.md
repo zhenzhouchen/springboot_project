@@ -148,7 +148,12 @@
         比如 varchar 用 int
         但是查询的时候反正都是 sql 语句，无所谓
     
-        
+- `sql 模糊查询的 % 位置`
+    - 最好不要在 Service 拼接
+        否则 if test 的时候会判断到 LIKE %% 案例说是查询所有？但是查不出来     
+      *NULL 时toString 是 null*
+        比如 name = null，则 "%"+name+"%"时 是 %null%   
+    - *使用 CONCAT 函数*                
     
     
     
