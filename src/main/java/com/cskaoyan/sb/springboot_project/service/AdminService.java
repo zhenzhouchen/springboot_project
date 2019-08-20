@@ -12,4 +12,9 @@ public interface AdminService {
     int upadte_admin (Admin admin);
     int delete_admin(Admin admin);
     int create_admin(Admin admin);
+    int[] queryRoleIds(String username);
+    List<String> queryPermissionsByRoleIds(int[] rolesIds);
+
+
+    String[] queryRolesByroleIds(int[] roleIds);
 }
