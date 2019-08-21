@@ -22,7 +22,11 @@ public class UtilsController {
         Map<String,Object> map = new HashMap<>();
         String tokenKey = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(tokenKey);
+        if(userId == null){
+            return map;
+        }
         List<Address_receive> address_receiveList = addressService.queryAddressReceById(userId);
+        map.put("data",address_receiveList);
         map.put("errmsg","成功");
         map.put("errno",0);
         return map;
