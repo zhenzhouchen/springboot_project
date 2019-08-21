@@ -46,7 +46,6 @@ public class StorageController {
             items = storageService.queryAllStorageList(sort,order);
         }else{
             items = storageService.queryStorageList(key,name,sort,order);
-
         }
         map_info.put("items",items);
         map.put("data",map_info);

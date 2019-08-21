@@ -41,4 +41,21 @@ public class AdminServiceImpl implements AdminService {
     public int create_admin(Admin admin) {
         return adminMapper.create_admin(admin);
     }
+
+    @Override
+    public int[] queryRoleIds(String username) {
+        return adminMapper.queryRoleIds(username);
+    }
+
+    @Override
+    public List<String> queryPermissionsByRoleIds(int[] rolesIds) {
+        return adminMapper.queryPermissionsByRoleIds(rolesIds);
+    }
+
+    @Override
+    public String[] queryRolesByroleIds(int[] roleIds) {
+        return adminMapper.queryRolesByroleIds(roleIds);
+    }
+
+
 }

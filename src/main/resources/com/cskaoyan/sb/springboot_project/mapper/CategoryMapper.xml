@@ -136,4 +136,9 @@
     values
     (#{name},#{keywords},#{desc},#{pid},#{iconUrl},#{picUrl},#{level},#{addTime},#{updateTime},#{deleted})
   </insert>
+
+  <select id="queryCategoryIds" resultType="java.lang.Integer">
+    select pid from cskaoyan_mall_category where id = #{id}
+  </select>
+
 </mapper>

@@ -50,8 +50,13 @@
   <select id="queryByGoodsId" resultMap="BaseResultMap">
     select id,goods_id,attribute,value,add_time,update_time,deleted
     from cskaoyan_mall_goods_attribute
-    where goods_id = #{id}
+    where goods_id = #{id} and deleted = 0
   </select>
+
+  <!--<select id="queryDeleteId" resultType="java.lang.Integer">-->
+    <!--select id from cskaoyan_mall_goods_attribute-->
+    <!--where goods_id = #{goods.id}-->
+  <!--</select>-->
 
   <insert id="insertAttribute">
     insert into cskaoyan_mall_goods_attribute
@@ -61,5 +66,11 @@
     (#{item.goodsId},#{item.attribute},#{item.value})
     </foreach>
   </insert>
+
+  <update id="deleteAttribute">
+      update cskaoyan_mall_goods_attribute
+      set deleted = 1
+      where goods_id = #{goods.id}
+  </update>
 
 </mapper>

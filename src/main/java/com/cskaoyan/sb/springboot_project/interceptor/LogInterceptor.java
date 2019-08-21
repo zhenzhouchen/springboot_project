@@ -4,6 +4,7 @@ import com.cskaoyan.sb.springboot_project.bean.Log;
 import com.cskaoyan.sb.springboot_project.service.LogService;
 import com.cskaoyan.sb.springboot_project.util.OperationJudgeUtil;
 import io.swagger.annotations.Api;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,18 +20,25 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //用于创建Session，不写会报Cannot create a session after the response has been committed
-        //原因可能是跨域请求时每次都会产生一个新的sessionId,导致无法获取原session中的数据
-        //用户登录和退出应当在登录时写入Session，解决后将改行删除
-        request.getSession().setAttribute("username", "vincent");
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        String username = (String) request.getSession().getAttribute("username");
-        //记录当前登录用户的操作
-        if(username != null) {
+        /*String username = (String) request.getSession().getAttribute("username");*/
+        String username = (String) SecurityUtils.getSubject().getPrincipal();
+        String logError = (String) request.getAttribute("logError");
+        String logout = (String) request.getAttribute("logout");
+        //退出标致，退出时subject已经销毁，使用该标志传递退出用户名
+        if(logout != null) {
+            username = logout;
+        }
+        //登录错误标致，登录失败时subject已经销毁，使用该标志传递登录用户名
+        if(logError != null) {
+            username = logError;
+        }
+        //记录登录用户的操作
+        if(username != null ) {
             //获取请求的URI
             String requestURI = request.getRequestURI();
             String contextPath = request.getContextPath();
