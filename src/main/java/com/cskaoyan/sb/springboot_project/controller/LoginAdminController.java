@@ -43,7 +43,7 @@ public class LoginAdminController {
             map.put("errmsg","用户帐号或密码不正确");
             map.put("errno",605);
             //日志记录
-            request.setAttribute("errno", "1");
+            request.setAttribute("errno", "0");
             request.setAttribute("result", "密码错误");
             //登录失败标志，gitsubject已经销毁，使用该标志传递登录用户名
             request.setAttribute("logError", username);
@@ -54,7 +54,7 @@ public class LoginAdminController {
         map.put("errmsg","成功");
         map.put("errno",0);
         //日志记录
-        request.setAttribute("errno", "0");
+        request.setAttribute("errno", "1");
         request.setAttribute("result", "登陆成功");
         return map;
     }
@@ -98,12 +98,12 @@ public class LoginAdminController {
             map.put("errmsg","成功");
             map.put("errno",0);
             request.setAttribute("result", "退出");
-            request.setAttribute("errno", "0");
+            request.setAttribute("errno", "1");
             //退出成功标志，退出时subject已经销毁，使用该标志传递退出用户名
             request.setAttribute("logout", username);
         } catch (Exception e) {
             request.setAttribute("result", "退出异常");
-            request.setAttribute("errno", "1");
+            request.setAttribute("errno", "0");
         }
         return map;
     }
