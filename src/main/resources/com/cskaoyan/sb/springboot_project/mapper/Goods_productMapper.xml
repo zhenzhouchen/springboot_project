@@ -45,6 +45,14 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <update id="updateInventory">
+    update cskaoyan_mall_goods_product
+    set
+    number = number - #{cart.number},
+    update_time = #{updateTime}
+    where goods_id = #{goodsId}
+  </update>
+
   <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Goods_product">
     <id column="id" property="id" />
     <result column="goods_id" property="goodsId" />
@@ -91,4 +99,7 @@
         where goods_id = #{goods.id}
     </update>
 
+  <select id="selectProductByProductId" resultMap="BaseResultMap">
+    select price,specifications,url from cskaoyan_mall_goods_product where id = #{productId} and deleted = 0
+  </select>
 </mapper>

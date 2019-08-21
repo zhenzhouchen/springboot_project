@@ -3,6 +3,7 @@ package com.cskaoyan.sb.springboot_project.mapper;
 import com.cskaoyan.sb.springboot_project.bean.Goods;
 import org.apache.ibatis.annotations.Param;
 import com.cskaoyan.sb.springboot_project.bean.Goods_statistics;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface GoodsMapper {
     int insertGoods(@Param("good") Goods goods);//商品上架
 
     int queryByIdReturnInt(Integer id);//插入前判断是否已经存在
+    @Select("select goods_sn, name form cskaoyan_mall_goods where goods_id = #{goodsId}")
+    Goods selectGoodByGoodsId(@Param("goodsId") Integer goodsId);
 }

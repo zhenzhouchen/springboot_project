@@ -18,7 +18,7 @@
     <result property="deleted" column="deleted"/>
   </resultMap>
 
-  <select id="selectCartListByUsername" resultMap="cartMap">
+  <select id="selectCartListByUserId" resultMap="cartMap">
     select
     cart.id,
     cart.user_id,
@@ -35,13 +35,45 @@
     cart.update_time,
     cart.deleted
     from cskaoyan_mall_cart cart
-    left join cskaoyan_mall_user `user`
-    on cart.user_id = `user`.id
-    where `user`.username = #{username}
+    where cart.user_id = #{userId}
     and cart.deleted = 0
   </select>
 
+  <update id="updateCart">
+    update cskaoyan_mall_cart
+    set
+    number = number + #{cart.number},
+    update_time = #{cart.updateTime}
+    where
+    product_id = #{cart.productId} and user_id = #{cart.userId}
+  </update>
 
+  <update id="checkGoods" >
+    update cskaoyan_mall_cart
+    set
+    checked = #{checked},
+    update_time = #{updateTime}
+    where
+    product_id = #{productId} and user_id = #{userId}
+  </update>
+
+  <update id="updateCartGoods">
+    update cskaoyan_mall_cart
+    set
+    number = #{cart.number},
+    update_time = #{cart.updateTime}
+    where
+    goods_id = #{cart.goodsId} and id = #{cart.id} and product_id = #{cart.productId} and user_id = #{cart.userId}
+  </update>
+
+  <insert id="addIntoCart">
+    insert into cskaoyan_mall_cart
+    (user_id,goods_id,goods_sn,goods_name,product_id,price,`number`,specifications,checked,pic_url,add_time,update_time,deleted)
+    values
+    (#{cart.userId},#{cart.goodsId},#{cart.goodsSn},#{cart.goodsName},#{cart.productId},#{cart.price},#{cart.number},
+    #{cart.specifications,typeHandler=com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler},
+    #{cart.checked},#{cart.picUrl},#{cart.addTime},#{cart.updateTime},#{cart.deleted})
+  </insert>
 
 
 
