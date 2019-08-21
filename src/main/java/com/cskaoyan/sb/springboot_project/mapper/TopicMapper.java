@@ -35,4 +35,8 @@ public interface TopicMapper {
     int updateByPrimaryKey(Topic record);
 
     List<Topic> topicList();
+
+    List<Topic> listTopicByCondition(@Param("sort") String sort, @Param("order") String order);
+
+    List<Topic> searchTopicByCondition(@Param("sort") String sort, @Param("order") String order, @Param("title") String title,@Param("subtitle") String subtitle);
 }

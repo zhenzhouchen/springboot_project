@@ -3,6 +3,9 @@ package com.cskaoyan.sb.springboot_project.mapper;
 import com.cskaoyan.sb.springboot_project.bean.Groupon;
 import com.cskaoyan.sb.springboot_project.bean.GrouponExample;
 import java.util.List;
+
+import com.cskaoyan.sb.springboot_project.bean.Groupon;
+import com.cskaoyan.sb.springboot_project.bean.Popularize.GrouponDetail;
 import org.apache.ibatis.annotations.Param;
 
 public interface GrouponMapper {
@@ -27,4 +30,10 @@ public interface GrouponMapper {
     int updateByPrimaryKeySelective(Groupon record);
 
     int updateByPrimaryKey(Groupon record);
+
+    List<Groupon> listGrouponByCondition(@Param("sort") String sort, @Param("order") String order);
+
+    List<Groupon> searchGrouponByCondition(@Param("sort") String sort, @Param("order") String order, @Param("goodsId") String goodsId);
+
+    List<Groupon> listGrouponByRulesId(@Param("rulesIds") List<Integer> rulesIds);
 }

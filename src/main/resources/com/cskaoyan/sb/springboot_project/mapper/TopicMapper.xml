@@ -17,6 +17,48 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cskaoyan.sb.springboot_project.bean.Topic">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
+
+  <!-- 搜索按条件排序 -->
+  <sql id="listCondition">
+    <if test="sort">
+      ORDER BY ${sort}
+    </if>
+    <if test="order">
+      ${order}
+    </if>
+  </sql>
+
+  <select id="listTopicByCondition" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM cskaoyan_mall_topic
+    WHERE deleted = 0
+    <include refid="listCondition"/>
+
+  </select>
+
+  <!-- 搜索按条件-->
+  <sql id="searchCondition">
+    <where>
+      <if test="title != null">
+        AND `title` LIKE CONCAT('%',#{title},'%')
+      </if>
+      <if test="subtitle != null">
+        AND `subtitle` LIKE CONCAT('%',#{subtitle},'%')
+      </if>
+      AND deleted = 0
+    </where>
+  </sql>
+  <select id="searchTopicByCondition" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM cskaoyan_mall_topic
+    <include refid="searchCondition"/>
+    <include refid="listCondition"/>
+
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -132,7 +174,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.sb.springboot_project.bean.Topic">
+  <insert id="insert" parameterType="com.cskaoyan.sb.springboot_project.bean.Topic" useGeneratedKeys="true" keyProperty="id">
     insert into cskaoyan_mall_topic (id, title, subtitle, 
       price, read_count, pic_url, 
       sort_order, goods, add_time, 
