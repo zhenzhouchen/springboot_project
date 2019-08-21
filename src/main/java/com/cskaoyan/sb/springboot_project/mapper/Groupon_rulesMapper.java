@@ -1,6 +1,5 @@
 package com.cskaoyan.sb.springboot_project.mapper;
 
-import com.cskaoyan.sb.springboot_project.bean.Coupon;
 import com.cskaoyan.sb.springboot_project.bean.Groupon_rules;
 import com.cskaoyan.sb.springboot_project.bean.Groupon_rulesExample;
 import java.util.List;
@@ -33,4 +32,5 @@ public interface Groupon_rulesMapper {
 
     List<Groupon_rules> searchGroupon_rulesByCondition(@Param("sort") String sort, @Param("order") String order, @Param("id") String id);
 
+    List<Groupon_rules> grouponList();
 }
