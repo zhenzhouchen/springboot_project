@@ -5,6 +5,8 @@ import com.cskaoyan.sb.springboot_project.bean.UserInfo;
 import com.cskaoyan.sb.springboot_project.mapper.UserMapper;
 import com.cskaoyan.sb.springboot_project.realm.MallToken;
 import com.cskaoyan.sb.springboot_project.service.UserService;
+import com.cskaoyan.sb.springboot_project.util.UserToken;
+import com.cskaoyan.sb.springboot_project.util.UserTokenManager;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -25,7 +27,7 @@ public class LoginWxController {
     @Autowired
     UserService userService;
     @RequestMapping("/auth/login")
-    public Map<String,Object> login(@RequestBody User user, HttpServletRequest request){
+    public Map<String,Object> login(@RequestBody User user,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> intermap = new HashMap<>();
 
@@ -34,6 +36,10 @@ public class LoginWxController {
         String password = user.getPassword();
         //UsernamePasswordToken token = new UsernamePasswordToken(username,password);
         MallToken mallToken = new MallToken(username, password, "wx");
+
+        //通过username查出userid放入session域
+        int userId = userService.queryIdByName(username);
+        UserToken userToken = UserTokenManager.generateToken(userId);
 
         //如果用户名和密码不正确会报异常，要处理
         try {
@@ -44,11 +50,9 @@ public class LoginWxController {
             return map;
         }
         UserInfo userInfo = userService.query_UserInfoByUsername(username);
-        Serializable id = subject.getSession().getId();
-        Date startTimestamp = subject.getSession().getStartTimestamp();
         intermap.put("userInfo",userInfo);
-        intermap.put("token",id);
-        intermap.put("tokenExpire",startTimestamp);
+        intermap.put("token", userToken.getToken());
+        intermap.put("tokenExpire", userToken.getExpireTime().toString());
         map.put("data",intermap);
         map.put("errmsg","成功");
         map.put("errno",0);
@@ -59,11 +63,19 @@ public class LoginWxController {
     public Map<String,Object> user_index(){
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> intermap = new HashMap<>();
-
-
+        //intermap.put("order",order_wx);
         map.put("data",intermap);
         map.put("errmsg","成功");
         map.put("errno",0);
         return map;
     }
+
+    @RequestMapping("auth/logout")
+    public Map<String,Object> authr_logout(){
+        Map<String,Object> map = new HashMap<>();
+        map.put("errmsg","成功");
+        map.put("errno",0);
+        return map;
+    }
+
 }

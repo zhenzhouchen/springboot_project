@@ -26,4 +26,7 @@ public interface UserMapper {
     String queryPasswordByName(@Param("username") String username);
 
     UserInfo query_UserInfoByUsername(@Param("username") String username);
+    @Select("select id from cskaoyan_mall_user where username = #{username}")
+    int queryIdByName(@Param("username") String username);
+
 }
