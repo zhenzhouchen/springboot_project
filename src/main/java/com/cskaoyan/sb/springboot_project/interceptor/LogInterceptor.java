@@ -57,7 +57,7 @@ public class LogInterceptor implements HandlerInterceptor {
             int type = OperationJudgeUtil.getActionType(op);
             log.setType(type); //操作分类 0:一般操作 1：安全操作 2：订单操作 3：其他操作
             log.setAction(action); //操作动作 根据requestUri进行判断
-            if("0".equals(errno)) { //操作状态  true成功 false失败 根据Controller返回值进行过判断
+            if("1".equals(errno)) { //操作状态  true成功 false失败 根据Controller返回值进行过判断
                 log.setStatus(true);
             } else {
                 log.setStatus(false);
