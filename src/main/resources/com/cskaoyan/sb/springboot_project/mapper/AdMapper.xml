@@ -29,10 +29,10 @@
   <sql id="searchCondition">
     <where>
       <if test="name != null">
-        AND `name` LIKE #{name}
+        AND `name` LIKE CONCAT('%',#{name},'%')
       </if>
       <if test="content != null">
-        AND `content` LIKE #{content}
+        AND `content` LIKE CONCAT('%',#{content},'%')
       </if>
       AND deleted = 0
     </where>
@@ -138,7 +138,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.sb.springboot_project.bean.Ad">
+  <insert id="insert" parameterType="com.cskaoyan.sb.springboot_project.bean.Ad" useGeneratedKeys="true" keyProperty="id">
     insert into cskaoyan_mall_ad (id, name, link, 
       url, position, content, 
       start_time, end_time, enabled, 

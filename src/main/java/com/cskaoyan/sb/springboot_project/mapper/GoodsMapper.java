@@ -22,11 +22,21 @@ public interface GoodsMapper {
 
     Goods queryById(Integer id);//编辑回显
 
-    Integer queryCategoryIds(Integer id);
+    Integer queryCategoryIds(Integer id);//编辑回显
 
     int insertGoods(@Param("good") Goods goods);//商品上架
 
     int queryByIdReturnInt(Integer id);//插入前判断是否已经存在
     @Select("select goods_sn, name form cskaoyan_mall_goods where goods_id = #{goodsId}")
     Goods selectGoodByGoodsId(@Param("goodsId") Integer goodsId);
+
+    Integer count();//计算总商品数
+
+    List<Goods> queryGoodsForfloorGoodsList(Integer categoryId);
+
+    Goods grouponList(Integer goodsId);
+
+    List<Goods> hotGoodsList();
+
+    List<Goods> newGoodsList();
 }
