@@ -16,4 +16,6 @@ public interface UserService {
     List<User_statistics> query_user_statistics_bean();
 
     UserInfo query_UserInfoByUsername(String username);
+
+    int queryIdByName(String username);
 }

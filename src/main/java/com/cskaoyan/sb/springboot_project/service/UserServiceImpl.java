@@ -37,5 +37,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.query_UserInfoByUsername(username);
     }
 
+    @Override
+    public int queryIdByName(String username) {
+        return userMapper.queryIdByName(username);
+    }
+
 
 }
