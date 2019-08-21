@@ -20,11 +20,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/wx/auth")
+@RequestMapping("/wx")
 public class LoginWxController {
     @Autowired
     UserService userService;
-    @RequestMapping("/login")
+    @RequestMapping("/auth/login")
     public Map<String,Object> login(@RequestBody User user, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> intermap = new HashMap<>();
