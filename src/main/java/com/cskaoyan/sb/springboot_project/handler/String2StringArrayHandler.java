@@ -18,11 +18,10 @@ public class String2StringArrayHandler implements TypeHandler<String[]> {
     public void setParameter(PreparedStatement preparedStatement, int i, String[] strings, JdbcType jdbcType) throws SQLException {
         StringBuffer stringBuffer = new StringBuffer();
         for (String string : strings) {
-            stringBuffer.append(i).append(",");
+            stringBuffer.append(string).append(",");
         }
-//        String substring = stringBuffer.substring(0, stringBuffer.length() - 1);
-        String s = stringBuffer.toString();
-        preparedStatement.setString(i, s);
+        String substring = stringBuffer.toString().substring(0, stringBuffer.length() - 1);
+        preparedStatement.setString(i, substring);
     }
 
     @Override
@@ -44,7 +43,14 @@ public class String2StringArrayHandler implements TypeHandler<String[]> {
     }
 
     private String[] transString2StringArray(String string) {
-        String[] stringArray = string.split(",");
+        String str = string;
+        if(str.charAt(0) == '[') {
+            str = str.substring(1);
+        }
+        if(str.charAt(str.length() - 1) == ']') {
+            str = str.substring(0, str.length() - 1);
+        }
+        String[] stringArray = str.split(",");
         return stringArray;
     }
 }
