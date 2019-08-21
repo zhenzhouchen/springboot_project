@@ -1,6 +1,7 @@
 package com.cskaoyan.sb.springboot_project.service;
 
 import com.cskaoyan.sb.springboot_project.bean.User;
+import com.cskaoyan.sb.springboot_project.bean.UserInfo;
 import com.cskaoyan.sb.springboot_project.bean.User_statistics;
 
 import java.sql.Timestamp;
@@ -13,4 +14,8 @@ public interface UserService {
 
 
     List<User_statistics> query_user_statistics_bean();
+
+    UserInfo query_UserInfoByUsername(String username);
+
+    int queryIdByName(String username);
 }

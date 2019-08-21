@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.UserMapper">
 
+
+  <resultMap id="UserInfoMapper" type="com.cskaoyan.sb.springboot_project.bean.UserInfo">
+    <result column="avatar" property="avatar"/>
+    <result column="nickName" property="nickName"/>
+  </resultMap>
+  <select id="query_UserInfoByUsername" resultMap="UserInfoMapper">
+    select
+    avatar,
+    username as nickName
+    from cskaoyan_mall_user
+    where username = #{username}
+  </select>
+
 <resultMap id="User_statistic_Map" type="com.cskaoyan.sb.springboot_project.bean.User_statistics">
   <result column="day" property="day"/>
   <result column="users" property="users"/>

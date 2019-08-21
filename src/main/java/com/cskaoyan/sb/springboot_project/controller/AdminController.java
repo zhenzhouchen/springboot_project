@@ -62,10 +62,10 @@ public class AdminController {
         if(result ==1) {
             map.put("errmsg", "成功");
             map.put("errno", 0);
-            request.setAttribute("errno", "0");
+            request.setAttribute("errno", "1");
             request.setAttribute("result", admin.getUsername());
         } else  {
-            request.setAttribute("errno", "1");
+            request.setAttribute("errno", "2");
             request.setAttribute("result", admin.getUsername());
         }
         return map;
@@ -76,12 +76,12 @@ public class AdminController {
         Map<String, Object> map = new HashMap<>();
         int result = adminService.delete_admin(admin);
         if(result ==1) {
-            request.setAttribute("errno", "0");
+            request.setAttribute("errno", "1");
             request.setAttribute("result", admin.getUsername());
             map.put("errmsg", "成功");
             map.put("errno", 0);
         } else {
-            request.setAttribute("errno", "1");
+            request.setAttribute("errno", "0");
             request.setAttribute("result", admin.getUsername());
         }
         return map;
@@ -94,12 +94,12 @@ public class AdminController {
           if(result ==1) {
               map.put("errmsg", "成功");
               map.put("errno", 0);
-              request.setAttribute("errno", "0");
+              request.setAttribute("errno", "1");
               request.setAttribute("result", admin.getUsername());
           } else {
               map.put("errmsg", "失败");
               map.put("errno", 1);
-              request.setAttribute("errno", "1");
+              request.setAttribute("errno", "0");
               request.setAttribute("result", admin.getUsername());
           }
           return map;
