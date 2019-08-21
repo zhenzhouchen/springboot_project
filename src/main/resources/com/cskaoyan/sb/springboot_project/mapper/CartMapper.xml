@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.CartMapper">
+  <resultMap id="cartMap" type="com.cskaoyan.sb.springboot_project.bean.Cart">
+    <id property="id" column="id"/>
+    <result property="userId" column="user_id"/>
+    <result property="goodsId" column="goods_id"/>
+    <result property="goodsSn" column="goods_sn"/>
+    <result property="goodsName" column="goods_name"/>
+    <result property="productId" column="product_id"/>
+    <result property="price" column="price"/>
+    <result property="number" column="number"/>
+    <result property="specifications" column="specifications" typeHandler="com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler"/>
+    <result property="checked" column="checked"/>
+    <result property="picUrl" column="pic_url"/>
+    <result property="addTime" column="add_time"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="deleted" column="deleted"/>
+  </resultMap>
+
+  <select id="selectCartListByUsername" resultMap="cartMap">
+    select
+    cart.id,
+    cart.user_id,
+    cart.goods_id,
+    cart.goods_sn,
+    cart.goods_name,
+    cart.product_id,
+    cart.price,
+    cart.`number`,
+    cart.specifications,
+    cart.checked,
+    cart.pic_url,
+    cart.add_time,
+    cart.update_time,
+    cart.deleted
+    from cskaoyan_mall_cart cart
+    left join cskaoyan_mall_user `user`
+    on cart.user_id = `user`.id
+    where `user`.username = #{username}
+    and cart.deleted = 0
+  </select>
+
+
+
+
+
+
+
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.sb.springboot_project.bean.Cart">
     update cskaoyan_mall_cart
     <set>
