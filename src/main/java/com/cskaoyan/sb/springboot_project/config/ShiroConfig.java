@@ -2,8 +2,12 @@ package com.cskaoyan.sb.springboot_project.config;
 
 
 
+import com.cskaoyan.sb.springboot_project.realm.CustomAuthenticator;
 import com.cskaoyan.sb.springboot_project.realm.CustomRealm;
+import com.cskaoyan.sb.springboot_project.realm.WxRealm;
+import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -12,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -20,13 +25,33 @@ public class ShiroConfig {
 
 
     @Bean
-    public DefaultWebSecurityManager securityManager(CustomRealm realm, EhCacheManager cacheManager,
+    public DefaultWebSecurityManager securityManager(CustomRealm customRealm, WxRealm wxRealm,EhCacheManager cacheManager,
                                                      DefaultWebSessionManager sessionManager){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(realm);
+        ArrayList<Realm> realms = new ArrayList<>();
+        realms.add(customRealm);
+        realms.add(wxRealm);
+        securityManager.setRealms(realms);
+        securityManager.setAuthenticator(customAuthenticator(customRealm, wxRealm));
         securityManager.setCacheManager(cacheManager);
         securityManager.setSessionManager(sessionManager);
         return securityManager;
+    }
+
+    /*注册自定义的认证器*/
+    @Bean
+    public CustomAuthenticator customAuthenticator(CustomRealm customRealm,
+                                                   WxRealm wxRealm){
+        CustomAuthenticator customAuthenticator = new CustomAuthenticator();
+        ArrayList<Realm> realms = new ArrayList<>();
+        realms.add(customRealm);
+        realms.add(wxRealm);
+        customAuthenticator.setRealms(realms);
+
+        customAuthenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+
+        return customAuthenticator;
+
     }
 
     @Bean
@@ -38,7 +63,9 @@ public class ShiroConfig {
         HashMap<String, String> filterChainDefinitionMap = new HashMap<>();
 
         filterChainDefinitionMap.put("/admin/auth/login","anon");
-        filterChainDefinitionMap.put("/*","authc");
+        filterChainDefinitionMap.put("/wx/auth/login","anon");
+
+        filterChainDefinitionMap.put("/admin/*","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return shiroFilterFactoryBean;
