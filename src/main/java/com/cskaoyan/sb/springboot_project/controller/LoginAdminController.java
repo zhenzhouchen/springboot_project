@@ -42,12 +42,20 @@ public class LoginAdminController {
         }catch (Exception e){
             map.put("errmsg","用户帐号或密码不正确");
             map.put("errno",605);
+            //日志记录
+            request.setAttribute("errno", "1");
+            request.setAttribute("result", "密码错误");
+            //登录失败标志，gitsubject已经销毁，使用该标志传递登录用户名
+            request.setAttribute("logError", username);
             return map;
         }
         Serializable id = subject.getSession().getId();
         map.put("data",id);
         map.put("errmsg","成功");
         map.put("errno",0);
+        //日志记录
+        request.setAttribute("errno", "0");
+        request.setAttribute("result", "登陆成功");
         return map;
     }
 
@@ -78,11 +86,25 @@ public class LoginAdminController {
     }
 
     @RequestMapping("logout")
-    public Map<String, Object> logout() {
-        SecurityUtils.getSubject().logout();
-        Map<String,Object> map = new HashMap<>();
-        map.put("errmsg","成功");
-        map.put("errno",0);
+    public Map<String, Object> logout(HttpServletRequest request) {
+        Map<String,Object> map = null;
+        try {
+            String username = (String) SecurityUtils.getSubject().getPrincipal();
+            Subject subject = SecurityUtils.getSubject();
+            System.out.println(subject);
+            //通过subject执行logout
+            SecurityUtils.getSubject().logout();
+            map = new HashMap<>();
+            map.put("errmsg","成功");
+            map.put("errno",0);
+            request.setAttribute("result", "退出");
+            request.setAttribute("errno", "0");
+            //退出成功标志，退出时subject已经销毁，使用该标志传递退出用户名
+            request.setAttribute("logout", username);
+        } catch (Exception e) {
+            request.setAttribute("result", "退出异常");
+            request.setAttribute("errno", "1");
+        }
         return map;
     }
 }

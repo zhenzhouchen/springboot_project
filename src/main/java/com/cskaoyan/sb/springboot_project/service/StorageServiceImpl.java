@@ -34,8 +34,6 @@ public class StorageServiceImpl implements StorageService {
             String contentType = file.getContentType();
             //获取文件大小
             long size = file.getSize();
-            /*//获取扩展名
-            String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));*/
             //获取文件信息
             InputStream inputStream = file.getInputStream();
             //创建objectMetaData，并设置文件格式和大小
