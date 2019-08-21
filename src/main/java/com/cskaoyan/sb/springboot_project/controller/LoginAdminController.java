@@ -2,6 +2,7 @@ package com.cskaoyan.sb.springboot_project.controller;
 
 import com.cskaoyan.sb.springboot_project.bean.Admin;
 import com.cskaoyan.sb.springboot_project.bean.AdminLoginInfo;
+import com.cskaoyan.sb.springboot_project.realm.MallToken;
 import com.cskaoyan.sb.springboot_project.service.AdminLoginInfoService;
 import com.cskaoyan.sb.springboot_project.service.AdminService;
 import org.apache.shiro.SecurityUtils;
@@ -31,10 +32,13 @@ public class LoginAdminController {
         Subject subject = SecurityUtils.getSubject();
         String username = admin.getUsername();
         String password = admin.getPassword();
-        UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+        //这里的custom的相当于admin
+        MallToken mallToken = new MallToken(username, password, "custom");
+
+        //UsernamePasswordToken token = new UsernamePasswordToken(username,password);
         //如果用户名和密码不正确会报异常，要处理
         try {
-            subject.login(token);
+            subject.login(mallToken);
         }catch (Exception e){
             map.put("errmsg","用户帐号或密码不正确");
             map.put("errno",605);
@@ -74,6 +78,7 @@ public class LoginAdminController {
 //        interMap.put("perms", new String[]{"*"});
 //        interMap.put("roles", new String[]{"超级管理员"});
 
+        System.out.println(adminLoginInfo);
         map.put("data",adminLoginInfo);
         map.put("errmsg","成功");
         map.put("errno",0);

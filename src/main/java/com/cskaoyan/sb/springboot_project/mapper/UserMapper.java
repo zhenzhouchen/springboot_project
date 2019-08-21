@@ -1,6 +1,7 @@
 package com.cskaoyan.sb.springboot_project.mapper;
 
 import com.cskaoyan.sb.springboot_project.bean.User;
+import com.cskaoyan.sb.springboot_project.bean.UserInfo;
 import com.cskaoyan.sb.springboot_project.bean.User_statistics;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -21,5 +22,8 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
+    @Select("select password from cskaoyan_mall_user where username = #{username}")
+    String queryPasswordByName(@Param("username") String username);
 
+    UserInfo query_UserInfoByUsername(@Param("username") String username);
 }
