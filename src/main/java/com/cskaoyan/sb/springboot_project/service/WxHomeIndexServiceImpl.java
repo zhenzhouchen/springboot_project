@@ -102,7 +102,7 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
     @Override
     public Map<String, Object> searchGoods() {
         Map<String, Object> data = new HashMap<>();
-        Keyword defaultKeyword = keywordMapper.defaultKeyword();
+        List<Keyword> defaultKeyword = keywordMapper.defaultKeyword();
         List<Keyword> hotKeywordList = keywordMapper.hotKeywordList();
         List<Search_history> historyKeywordList = searchHistoryMapper.historyKeywordList();
         data.put("defaultKeyword", defaultKeyword);

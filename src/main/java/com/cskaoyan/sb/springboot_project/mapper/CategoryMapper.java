@@ -47,8 +47,6 @@ public interface CategoryMapper {
 
     Category searchCategoryById(Integer i);
 
-//    逆向工程另外添加
-
     long countByExample(CategoryExample example);
 
     int deleteByExample(CategoryExample example);

@@ -22,7 +22,7 @@ public interface KeywordMapper {
 
     Keyword selectKeywordById(@Param("id") int id);
 
-    Keyword defaultKeyword();
+    List<Keyword> defaultKeyword();
 
     List<Keyword> hotKeywordList();
 }
