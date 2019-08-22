@@ -6,6 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.cskaoyan.sb.springboot_project.bean.Category;
+import com.cskaoyan.sb.springboot_project.bean.CategoryExample;
+import com.cskaoyan.sb.springboot_project.bean.CategoryList;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
+
 import java.util.List;
 
 @Mapper
@@ -35,5 +42,28 @@ public interface CategoryMapper {
 
     Integer queryCategoryIds(Integer id);
 
+
     List<Category> channel();
+
+    Category searchCategoryById(Integer i);
+
+//    逆向工程另外添加
+
+    long countByExample(CategoryExample example);
+
+    int deleteByExample(CategoryExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Category record);
+
+    int insertSelective(Category record);
+
+    List<Category> selectByExample(CategoryExample example);
+
+    Category selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Category record, @Param("example") CategoryExample example);
+
+    int updateByExample(@Param("record") Category record, @Param("example") CategoryExample example);
 }

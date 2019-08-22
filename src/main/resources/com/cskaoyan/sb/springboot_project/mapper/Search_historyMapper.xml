@@ -73,4 +73,35 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="updateDeletedByUserId">
+    update cskaoyan_mall_search_history set deleted = 1
+    where user_id = #{userId}
+  </update>
+
+  <insert id="insertSearchHistory">
+    insert into cskaoyan_mall_search_history
+    (user_id,keyword) values (#{userId},#{keyword})
+  </insert>
+
+  <select id="selectByKeyword" resultType="java.lang.Integer">
+    select count(id) from cskaoyan_mall_search_history
+    where user_id = #{userId} and keyword = #{keyword} and deleted = 0
+  </select>
+
+  <select id="searchHelper" resultType="java.lang.String">
+    select keyword from cskaoyan_mall_search_history
+    where deleted = 0 and keyword like concat('%',#{keyword},'%')
+  </select>
+
+  <select id="historyKeywordList" resultType="com.cskaoyan.sb.springboot_project.bean.Search_history">
+    select keyword from cskaoyan_mall_search_history
+    <where>
+      deleted = 0
+      <if test="userId != null">
+        and user_id = #{userId}
+      </if>
+    </where>
+  </select>
+
 </mapper>

@@ -1,17 +1,15 @@
 package com.cskaoyan.sb.springboot_project.controller.popluarizeController;
 
 import com.cskaoyan.sb.springboot_project.bean.Ad;
-import com.cskaoyan.sb.springboot_project.bean.Popularize.PopBaseResp;
+import com.cskaoyan.sb.springboot_project.bean.Popularize.BaseResp;
 import com.cskaoyan.sb.springboot_project.bean.Popularize.PopPage;
 import com.cskaoyan.sb.springboot_project.service.AdService;
-import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -30,14 +28,14 @@ public class AdController {
      *      TODO：模糊查询的直接显示（不加入查询内容）
      */
     @RequestMapping("ad/list")
-    public PopBaseResp<Map<String, Object>> listAdByCondition(PopPage popPage,String name,String content) {
+    public BaseResp<Map<String, Object>> listAdByCondition(PopPage popPage, String name, String content) {
 
         /*System.out.println(name);
         System.out.println(content);*/
 
         Map<String, Object> map = adService.listAdByCondition(popPage,name,content);
 
-        PopBaseResp<Map<String, Object>> adPopBaseResp = new PopBaseResp<>();
+        BaseResp<Map<String, Object>> adPopBaseResp = new BaseResp<>();
         if (map == null) {
             setErrorInfo(adPopBaseResp, 1);
         } else {
@@ -53,10 +51,10 @@ public class AdController {
      * —— 添加 ad ——
      */
     @RequestMapping("ad/create")
-    public PopBaseResp<Ad> createAd(@RequestBody Ad ad) {
+    public BaseResp<Ad> createAd(@RequestBody Ad ad) {
         Ad addedAd = adService.createAd(ad);
 
-        PopBaseResp<Ad> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Ad> mapPopBaseResp = new BaseResp<>();
         if (addedAd != null) {
             mapPopBaseResp.setData(addedAd);
             setErrorInfo(mapPopBaseResp, 0);
@@ -72,10 +70,10 @@ public class AdController {
      * —— 修改 ad ——
      */
     @RequestMapping("ad/update")
-    public PopBaseResp<Ad> updateAd(@RequestBody Ad ad) {
+    public BaseResp<Ad> updateAd(@RequestBody Ad ad) {
         Ad updateAd = adService.updateAd(ad);
 
-        PopBaseResp<Ad> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Ad> mapPopBaseResp = new BaseResp<>();
         if (updateAd != null) {
             mapPopBaseResp.setData(updateAd);
             setErrorInfo(mapPopBaseResp, 0);
@@ -91,11 +89,11 @@ public class AdController {
      * —— 删除 ad ——
      */
     @RequestMapping("ad/delete")
-    public PopBaseResp<Ad> deleteAd(@RequestBody Ad ad) {
+    public BaseResp<Ad> deleteAd(@RequestBody Ad ad) {
         ad.setDeleted(true);
         Ad deleteAd = adService.updateAd(ad);
 
-        PopBaseResp<Ad> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Ad> mapPopBaseResp = new BaseResp<>();
         if (deleteAd != null) {
             setErrorInfo(mapPopBaseResp, 0);
         } else {
@@ -109,7 +107,7 @@ public class AdController {
     /**
      * —— 添加成功、失败信息 ——
      */
-    private void setErrorInfo(PopBaseResp popBaseResp, int isError) {
+    private void setErrorInfo(BaseResp popBaseResp, int isError) {
         if (isError == 0) {
             popBaseResp.setErrmsg("成功");
             popBaseResp.setErrno(0);

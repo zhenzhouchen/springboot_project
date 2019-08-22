@@ -20,4 +20,8 @@ public interface CategoryService {
     int deleteCategoryById(Category category);
 
     Integer queryCategoryIds(Integer id);
+
+    Category queryCategoryById(int id);
+
+    List<Category> queryCategoryByPid(Category category);
 }

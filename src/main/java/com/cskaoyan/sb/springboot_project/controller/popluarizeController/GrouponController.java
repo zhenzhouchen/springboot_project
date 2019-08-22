@@ -1,6 +1,6 @@
 package com.cskaoyan.sb.springboot_project.controller.popluarizeController;
 
-import com.cskaoyan.sb.springboot_project.bean.Popularize.PopBaseResp;
+import com.cskaoyan.sb.springboot_project.bean.Popularize.BaseResp;
 import com.cskaoyan.sb.springboot_project.bean.Popularize.PopPage;
 import com.cskaoyan.sb.springboot_project.service.GrouponService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class GrouponController {
      *      可以在这里判断，也可以直接在数据库底层 if test判断
      */
     @RequestMapping("groupon/listRecord")
-    public PopBaseResp<Map<String, Object>> listGroupon(PopPage popPage, String goodsId) {
+    public BaseResp<Map<String, Object>> listGroupon(PopPage popPage, String goodsId) {
 
 
         Map<String, Object> grouponResult = null;
@@ -34,7 +34,7 @@ public class GrouponController {
             grouponResult = grouponService.listGroupon(popPage);
         }
 
-        PopBaseResp<Map<String, Object>> grouponPopBaseResp = new PopBaseResp<>();
+        BaseResp<Map<String, Object>> grouponPopBaseResp = new BaseResp<>();
         if (grouponResult == null) {
             setErrorInfo(grouponPopBaseResp, 1);
         } else {
@@ -48,7 +48,7 @@ public class GrouponController {
     /**
      * —— 添加成功、失败信息 ——
      */
-    private void setErrorInfo(PopBaseResp popBaseResp, int isError) {
+    private void setErrorInfo(BaseResp popBaseResp, int isError) {
         if (isError == 0) {
             popBaseResp.setErrmsg("成功");
             popBaseResp.setErrno(0);

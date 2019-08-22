@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class WxHomeIndexServiceImpl implements WxHomeIndexService {
@@ -34,6 +31,12 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
     @Autowired
     TopicMapper topicMapper;
 
+    @Autowired
+    KeywordMapper keywordMapper;
+
+    @Autowired
+    Search_historyMapper searchHistoryMapper;
+
     //    private Map<String,Object> floorGoodsList;//category-id,name;goods
     @Override
     public Map<String, Object> queryAllIndexList() {
@@ -50,7 +53,7 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
         List<Object> floorGoodsList = new ArrayList<>();
         List<Category> level1 = categoryMapper.queryIdForfloorGoodsList();
         for (Category category : level1) {
-            Map<String,Object> map = new HashMap<>();
+            Map<String, Object> map = new HashMap<>();
             map.put("id", category.getId());
             map.put("name", category.getName());
             List<Integer> level2 = categoryMapper.queryId2ForfloorGoodsList(category.getId());
@@ -61,7 +64,7 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
                     goodsList.add(goods1);
                 }
             }
-            map.put("goodsList",goodsList);
+            map.put("goodsList", goodsList);
             floorGoodsList.add(map);
         }
         data.put("floorGoodsList", floorGoodsList);
@@ -94,5 +97,70 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
         List<Integer> goodsCount = new ArrayList<>();
         goodsCount.add(count);
         return goodsCount;
+    }
+
+    @Override
+    public Map<String, Object> searchGoods() {
+        Map<String, Object> data = new HashMap<>();
+        Keyword defaultKeyword = keywordMapper.defaultKeyword();
+        List<Keyword> hotKeywordList = keywordMapper.hotKeywordList();
+        List<Search_history> historyKeywordList = searchHistoryMapper.historyKeywordList();
+        data.put("defaultKeyword", defaultKeyword);
+        data.put("historyKeywordList", historyKeywordList);
+        data.put("hotKeywordList", hotKeywordList);
+        return data;
+    }
+
+    @Override
+    public Map<String, Object> searchGoodslist(String keyword) {
+        Map<String, Object> data = new HashMap<>();
+        Integer count = goodsMapper.searchGoodsCount(keyword);
+        List<Goods> goodsList = goodsMapper.searchGoodslist(keyword);
+        //将商品列表的目录id存入不重复的set集合中
+        Set<Integer> categoryIdList = new HashSet<>();
+        for (Goods goods : goodsList) {
+            categoryIdList.add(goods.getCategoryId());
+        }
+        //遍历set集合取出该目录的所有信息，即category的bean
+        List<Category> filterCategoryList = new ArrayList<>();
+        for (Integer i : categoryIdList) {
+            Category category = categoryMapper.searchCategoryById(i);
+            filterCategoryList.add(category);
+        }
+        data.put("count", count);
+        data.put("filterCategoryList", filterCategoryList);
+        data.put("goodsList", goodsList);
+        return data;
+    }
+
+    @Override
+    public List<String> searchHelper(String keyword) {
+        List<String> list = searchHistoryMapper.searchHelper(keyword);
+        return list;
+    }
+
+    @Override
+    public void updateSearchHistory(Integer userId,String keyword) {
+        //先在表里查找有无此搜索记录，若无则插入
+        int i = searchHistoryMapper.selectByKeyword(userId,keyword);
+        if (i == 0) {
+            searchHistoryMapper.insertSearchHistory(userId,keyword);
+        }
+    }
+
+    @Override
+    public int clearHistory(Integer userId) {
+        int i = searchHistoryMapper.updateDeletedByUserId(userId);
+        return i;
+    }
+
+    @Override
+    public Map<String, Object> couponMyList() {
+        Map<String,Object> map = new HashMap<>();
+        int count = couponMapper.countCouponMyList();
+        List<Coupon> data = couponMapper.couponMyList();
+        map.put("count",count);
+        map.put("data",data);
+        return map;
     }
 }

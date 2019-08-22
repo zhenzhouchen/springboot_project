@@ -2,7 +2,7 @@ package com.cskaoyan.sb.springboot_project.controller.popluarizeController;
 
 
 import com.cskaoyan.sb.springboot_project.bean.Topic;
-import com.cskaoyan.sb.springboot_project.bean.Popularize.PopBaseResp;
+import com.cskaoyan.sb.springboot_project.bean.Popularize.BaseResp;
 import com.cskaoyan.sb.springboot_project.bean.Popularize.PopPage;
 import com.cskaoyan.sb.springboot_project.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class TopicController {
      *      可以在这里判断，也可以直接在数据库底层 if test判断
      */
     @RequestMapping("topic/list")
-    public PopBaseResp<Map<String, Object>> listTopic(PopPage popPage, String title,String subtitle) {
+    public BaseResp<Map<String, Object>> listTopic(PopPage popPage, String title, String subtitle) {
 
 
         Map<String, Object> topicResult = null;
@@ -37,7 +37,7 @@ public class TopicController {
             topicResult = topicService.listTopic(popPage);
         }
 
-        PopBaseResp<Map<String, Object>> topicPopBaseResp = new PopBaseResp<>();
+        BaseResp<Map<String, Object>> topicPopBaseResp = new BaseResp<>();
         if (topicResult == null) {
             setErrorInfo(topicPopBaseResp, 1);
         } else {
@@ -53,11 +53,11 @@ public class TopicController {
      * —— 添加 topic ——
      */
     @RequestMapping("topic/create")
-    public PopBaseResp<Topic> createTopic(@RequestBody Topic topic) {
+    public BaseResp<Topic> createTopic(@RequestBody Topic topic) {
 
         Topic createTopic = topicService.createTopic(topic);
 
-        PopBaseResp<Topic> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Topic> mapPopBaseResp = new BaseResp<>();
         if (createTopic != null) {
             mapPopBaseResp.setData(createTopic);
             setErrorInfo(mapPopBaseResp, 0);
@@ -73,10 +73,10 @@ public class TopicController {
      * —— 修改 coupon ——
      */
     @RequestMapping("topic/update")
-    public PopBaseResp<Topic> updateTopic(@RequestBody Topic topic) {
+    public BaseResp<Topic> updateTopic(@RequestBody Topic topic) {
         Topic updateTopic = topicService.updateTopic(topic);
 
-        PopBaseResp<Topic> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Topic> mapPopBaseResp = new BaseResp<>();
         if (updateTopic != null) {
             setErrorInfo(mapPopBaseResp, 0);
         } else {
@@ -91,11 +91,11 @@ public class TopicController {
      * —— 删除 topic ——
      */
     @RequestMapping("topic/delete")
-    public PopBaseResp<Topic> deleteTopic(@RequestBody Topic topic) {
+    public BaseResp<Topic> deleteTopic(@RequestBody Topic topic) {
         topic.setDeleted(true);
         Topic deleteTopic = topicService.updateTopic(topic);
 
-        PopBaseResp<Topic> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Topic> mapPopBaseResp = new BaseResp<>();
         if (deleteTopic != null) {
             setErrorInfo(mapPopBaseResp, 0);
         } else {
@@ -109,9 +109,9 @@ public class TopicController {
      * —— 显示详情 ——
      */
     @RequestMapping("topic/read")
-    public PopBaseResp<Topic> readTopic(@RequestBody String id) {
+    public BaseResp<Topic> readTopic(@RequestBody String id) {
         Topic readTopic = topicService.readTopicById(id);
-        PopBaseResp<Topic> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Topic> mapPopBaseResp = new BaseResp<>();
         if (readTopic != null) {
             mapPopBaseResp.setData(readTopic);
             setErrorInfo(mapPopBaseResp, 0);
@@ -125,7 +125,7 @@ public class TopicController {
     /**
      * —— 添加成功、失败信息 ——
      */
-    private void setErrorInfo(PopBaseResp popBaseResp, int isError) {
+    private void setErrorInfo(BaseResp popBaseResp, int isError) {
         if (isError == 0) {
             popBaseResp.setErrmsg("成功");
             popBaseResp.setErrno(0);

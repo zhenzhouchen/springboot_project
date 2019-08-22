@@ -21,4 +21,8 @@ public interface KeywordMapper {
     int insertKeyword(Keyword keyword);
 
     Keyword selectKeywordById(@Param("id") int id);
+
+    Keyword defaultKeyword();
+
+    List<Keyword> hotKeywordList();
 }
