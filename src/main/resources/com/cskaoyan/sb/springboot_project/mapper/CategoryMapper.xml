@@ -169,7 +169,6 @@
     select id,`name`,keywords,`desc`,pid,icon_url,pic_url,`level`,add_time,update_time,sort_order,deleted
     from cskaoyan_mall_category where deleted = 0 and id = #{i}
   </select>
-  <!-- 逆向工程另外生成 -->
   <resultMap id="BaseResultMap" type="com.cskaoyan.sb.springboot_project.bean.Category">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />

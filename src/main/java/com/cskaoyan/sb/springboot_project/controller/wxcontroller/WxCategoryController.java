@@ -5,6 +5,9 @@ import com.cskaoyan.sb.springboot_project.bean.Category;
 import com.cskaoyan.sb.springboot_project.bean.CategoryList;
 import com.cskaoyan.sb.springboot_project.bean.Popularize.BaseResp;
 import com.cskaoyan.sb.springboot_project.service.CategoryService;
+import com.cskaoyan.sb.springboot_project.service.GoodsService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.prism.impl.BaseResourcePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,9 @@ public class WxCategoryController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    GoodsService goodsService;
 
     /*
         —— 显示类别 ——
@@ -71,13 +77,54 @@ public class WxCategoryController {
         if (categories != null || category != null) {
             mapBaseResp = new BaseResp<>();
             mapBaseResp.setData(data);
-            mapBaseResp.setErrno(0);
-            mapBaseResp.setErrmsg("成功");
+            setErrorInfo(mapBaseResp,0);
             return mapBaseResp;
         }
 
         return mapBaseResp;
     }
 
+    /**
+     * —— 类别详情 ——
+     * 1、查询兄弟类别
+     * 2、查询当前类别
+     * 3、查询父类别
+     */
+
+    @RequestMapping("goods/category")
+    public BaseResp<Map<String, Object>> goodsByCate(int id) {
+        Category category = categoryService.queryCategoryById(id);
+        List<Category> brotherCates = categoryService.queryCategoryByPid(category);
+        Category parentCate = categoryService.queryCategoryById(category.getPid());
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("brotherCategory", brotherCates);
+        data.put("currentCategory", category);
+        data.put("parentCategory", parentCate);
+
+        BaseResp<Map<String, Object>> mapBaseResp = null;
+        if (category != null && brotherCates != null && parentCate != null) {
+            mapBaseResp = new BaseResp<>();
+            mapBaseResp.setData(data);
+            setErrorInfo(mapBaseResp,0);
+
+            return mapBaseResp;
+        }
+
+        return mapBaseResp;
+    }
+
+    /**
+     * —— 添加成功、失败信息 ——
+     */
+    private void setErrorInfo(BaseResp baseResp, int isError) {
+        if (isError == 0) {
+            baseResp.setErrmsg("成功");
+            baseResp.setErrno(0);
+        } else {
+            baseResp.setErrmsg("失败");
+            baseResp.setErrno(1);
+        }
+    }
 
 }
