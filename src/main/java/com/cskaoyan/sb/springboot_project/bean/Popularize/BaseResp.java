@@ -2,7 +2,7 @@ package com.cskaoyan.sb.springboot_project.bean.Popularize;
 
 import java.util.List;
 
-public class PopBaseResp<T> {
+public class BaseResp<T> {
 
     private T Data;
     private String errmsg;

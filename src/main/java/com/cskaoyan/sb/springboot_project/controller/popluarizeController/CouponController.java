@@ -2,22 +2,15 @@ package com.cskaoyan.sb.springboot_project.controller.popluarizeController;
 
 
 import com.cskaoyan.sb.springboot_project.bean.Coupon;
-import com.cskaoyan.sb.springboot_project.bean.Popularize.PopBaseResp;
+import com.cskaoyan.sb.springboot_project.bean.Popularize.BaseResp;
 import com.cskaoyan.sb.springboot_project.bean.Popularize.PopPage;
-import com.cskaoyan.sb.springboot_project.bean.User;
 import com.cskaoyan.sb.springboot_project.service.CouponService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -34,7 +27,7 @@ public class CouponController {
      *      可以在这里判断，也可以直接在数据库底层 if test判断
      */
     @RequestMapping("coupon/list")
-    public PopBaseResp<Map<String, Object>> listCoupon(PopPage popPage,String name,String type,String status) {
+    public BaseResp<Map<String, Object>> listCoupon(PopPage popPage, String name, String type, String status) {
 
 
         Map<String, Object> couponResult = null;
@@ -44,7 +37,7 @@ public class CouponController {
             couponResult = couponService.listCoupon(popPage);
         }
 
-        PopBaseResp<Map<String, Object>> couponPopBaseResp = new PopBaseResp<>();
+        BaseResp<Map<String, Object>> couponPopBaseResp = new BaseResp<>();
         if (couponResult == null) {
             setErrorInfo(couponPopBaseResp, 1);
         } else {
@@ -60,11 +53,11 @@ public class CouponController {
      * —— 添加 coupon ——
      */
     @RequestMapping("coupon/create")
-    public PopBaseResp<Coupon> createCoupon(@RequestBody Coupon coupon) {
+    public BaseResp<Coupon> createCoupon(@RequestBody Coupon coupon) {
 
         Coupon coupondedCoupon = couponService.createCoupon(coupon);
 
-        PopBaseResp<Coupon> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Coupon> mapPopBaseResp = new BaseResp<>();
         if (coupondedCoupon != null) {
             mapPopBaseResp.setData(coupondedCoupon);
             setErrorInfo(mapPopBaseResp, 0);
@@ -80,10 +73,10 @@ public class CouponController {
      * —— 修改 coupon ——
      */
     @RequestMapping("coupon/update")
-    public PopBaseResp<Coupon> updateCoupon(@RequestBody Coupon coupon) {
+    public BaseResp<Coupon> updateCoupon(@RequestBody Coupon coupon) {
         Coupon updateCoupon = couponService.updateCoupon(coupon);
 
-        PopBaseResp<Coupon> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Coupon> mapPopBaseResp = new BaseResp<>();
         if (updateCoupon != null) {
             mapPopBaseResp.setData(updateCoupon);
             setErrorInfo(mapPopBaseResp, 0);
@@ -99,11 +92,11 @@ public class CouponController {
      * —— 删除 coupon ——
      */
     @RequestMapping("coupon/delete")
-    public PopBaseResp<Coupon> deleteCoupon(@RequestBody Coupon coupon) {
+    public BaseResp<Coupon> deleteCoupon(@RequestBody Coupon coupon) {
         coupon.setDeleted(true);
         Coupon deleteCoupon = couponService.updateCoupon(coupon);
 
-        PopBaseResp<Coupon> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Coupon> mapPopBaseResp = new BaseResp<>();
         if (deleteCoupon != null) {
             setErrorInfo(mapPopBaseResp, 0);
         } else {
@@ -123,9 +116,9 @@ public class CouponController {
      * —— 显示详情 ——
      */
     @RequestMapping("coupon/read")
-    public PopBaseResp<Coupon> readCoupon(@RequestBody String id) {
+    public BaseResp<Coupon> readCoupon(@RequestBody String id) {
         Coupon readCoupon = couponService.readCouponById(id);
-        PopBaseResp<Coupon> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Coupon> mapPopBaseResp = new BaseResp<>();
         if (readCoupon != null) {
             mapPopBaseResp.setData(readCoupon);
             setErrorInfo(mapPopBaseResp, 0);
@@ -142,11 +135,11 @@ public class CouponController {
      *  由于没有数据，不好抓包，可能要用到多表查询
      */
     @RequestMapping("coupon/listuser?page=1&limit=20&couponId=54&sort=add_time&order=desc")
-    public PopBaseResp<Map<String,Object>> listUserByCoupon(PopPage popPage, String couponId) {
+    public BaseResp<Map<String,Object>> listUserByCoupon(PopPage popPage, String couponId) {
 
         Map<String,Object> userResult = couponService.listUserById(popPage, couponId);
 
-        PopBaseResp<Map<String,Object>> mapPopBaseResp = new PopBaseResp<>();
+        BaseResp<Map<String,Object>> mapPopBaseResp = new BaseResp<>();
         if (userResult != null) {
             mapPopBaseResp.setData(userResult);
             setErrorInfo(mapPopBaseResp, 0);
@@ -161,7 +154,7 @@ public class CouponController {
     /**
      * —— 添加成功、失败信息 ——
      */
-    private void setErrorInfo(PopBaseResp popBaseResp, int isError) {
+    private void setErrorInfo(BaseResp popBaseResp, int isError) {
         if (isError == 0) {
             popBaseResp.setErrmsg("成功");
             popBaseResp.setErrno(0);

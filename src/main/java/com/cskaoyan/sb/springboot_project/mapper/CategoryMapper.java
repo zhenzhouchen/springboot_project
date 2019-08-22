@@ -1,8 +1,10 @@
 package com.cskaoyan.sb.springboot_project.mapper;
 
 import com.cskaoyan.sb.springboot_project.bean.Category;
+import com.cskaoyan.sb.springboot_project.bean.CategoryExample;
 import com.cskaoyan.sb.springboot_project.bean.CategoryList;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
@@ -27,4 +29,24 @@ public interface CategoryMapper {
     int deleteCategoryById(Category category);
 
     Integer queryCategoryIds(Integer id);
+
+//    逆向工程另外添加
+
+    long countByExample(CategoryExample example);
+
+    int deleteByExample(CategoryExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Category record);
+
+    int insertSelective(Category record);
+
+    List<Category> selectByExample(CategoryExample example);
+
+    Category selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Category record, @Param("example") CategoryExample example);
+
+    int updateByExample(@Param("record") Category record, @Param("example") CategoryExample example);
 }
