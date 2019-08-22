@@ -123,7 +123,7 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
         }
         //遍历set集合取出该目录的所有信息，即category的bean
         List<Category> filterCategoryList = new ArrayList<>();
-        for (Integer i:categoryIdList){
+        for (Integer i : categoryIdList) {
             Category category = categoryMapper.searchCategoryById(i);
             filterCategoryList.add(category);
         }
@@ -131,5 +131,26 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
         data.put("filterCategoryList", filterCategoryList);
         data.put("goodsList", goodsList);
         return data;
+    }
+
+    @Override
+    public List<String> searchHelper(String keyword) {
+        List<String> list = searchHistoryMapper.searchHelper(keyword);
+        return list;
+    }
+
+    @Override
+    public void updateSearchHistory(Integer userId,String keyword) {
+        //先在表里查找有无此搜索记录，若无则插入
+        int i = searchHistoryMapper.selectByKeyword(userId,keyword);
+        if (i == 0) {
+            searchHistoryMapper.insertSearchHistory(userId,keyword);
+        }
+    }
+
+    @Override
+    public int clearHistory(Integer userId) {
+        int i = searchHistoryMapper.updateDeletedByUserId(userId);
+        return i;
     }
 }

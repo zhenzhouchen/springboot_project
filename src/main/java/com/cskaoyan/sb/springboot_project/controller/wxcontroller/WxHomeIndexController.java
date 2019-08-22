@@ -52,9 +52,39 @@ public class WxHomeIndexController {
         return map;
     }
 
-    @RequestMapping("/goods/list")
-    public Map<String, Object> searchGoodslist(String keyword) {
+    @RequestMapping("/search/clearhistory")
+    public Map<String, Object> clearHistory(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>();
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        if (userId != null){
+            int i = wxIndexService.clearHistory(userId);
+            if (i > 0) {
+                map.put("errmsg", "成功");
+                map.put("errno", 0);
+            }
+        }
+        return map;
+    }
+
+    @RequestMapping("/search/helper")
+    public Map<String, Object> searchHelper(String keyword) {
+        Map<String, Object> map = new HashMap<>();
+        List<String> data = wxIndexService.searchHelper(keyword);
+        map.put("data", data);
+        map.put("errmsg", "成功");
+        map.put("errno", 0);
+        return map;
+    }
+
+    @RequestMapping("/goods/list")
+    public Map<String, Object> searchGoodslist(HttpServletRequest request, String keyword) {
+        Map<String, Object> map = new HashMap<>();
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        if (userId != null) {
+            wxIndexService.updateSearchHistory(userId, keyword);
+        }
         Map<String, Object> data = wxIndexService.searchGoodslist(keyword);
         map.put("data", data);
         map.put("errmsg", "成功");

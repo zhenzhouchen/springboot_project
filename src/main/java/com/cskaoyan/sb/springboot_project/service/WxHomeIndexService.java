@@ -12,4 +12,10 @@ public interface WxHomeIndexService {
     Map<String, Object> searchGoods();
 
     Map<String, Object> searchGoodslist(String keyword);
+
+    List<String> searchHelper(String keyword);
+
+    void updateSearchHistory(Integer userId,String keyword);
+
+    int clearHistory(Integer userId);
 }
