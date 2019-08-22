@@ -111,4 +111,18 @@ public class WxHomeIndexController {
         return map;
     }
 
+    @RequestMapping("/coupon/mylist")
+    public Map<String, Object> couponMyList(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        if (userId != null) {
+            Map<String, Object> data = wxIndexService.couponMyList();
+            map.put("data", data);
+            map.put("errmsg", "成功");
+            map.put("errno", 0);
+        }
+        return map;
+    }
+
 }

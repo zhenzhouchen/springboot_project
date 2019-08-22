@@ -18,4 +18,6 @@ public interface WxHomeIndexService {
     void updateSearchHistory(Integer userId,String keyword);
 
     int clearHistory(Integer userId);
+
+    Map<String, Object> couponMyList();
 }

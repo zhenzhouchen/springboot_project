@@ -506,4 +506,24 @@
     from cskaoyan_mall_coupon where deleted = 0
   </select>
 
+  <resultMap id="couponMyListMap" type="com.cskaoyan.sb.springboot_project.bean.Coupon">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="discount" jdbcType="DECIMAL" property="discount" />
+    <result column="min" jdbcType="DECIMAL" property="min" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+
+  <select id="couponMyList" resultMap="couponMyListMap">
+    select id,`name`,`desc`,tag,discount,`min`,start_time,end_time
+    from cskaoyan_mall_coupon where deleted = 0
+  </select>
+
+  <select id="countCouponMyList" resultType="java.lang.Integer">
+    select count(id) from cskaoyan_mall_coupon where deleted = 0
+  </select>
+
 </mapper>
