@@ -73,4 +73,15 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="historyKeywordList" resultType="com.cskaoyan.sb.springboot_project.bean.Search_history">
+    select keyword from cskaoyan_mall_search_history
+    <where>
+      deleted = 0
+      <if test="userId != null">
+        and user_id = #{userId}
+      </if>
+    </where>
+  </select>
+
 </mapper>

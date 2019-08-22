@@ -157,6 +157,52 @@
     <result column="deleted" property="deleted" />
   </resultMap>
 
+  <select id="searchGoodslist" resultMap="BaseResultMap">
+    select id,goods_sn,name,category_id,brand_id,
+    gallery,keywords,brief,is_on_sale,sort_order,
+    pic_url,share_url,is_new,is_hot,unit,counter_price,
+    retail_price,detail,add_time,update_time,deleted
+    from cskaoyan_mall_goods
+    where deleted = 0 and `name` like concat('%',#{keyword},'%')
+  </select>
+
+
+  <select id="newGoodsList" resultMap="BaseResultMap">
+    select id,goods_sn,name,category_id,brand_id,
+    gallery,keywords,brief,is_on_sale,sort_order,
+    pic_url,share_url,is_new,is_hot,unit,counter_price,
+    retail_price,detail,add_time,update_time,deleted
+    from cskaoyan_mall_goods
+    where is_new = 1 and deleted =0
+  </select>
+
+  <select id="hotGoodsList" resultMap="BaseResultMap">
+    select id,goods_sn,name,category_id,brand_id,
+    gallery,keywords,brief,is_on_sale,sort_order,
+    pic_url,share_url,is_new,is_hot,unit,counter_price,
+    retail_price,detail,add_time,update_time,deleted
+    from cskaoyan_mall_goods
+    where is_hot = 1 and deleted = 0
+  </select>
+
+  <select id="grouponList" resultMap="BaseResultMap">
+    select id,goods_sn,name,category_id,brand_id,
+    gallery,keywords,brief,is_on_sale,sort_order,
+    pic_url,share_url,is_new,is_hot,unit,counter_price,
+    retail_price,detail,add_time,update_time,deleted
+    from cskaoyan_mall_goods
+    where id = #{goodsId} and deleted = 0
+  </select>
+
+  <select id="queryGoodsForfloorGoodsList" resultMap="BaseResultMap">
+    select id,goods_sn,name,category_id,brand_id,
+    gallery,keywords,brief,is_on_sale,sort_order,
+    pic_url,share_url,is_new,is_hot,unit,counter_price,
+    retail_price,detail,add_time,update_time,deleted
+    from cskaoyan_mall_goods
+    where category_id = #{categoryId} and deleted = 0
+  </select>
+
   <select id="queryAllGoodsList" resultMap="BaseResultMap">
     select id,
     goods_sn,
@@ -220,6 +266,15 @@
     from cskaoyan_mall_goods
     where id = #{id}
    </select>
+
+  <select id="count" resultType="java.lang.Integer">
+    select count(id) from cskaoyan_mall_goods where deleted = 0
+  </select>
+
+  <select id="searchGoodsCount" resultType="java.lang.Integer">
+    select count(id) from cskaoyan_mall_goods
+    where deleted = 0 and `name` like concat('%',#{keyword},'%')
+  </select>
 
   <select id="queryByIdReturnInt" resultType="java.lang.Integer">
     select count(id) from cskaoyan_mall_goods where id = #{id}
