@@ -153,4 +153,14 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
         int i = searchHistoryMapper.updateDeletedByUserId(userId);
         return i;
     }
+
+    @Override
+    public Map<String, Object> couponMyList() {
+        Map<String,Object> map = new HashMap<>();
+        int count = couponMapper.countCouponMyList();
+        List<Coupon> data = couponMapper.couponMyList();
+        map.put("count",count);
+        map.put("data",data);
+        return map;
+    }
 }
