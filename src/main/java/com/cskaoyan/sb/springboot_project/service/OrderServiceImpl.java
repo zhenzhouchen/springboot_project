@@ -1,9 +1,6 @@
 package com.cskaoyan.sb.springboot_project.service;
 
-import com.cskaoyan.sb.springboot_project.bean.Order;
-import com.cskaoyan.sb.springboot_project.bean.Order_goods;
-import com.cskaoyan.sb.springboot_project.bean.Order_statistics;
-import com.cskaoyan.sb.springboot_project.bean.User;
+import com.cskaoyan.sb.springboot_project.bean.*;
 import com.cskaoyan.sb.springboot_project.mapper.OrderMapper;
 import com.cskaoyan.sb.springboot_project.mapper.Order_goodsMapper;
 import com.cskaoyan.sb.springboot_project.mapper.UserMapper;
@@ -53,5 +50,30 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order_statistics> query_order_statistics() {
         return orderMapper.query_order_statistics();
+    }
+
+    @Override
+    public List<OrderInfo_wx> queryOrderInfoById(Integer userId) {
+        return orderMapper.queryOrderInfoById(userId);
+    }
+
+    @Override
+    public List<OrderInfo_wx> queryOrderInfoByIdNoPaied(Integer userId) {
+        return orderMapper.queryOrderInfoByIdNoPaied(userId);
+    }
+
+    @Override
+    public List<OrderInfo_wx> queryOrderInfoByIdNoShip(Integer userId) {
+        return orderMapper.queryOrderInfoByIdNoShip(userId);
+    }
+
+    @Override
+    public List<OrderInfo_wx> queryOrderInfoByIdNoReceive(Integer userId) {
+        return orderMapper.queryOrderInfoByIdNoReceive(userId);
+    }
+
+    @Override
+    public List<OrderInfo_wx> queryOrderInfoByIdNoComment(Integer userId) {
+        return orderMapper.queryOrderInfoByIdNoComment(userId);
     }
 }

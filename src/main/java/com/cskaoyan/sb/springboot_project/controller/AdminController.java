@@ -35,8 +35,9 @@ public class AdminController {
             items = adminService.queryAdminList(username,sort,order);
         }
         //获取每页的总记录数
-        PageInfo<Admin> userPageInfo = new PageInfo<>(items);info_map.put("items",items);
+        PageInfo<Admin> userPageInfo = new PageInfo<>(items);
         long total = userPageInfo.getTotal();
+        info_map.put("items",items);
         info_map.put("total",total);
         info_map.put("items",items);
         map.put("errmsg","成功");

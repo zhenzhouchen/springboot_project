@@ -76,4 +76,12 @@ public class RoleController {
         map.put("errno",0);
         return map;
     }
+
+    @RequestMapping("role/permissions")
+    public Map<String,Object> role_permissions(Integer roleId){
+        Map<String,Object> map = new HashMap<>();
+        map.put("errmsg", "成功");
+        map.put("errno", 0);
+        return map;
+    }
 }

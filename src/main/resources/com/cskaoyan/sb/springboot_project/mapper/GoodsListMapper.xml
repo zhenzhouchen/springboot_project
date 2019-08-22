@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.sb.springboot_project.mapper.GoodsListMapper">
+<select id="queryGoodsList" resultType="com.cskaoyan.sb.springboot_project.bean.GoodsList">
+    select
+     cskaoyan_mall_goods.name as goodsName,
+     cskaoyan_mall_order_goods.order_id as id,
+     cskaoyan_mall_goods.pic_url as picUrl
+     from cskaoyan_mall_order
+     right join cskaoyan_mall_order_goods on  cskaoyan_mall_order.id =cskaoyan_mall_order_goods.order_id
+     left join cskaoyan_mall_goods on cskaoyan_mall_goods.id = cskaoyan_mall_order_goods.goods_id
+    where order_id = #{orderId}
+</select>
+</mapper>
