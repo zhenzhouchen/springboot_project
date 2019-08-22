@@ -26,3 +26,8 @@ pagehelper:
 
 mybatis:
   type-handlers-package: com.cskaoyan.sb.springboot_project.handler
+
+logging:
+  file: spring.log
+  level:
+    com.cskaoyan.sb.springboot_project.mapper: debug

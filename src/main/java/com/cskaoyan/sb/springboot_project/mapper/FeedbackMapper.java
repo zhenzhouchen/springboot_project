@@ -13,4 +13,6 @@ public interface FeedbackMapper {
     int updateByPrimaryKeySelective(Feedback record);
 
     int updateByPrimaryKey(Feedback record);
+
+    int submitWxFeedback(@Param("feedback") Feedback feedback);
 }

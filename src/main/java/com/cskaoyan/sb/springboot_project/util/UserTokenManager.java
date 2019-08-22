@@ -11,6 +11,7 @@ import java.util.Map;
 public class UserTokenManager {
     private static Map<String, UserToken> tokenMap = new HashMap<>();
     private static Map<Integer, UserToken> idMap = new HashMap<>();
+    private static Map<String, UserToken> usernameMap = new HashMap<>();
 
     public static Integer getUserId(String token) {
         UserToken userToken = tokenMap.get(token);
@@ -27,8 +28,23 @@ public class UserTokenManager {
         return userToken.getUserId();
     }
 
+    public static String getUsername(String token) {
+        UserToken userToken = tokenMap.get(token);
+        if (userToken == null) {
+            return null;
+        }
 
-    public static UserToken generateToken(Integer id) {
+        if (userToken.getExpireTime().isBefore(LocalDateTime.now())) {
+            tokenMap.remove(token);
+            usernameMap.remove(userToken.getUsername());
+            return null;
+        }
+
+        return userToken.getUsername();
+    }
+
+
+    public static UserToken generateToken(Integer id, String username) {
         UserToken userToken = null;
 
 //        userToken = idMap.get(id);
@@ -50,9 +66,10 @@ public class UserTokenManager {
         userToken.setUpdateTime(update);
         userToken.setExpireTime(expire);
         userToken.setUserId(id);
+        userToken.setUsername(username);
         tokenMap.put(token, userToken);
         idMap.put(id, userToken);
-
+        usernameMap.put(username, userToken);
         return userToken;
     }
 

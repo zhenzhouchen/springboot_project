@@ -39,7 +39,8 @@ public class LoginWxController {
 
         //通过username查出userid放入session域
         int userId = userService.queryIdByName(username);
-        UserToken userToken = UserTokenManager.generateToken(userId);
+        //使用UserTokenManager后执行SecurityUtils.getSubject().getPrincipal()将不能获取到值
+        UserToken userToken = UserTokenManager.generateToken(userId, username);
 
         //如果用户名和密码不正确会报异常，要处理
         try {
