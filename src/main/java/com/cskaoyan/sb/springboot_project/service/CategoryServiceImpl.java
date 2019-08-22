@@ -97,4 +97,14 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categories;
     }
+
+    @Override
+    public List<Category> queryBrotherCategoryByPid(Category category) {
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.createCriteria().andPidEqualTo(category.getPid()).andIdNotEqualTo(category.getId());
+
+        List<Category> categories = categoryMapper.selectByExample(categoryExample);
+
+        return categories;
+    }
 }

@@ -94,7 +94,7 @@ public class WxCategoryController {
     @RequestMapping("goods/category")
     public BaseResp<Map<String, Object>> goodsByCate(int id) {
         Category category = categoryService.queryCategoryById(id);
-        List<Category> brotherCates = categoryService.queryCategoryByPid(category);
+        List<Category> brotherCates = categoryService.queryBrotherCategoryByPid(category);
         Category parentCate = categoryService.queryCategoryById(category.getPid());
 
         Map<String, Object> data = new HashMap<>();
@@ -113,6 +113,7 @@ public class WxCategoryController {
 
         return mapBaseResp;
     }
+
 
     /**
      * —— 添加成功、失败信息 ——
