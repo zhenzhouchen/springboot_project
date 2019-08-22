@@ -1,6 +1,12 @@
 package com.cskaoyan.sb.springboot_project.mapper;
 
 import com.cskaoyan.sb.springboot_project.bean.Category;
+import com.cskaoyan.sb.springboot_project.bean.CategoryList;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import com.cskaoyan.sb.springboot_project.bean.Category;
 import com.cskaoyan.sb.springboot_project.bean.CategoryExample;
 import com.cskaoyan.sb.springboot_project.bean.CategoryList;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,9 +34,20 @@ public interface CategoryMapper {
     @Update("update cskaoyan_mall_category set deleted = 1 where id = #{id}")
     int deleteCategoryById(Category category);
 
+    @Select("select id,name from cskaoyan_mall_category where level = 'L1' and deleted = 0")
+    List<Category> queryIdForfloorGoodsList();
+
+    @Select("select id from cskaoyan_mall_category where pid = #{id} and deleted = 0")
+    List<Integer> queryId2ForfloorGoodsList(Integer id);
+
     Integer queryCategoryIds(Integer id);
 
-//    閫嗗悜宸ョ▼鍙﹀娣诲姞
+
+    List<Category> channel();
+
+    Category searchCategoryById(Integer i);
+
+//    逆向工程另外添加
 
     long countByExample(CategoryExample example);
 

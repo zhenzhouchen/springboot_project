@@ -84,11 +84,15 @@
 
   <resultMap id="brandListMap" type="com.cskaoyan.sb.springboot_project.bean.Brand">
     <id column="id" property="value"/>
+    <result column="name" property="name"/>
     <result column="name" property="label"/>
+    <result column="desc" property="desc"/>
+    <result column="floor_price" property="floorPrice"/>
+    <result  column="pic_url" property="picUrl"/>
   </resultMap>
 
   <select id="brandList" resultMap="brandListMap">
-    select id,`name`
+    select id,`name`,`desc`,floor_price,pic_url
     from cskaoyan_mall_brand
   </select>
 

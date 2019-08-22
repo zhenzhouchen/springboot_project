@@ -491,4 +491,19 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <resultMap id="couponListMap" type="com.cskaoyan.sb.springboot_project.bean.Coupon">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="discount" jdbcType="DECIMAL" property="discount" />
+    <result column="min" jdbcType="DECIMAL" property="min" />
+    <result column="days" jdbcType="SMALLINT" property="days" />
+  </resultMap>
+
+  <select id="couponList" resultMap="couponListMap">
+    select id,`name`,`desc`,tag,discount,`min`,days
+    from cskaoyan_mall_coupon where deleted = 0
+  </select>
+
 </mapper>

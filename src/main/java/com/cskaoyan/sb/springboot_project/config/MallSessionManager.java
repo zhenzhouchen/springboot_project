@@ -14,8 +14,7 @@ public class MallSessionManager extends DefaultWebSessionManager {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String id = request.getHeader("X-cskaoyanmall-Admin-Token");
-        if (id != null && !"".equals(id) )
-        {
+        if (id != null && !"".equals(id)) {
             return id;
         }
         return super.getSessionId(servletRequest, response);

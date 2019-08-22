@@ -418,4 +418,9 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="topicList" resultMap="BaseResultMap">
+    select id, title, subtitle, price, read_count, pic_url
+     from cskaoyan_mall_topic where deleted = 0
+  </select>
 </mapper>

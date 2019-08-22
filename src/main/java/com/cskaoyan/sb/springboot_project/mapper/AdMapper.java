@@ -4,6 +4,7 @@ import com.cskaoyan.sb.springboot_project.bean.Ad;
 import com.cskaoyan.sb.springboot_project.bean.AdExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface AdMapper {
     long countByExample(AdExample example);
@@ -29,4 +30,7 @@ public interface AdMapper {
     int updateByPrimaryKey(Ad record);
 
     List<Ad> listAdByCondition(@Param("sort") String sort, @Param("order") String order, @Param("name") String name,@Param("content") String content);
+
+    @Select("select * from cskaoyan_mall_ad where deleted = 0")
+    List<Ad> banner();
 }

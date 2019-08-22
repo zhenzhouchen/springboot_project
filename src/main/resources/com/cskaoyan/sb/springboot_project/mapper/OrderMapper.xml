@@ -2,6 +2,114 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.OrderMapper">
 
+
+
+  <resultMap id="OrderInfoMapper" type="com.cskaoyan.sb.springboot_project.bean.OrderInfo_wx">
+    <result column="actualPrice" property="actualPrice"/>
+    <result column="orderSn" property="orderSn"/>
+    <result column="orderStatus" property="orderStatus"/>
+    <result column="id" property="id"/>
+    <collection property="handleOption" ofType="com.cskaoyan.sb.springboot_project.bean.HandleOption">
+      <result column="cancel" property="cancel" typeHandler="com.cskaoyan.sb.springboot_project.handler.Int2Boolean"/>
+      <result column="comment" property="comment" typeHandler="com.cskaoyan.sb.springboot_project.handler.Int2Boolean"/>
+      <result column="confirm" property="confirm" typeHandler="com.cskaoyan.sb.springboot_project.handler.Int2Boolean"/>
+      <result column="delete" property="delete" typeHandler="com.cskaoyan.sb.springboot_project.handler.Int2Boolean"/>
+      <result column="pay" property="pay" typeHandler="com.cskaoyan.sb.springboot_project.handler.Int2Boolean"/>
+      <result column="rebuy" property="rebuy" typeHandler="com.cskaoyan.sb.springboot_project.handler.Int2Boolean"/>
+      <result column="refund" property="refund" typeHandler="com.cskaoyan.sb.springboot_project.handler.Int2Boolean"/>
+    </collection>
+  </resultMap>
+  <select id="queryOrderInfoByIdNoComment" resultMap="OrderInfoMapper">
+     select
+     actual_price as actualPrice,
+     order_sn as orderSn,
+     order_status as orderStatus,
+     cskaoyan_mall_order_goods.order_id as id,
+     cancel,
+     cskaoyan_mall_handleoption.comment,
+     confirm,
+     `delete`,
+     pay,
+     rebuy,
+     refund
+     from cskaoyan_mall_order
+     right join cskaoyan_mall_order_goods on  cskaoyan_mall_order.id =cskaoyan_mall_order_goods.order_id
+     left join cskaoyan_mall_handleoption on cskaoyan_mall_order.id = cskaoyan_mall_handleoption.order_id
+    where user_id = #{userId} and order_status = '301' or order_status = '401' or order_status = '402'
+  </select>
+  <select id="queryOrderInfoByIdNoReceive" resultMap="OrderInfoMapper">
+     select
+     actual_price as actualPrice,
+     order_sn as orderSn,
+     order_status as orderStatus,
+     cskaoyan_mall_order_goods.order_id as id,
+     cancel,
+     cskaoyan_mall_handleoption.comment,
+     confirm,
+     `delete`,
+     pay,
+     rebuy,
+     refund
+     from cskaoyan_mall_order
+     right join cskaoyan_mall_order_goods on  cskaoyan_mall_order.id =cskaoyan_mall_order_goods.order_id
+     left join cskaoyan_mall_handleoption on cskaoyan_mall_order.id = cskaoyan_mall_handleoption.order_id
+    where user_id = #{userId} and order_status = '301'
+  </select>
+  <select id="queryOrderInfoByIdNoShip" resultMap="OrderInfoMapper">
+      select
+     actual_price as actualPrice,
+     order_sn as orderSn,
+     order_status as orderStatus,
+     cskaoyan_mall_order_goods.order_id as id,
+     cancel,
+     cskaoyan_mall_handleoption.comment,
+     confirm,
+     `delete`,
+     pay,
+     rebuy,
+     refund
+     from cskaoyan_mall_order
+     right join cskaoyan_mall_order_goods on  cskaoyan_mall_order.id =cskaoyan_mall_order_goods.order_id
+     left join cskaoyan_mall_handleoption on cskaoyan_mall_order.id = cskaoyan_mall_handleoption.order_id
+    where user_id = #{userId} and order_status = '201'
+  </select>
+  <select id="queryOrderInfoByIdNoPaied" resultMap="OrderInfoMapper">
+     select
+     actual_price as actualPrice,
+     order_sn as orderSn,
+     order_status as orderStatus,
+     cskaoyan_mall_order_goods.order_id as id,
+     cancel,
+     cskaoyan_mall_handleoption.comment,
+     confirm,
+     `delete`,
+     pay,
+     rebuy,
+     refund
+     from cskaoyan_mall_order
+     right join cskaoyan_mall_order_goods on  cskaoyan_mall_order.id =cskaoyan_mall_order_goods.order_id
+     left join cskaoyan_mall_handleoption on cskaoyan_mall_order.id = cskaoyan_mall_handleoption.order_id
+    where user_id = #{userId} and order_status = '101'
+  </select>
+  <select id="queryOrderInfoById" resultMap="OrderInfoMapper">
+    select
+     actual_price as actualPrice,
+     order_sn as orderSn,
+     order_status as orderStatus,
+     cskaoyan_mall_order_goods.order_id as id,
+     cancel,
+     cskaoyan_mall_handleoption.comment,
+     confirm,
+     `delete`,
+     pay,
+     rebuy,
+     refund
+     from cskaoyan_mall_order
+     right join cskaoyan_mall_order_goods on  cskaoyan_mall_order.id =cskaoyan_mall_order_goods.order_id
+     left join cskaoyan_mall_handleoption on cskaoyan_mall_order.id = cskaoyan_mall_handleoption.order_id
+    where user_id = #{userId}
+  </select>
+
   <select id="query_order_statistics" resultType="com.cskaoyan.sb.springboot_project.bean.Order_statistics">
     select
         add_time as day,

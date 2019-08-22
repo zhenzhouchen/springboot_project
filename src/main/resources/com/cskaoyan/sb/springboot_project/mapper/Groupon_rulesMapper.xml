@@ -329,4 +329,11 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="grouponList" resultMap="BaseResultMap">
+    select id, goods_id, goods_name,pic_url,discount,discount_member
+    from cskaoyan_mall_groupon_rules
+    where deleted = 0
+  </select>
+
 </mapper>
