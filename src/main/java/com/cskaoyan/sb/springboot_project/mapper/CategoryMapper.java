@@ -36,4 +36,6 @@ public interface CategoryMapper {
     Integer queryCategoryIds(Integer id);
 
     List<Category> channel();
+
+    Category searchCategoryById(Integer i);
 }

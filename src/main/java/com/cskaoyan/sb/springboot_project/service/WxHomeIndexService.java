@@ -8,4 +8,8 @@ public interface WxHomeIndexService {
     Map<String,Object> queryAllIndexList();
 
     List<Integer> goodsCount();
+
+    Map<String, Object> searchGoods();
+
+    Map<String, Object> searchGoodslist(String keyword);
 }

@@ -39,4 +39,8 @@ public interface GoodsMapper {
     List<Goods> hotGoodsList();
 
     List<Goods> newGoodsList();
+
+    Integer searchGoodsCount(String keyword);
+
+    List<Goods> searchGoodslist(String keyword);
 }

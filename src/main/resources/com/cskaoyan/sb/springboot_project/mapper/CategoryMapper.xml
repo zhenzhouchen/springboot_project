@@ -147,4 +147,24 @@
     select pid from cskaoyan_mall_category where id = #{id}
   </select>
 
+  <resultMap id="searchCategoryByIdMap" type="com.cskaoyan.sb.springboot_project.bean.Category">
+    <id property="id" column="id"/>
+    <result property="name" column="name"/>
+    <result property="keywords" column="keywords"/>
+    <result property="desc" column="desc"/>
+    <result property="pid" column="pid"/>
+    <result property="iconUrl" column="icon_url"/>
+    <result property="picUrl" column="pic_url"/>
+    <result property="level" column="level"/>
+    <result property="addTime" column="add_time"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="sortOrder" column="sort_order"/>
+    <result property="deleted" column="deleted"/>
+  </resultMap>
+
+  <select id="searchCategoryById" resultMap="searchCategoryByIdMap">
+    select id,`name`,keywords,`desc`,pid,icon_url,pic_url,`level`,add_time,update_time,sort_order,deleted
+    from cskaoyan_mall_category where deleted = 0 and id = #{i}
+  </select>
+
 </mapper>
