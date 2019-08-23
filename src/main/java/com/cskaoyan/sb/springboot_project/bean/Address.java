@@ -31,10 +31,14 @@ public class Address {
     String cityName;
     String provinceName;
 
+    String area;
+    String city;
+    String province;
+
     public Address() {
     }
 
-    public Address(Integer id, String name, Integer userId, Integer provinceId, Integer cityId, Integer areaId, String address, String mobile, boolean isDefault, Date addTime, Date updateTime, Boolean deleted, String areaName, String cityName, String provinceName) {
+    public Address(Integer id, String name, Integer userId, Integer provinceId, Integer cityId, Integer areaId, String address, String mobile, boolean isDefault, Date addTime, Date updateTime, Boolean deleted, String areaName, String cityName, String provinceName, String area, String city, String province) {
         this.id = id;
         this.name = name;
         this.userId = userId;
@@ -50,6 +54,9 @@ public class Address {
         this.areaName = areaName;
         this.cityName = cityName;
         this.provinceName = provinceName;
+        this.area = area;
+        this.city = city;
+        this.province = province;
     }
 
     public Integer getId() {
@@ -116,16 +123,12 @@ public class Address {
         this.mobile = mobile;
     }
 
-    public boolean getIsDefault() {
+    public boolean isDefault() {
         return isDefault;
     }
 
-    public void setIsDefault(int aDefault) {
-        if(aDefault==1)
-        isDefault = true;
-        else
-            isDefault = false;
-
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
     }
 
     public Date getAddTime() {
@@ -176,4 +179,51 @@ public class Address {
         this.provinceName = provinceName;
     }
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", userId=" + userId +
+                ", provinceId=" + provinceId +
+                ", cityId=" + cityId +
+                ", areaId=" + areaId +
+                ", address='" + address + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", isDefault=" + isDefault +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                ", areaName='" + areaName + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", provinceName='" + provinceName + '\'' +
+                ", area='" + area + '\'' +
+                ", city='" + city + '\'' +
+                ", province='" + province + '\'' +
+                '}';
+    }
 }
