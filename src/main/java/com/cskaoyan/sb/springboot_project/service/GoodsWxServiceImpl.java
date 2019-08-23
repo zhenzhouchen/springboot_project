@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GoodsWxServiceImpl implements GoodsWxService {
@@ -64,9 +66,12 @@ public class GoodsWxServiceImpl implements GoodsWxService {
         List<String> goods_specificationNameList = goods_specificationMapper.querySpecificationNameByGoodsId(goodsId);
         for (String name : goods_specificationNameList) {
             List<Goods_specification> specificationList = goods_specificationMapper.querySpecificationByName(name, goodsId);
-            specificationMap.put(name, specificationList);
+            specificationMap.put("name", name);
+            specificationMap.put("valueList", specificationList);
         }
-        goodsDetailMap.put("specificationList", specificationMap);
+        ArrayList<HashMap> arrayList = new ArrayList<>();
+        arrayList.add(specificationMap);
+        goodsDetailMap.put("specificationList", arrayList);
         goodsDetailMap.put("userHasCollect", 0);
         return new ResponseVo<>(goodsDetailMap, "成功", 0);
     }
