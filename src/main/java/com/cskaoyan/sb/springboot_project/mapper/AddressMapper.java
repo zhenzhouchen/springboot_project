@@ -16,4 +16,7 @@ public interface AddressMapper {
 
     List<Address_receive> queryAddressReceById(@Param("userId") int userId);
 
+    Address queryDefaultAddress(Integer userId);
+
+    Address queryAddressReceByAddressId(int addressId);
 }

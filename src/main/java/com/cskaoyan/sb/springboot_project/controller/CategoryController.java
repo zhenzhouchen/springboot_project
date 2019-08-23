@@ -2,7 +2,6 @@ package com.cskaoyan.sb.springboot_project.controller;
 
 
 import com.cskaoyan.sb.springboot_project.bean.Category;
-import com.cskaoyan.sb.springboot_project.bean.Order;
 import com.cskaoyan.sb.springboot_project.service.CategoryService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

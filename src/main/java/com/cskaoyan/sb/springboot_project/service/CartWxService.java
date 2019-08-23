@@ -21,4 +21,7 @@ public interface CartWxService {
     int updateCartGoods(Cart cart);
 
     ResponseVo goodsCount(Integer userId);
+
+    ResponseVo checkoutOrder(Integer userId, int cartId, int addressId, int couponId, int grouponRulesId);
+
 }

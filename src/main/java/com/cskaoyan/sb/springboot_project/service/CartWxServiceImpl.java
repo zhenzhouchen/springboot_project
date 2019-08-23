@@ -2,30 +2,30 @@ package com.cskaoyan.sb.springboot_project.service;
 
 
 import com.cskaoyan.sb.springboot_project.bean.*;
-import com.cskaoyan.sb.springboot_project.mapper.CartMapper;
-import com.cskaoyan.sb.springboot_project.mapper.GoodsMapper;
-import com.cskaoyan.sb.springboot_project.mapper.Goods_productMapper;
+import com.cskaoyan.sb.springboot_project.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.System;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CartWxServiceImpl implements CartWxService {
 
     @Autowired
     CartMapper cartMapper;
-
     @Autowired
     GoodsMapper goodsMapper;
-
     @Autowired
     Goods_productMapper goods_productMapper;
+    @Autowired
+    CouponMapper couponMapper;
+    @Autowired
+    Coupon_userMapper coupon_userMapper;
+    @Autowired
+    AddressMapper addressMapper;
 
     @Override
     public Map<String, Object> selectCartListByUserId(int userId) {
@@ -141,5 +141,64 @@ public class CartWxServiceImpl implements CartWxService {
             count += cart.getNumber();
         }
         return new ResponseVo(count, "成功", 0);
+    }
+
+    @Override
+    @Transactional
+    public ResponseVo checkoutOrder(Integer userId, int cartId, int addressId, int couponId, int grouponRulesId) {
+        try {
+            //获取下单商品清单
+            List<Cart> cartList = cartMapper.selectCartCheckedListByUserId(userId);
+            BigDecimal goodsTotalPrice = BigDecimal.valueOf(0);
+            BigDecimal actualPrice = BigDecimal.valueOf(0);
+            BigDecimal orderTotalPrice = BigDecimal.valueOf(0);
+            BigDecimal couponPrice = BigDecimal.valueOf(0);
+            BigDecimal freightPrice = BigDecimal.valueOf(0);//邮费设为0
+            BigDecimal grouponPrice = BigDecimal.valueOf(0);//拼团设为0
+            for (Cart cart : cartList) {
+                /*//清单商品从购物车删除
+                cartMapper.deleteCartGoodsByProductIds(cart.getProductId(), new Date(), userId);*/
+                /*//清单商品减少库存
+                goods_productMapper.updateInventory(cart, new Date(), cart.getNumber());*/
+                //计算清单商品总价格
+                goodsTotalPrice = goodsTotalPrice.add(cart.getPrice().multiply(new BigDecimal(cart.getNumber())));
+            }
+            //查询可用的优惠券数量
+            int couponCount = coupon_userMapper.queryCouponCount(userId);
+            //查询优惠券折扣
+            if(couponId > 0) {
+                CouponExample couponExample = new CouponExample();
+                couponExample.createCriteria().andIdEqualTo(couponId);
+                List<Coupon> coupons = couponMapper.selectByExample(couponExample);
+                Coupon coupon = coupons.get(0);
+                couponPrice = coupon.getDiscount();
+            }
+            actualPrice = goodsTotalPrice.subtract(couponPrice);
+            orderTotalPrice = goodsTotalPrice.add(freightPrice).subtract(couponPrice);
+            Address checkedAddress = null;
+            if(addressId == 0) {
+                checkedAddress = addressMapper.queryDefaultAddress(userId);
+            } else {
+                checkedAddress = addressMapper.queryAddressReceByAddressId(addressId);
+            }
+            //返回参数
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("actualPrice", actualPrice);
+            hashMap.put("addressId", addressId);
+            hashMap.put("availableCouponLength", couponCount);
+            hashMap.put("checkedAddress", checkedAddress);
+            hashMap.put("checkedGoodsList", cartList);
+            hashMap.put("couponId", couponId);
+            hashMap.put("couponPrice", couponPrice);
+            hashMap.put("freightPrice", freightPrice);
+            hashMap.put("goodsTotalPrice", goodsTotalPrice);
+            hashMap.put("grouponPrice", grouponPrice);
+            hashMap.put("grouponRulesId", grouponRulesId);
+            hashMap.put("orderTotalPrice", orderTotalPrice);
+            return new ResponseVo(hashMap, "成功", 0);
+        } catch (Exception e) {
+            e.getStackTrace();
+            return new ResponseVo("失败", -1);
+        }
     }
 }

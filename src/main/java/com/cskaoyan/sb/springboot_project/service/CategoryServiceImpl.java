@@ -17,9 +17,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
 
-    @Autowired
-
-
     @Override
     public List<Category> selectCategoryList() {
         return categoryMapper.selectCategoryList();

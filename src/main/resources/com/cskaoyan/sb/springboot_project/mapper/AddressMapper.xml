@@ -63,5 +63,41 @@
     order by #{sort}
     #{order}
   </select>
+
+  <select id="queryDefaultAddress" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
+    SELECT
+    id,
+    `name`,
+    user_id as userId,
+    province_id as provinceId,
+    city_id as cityId,
+    area_id as areaId,
+    address,
+    mobile,
+    is_default as isDefault,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    FROM cskaoyan_mall_address
+    where user_id = #{userId} and is_default = 1 and deleted = 0
+  </select>
+
+  <select id="queryAddressReceByAddressId" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
+    SELECT
+    id,
+    `name`,
+    user_id as userId,
+    province_id as provinceId,
+    city_id as cityId,
+    area_id as areaId,
+    address,
+    mobile,
+    is_default as isDefault,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    FROM cskaoyan_mall_address
+    where id = #{addressId} and deleted = 0
+  </select>
   
 </mapper>

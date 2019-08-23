@@ -40,4 +40,5 @@ public interface CouponMapper {
     List<Coupon> couponMyList();
 
     int countCouponMyList();
+
 }

@@ -1,5 +1,4 @@
 package com.cskaoyan.sb.springboot_project.bean;
-
 import java.util.Date;
 
 public class Address {

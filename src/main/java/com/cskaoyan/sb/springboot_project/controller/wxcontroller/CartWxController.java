@@ -52,7 +52,7 @@ public class CartWxController {
             int total = cartWxService.selectGoodsCount(userId);
             hashMap.put("data", total);
             hashMap.put("errmsg", "成功");
-            hashMap.put("errno", 808);
+            hashMap.put("errno", 0);
         }
         return hashMap;
     }
@@ -114,5 +114,12 @@ public class CartWxController {
         String tokenKey = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(tokenKey);
         return cartWxService.goodsCount(userId);
+    }
+
+    @RequestMapping("checkout")
+    public ResponseVo checkoutOrder(HttpServletRequest request, int cartId, int addressId, int couponId, int grouponRulesId) {
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        return cartWxService.checkoutOrder(userId, cartId, addressId, couponId, grouponRulesId);
     }
 }
