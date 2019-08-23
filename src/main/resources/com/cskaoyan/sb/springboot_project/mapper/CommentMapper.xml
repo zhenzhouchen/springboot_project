@@ -106,12 +106,16 @@
     <result column="content" property="content" />
     <result column="user_id" property="userId" />
     <result column="has_picture" property="hasPicture" />
-    <result column="pic_urls" property="picUrls" />
+    <result column="pic_urls" property="picUrls" typeHandler="com.cskaoyan.sb.springboot_project.handler.String2StringArrayHandler"/>
     <result column="star" property="star" />
     <result column="add_time" property="addTime" />
     <result column="update_time" property="updateTime" />
     <result column="deleted" property="deleted" />
   </resultMap>
+
+  <select id="queryCommentByUserId" resultMap="ReplyResultMap">
+    select * from cskaoyan_mall_comment where value_id = #{goodsId}
+  </select>
 
   <select id="queryCommentById" resultMap="ReplyResultMap">
     select content from cskaoyan_mall_comment where id = #{commentId}

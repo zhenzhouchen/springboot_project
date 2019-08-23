@@ -2,6 +2,7 @@ package com.cskaoyan.sb.springboot_project.mapper;
 
 import com.cskaoyan.sb.springboot_project.bean.Comment;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -17,4 +18,8 @@ public interface CommentMapper {
     int replyComment(Comment comment);
 
     Comment queryCommentById(Comment comment);
+
+    List<Comment> queryCommentByUserId(@Param("goodsId") int goodsId);
+    @Select("select count(id) from cskaoyan_mall_comment where value_id = #{goodsId}")
+    int queryCommentCount(@Param("goodsId") int goodsId);
 }

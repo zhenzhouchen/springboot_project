@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/wx")
-public class UtilsController {
+public class AddressWxController {
     @Autowired
     AddressService addressService;
     @RequestMapping("address/list")

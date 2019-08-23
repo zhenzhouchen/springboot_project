@@ -56,6 +56,8 @@ public class String2StringArrayHandler implements TypeHandler<String[]> {
         if(str.charAt(str.length() - 1) == ']') {
             str = str.substring(0, str.length() - 1);
         }
+        str = str.replace("\"", "");
+        str = str.replace(" ", "");
         String[] stringArray = str.split(",");
         return stringArray;
     }
