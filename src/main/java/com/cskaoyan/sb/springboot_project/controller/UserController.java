@@ -29,7 +29,7 @@ public class UserController {
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> info_map = new HashMap<>();
         List<User> items = null;
-        if(username==null && mobile ==null){
+         if(username==null && mobile ==null){
             items = userService.queryAllUserList(sort,order);
         }else{
             items = userService.queryUserList(username,mobile,sort,order);

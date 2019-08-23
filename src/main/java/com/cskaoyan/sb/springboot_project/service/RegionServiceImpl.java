@@ -17,4 +17,9 @@ public class RegionServiceImpl implements RegionService {
     public List<Region> selectRegionList() {
         return regionMapper.selectRegionList();
     }
+
+    @Override
+    public List<Region> queryRegion(int pid) {
+        return regionMapper.queryRegion(pid);
+    }
 }
