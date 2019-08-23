@@ -438,4 +438,12 @@
     </if>
   </update>
 
+  <select id="getFilterList" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM cskaoyan_mall_category
+    WHERE deleted = 0 ORDER BY `sort_order`
+    LIMIT #{count}
+  </select>
+
 </mapper>

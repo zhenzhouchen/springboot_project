@@ -6,10 +6,14 @@ import com.cskaoyan.sb.springboot_project.mapper.GoodsMapper;
 import com.cskaoyan.sb.springboot_project.mapper.Goods_attributeMapper;
 import com.cskaoyan.sb.springboot_project.mapper.Goods_productMapper;
 import com.cskaoyan.sb.springboot_project.mapper.Goods_specificationMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -68,5 +72,31 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int updateGoods(Goods goods) {
         return goodsMapper.updateByPrimaryKey(goods);
+    }
+
+
+    @Override
+    public Map<String, Object> queryGoodsById(int categoryId, int page, int size){
+        PageHelper.startPage(page, size);
+        List<Goods> goods = goodsMapper.queryGoodsById(categoryId);
+
+
+        PageInfo<Goods> total = new PageInfo<>(goods);
+
+        Map<String, Object> goodsDetail = new HashMap<>();
+        goodsDetail.put("goodsList", goods);
+        goodsDetail.put("count", total);
+
+        return goodsDetail;
+    }
+
+    @Override
+    public Map<String, Object> queryRelatedByCateId(int id) {
+        Goods goods = goodsMapper.queryById(id);
+        List<Goods> goodsList = goodsMapper.queryGoodsById(goods.getCategoryId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("goodsList", goodsList);
+
+        return map;
     }
 }

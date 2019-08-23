@@ -43,4 +43,6 @@ public interface GoodsMapper {
     Integer searchGoodsCount(String keyword);
 
     List<Goods> searchGoodslist(String keyword);
+
+    List<Goods> queryGoodsById(@Param("categoryId") int categoryId);
 }

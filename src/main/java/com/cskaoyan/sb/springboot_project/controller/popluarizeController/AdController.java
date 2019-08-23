@@ -25,7 +25,7 @@ public class AdController {
      * 1、判断是否有 name、content，
      *      可以在这里判断，也可以直接在数据库底层 if test判断
      *
-     *      TODO：模糊查询的直接显示（不加入查询内容）
+     *      TODO：模糊查询的直接显示（不加入查询内容） —— 已解决 CONCAT % 即可
      */
     @RequestMapping("ad/list")
     public BaseResp<Map<String, Object>> listAdByCondition(PopPage popPage, String name, String content) {

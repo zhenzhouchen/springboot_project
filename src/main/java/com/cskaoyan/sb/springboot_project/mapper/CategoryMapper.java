@@ -47,7 +47,7 @@ public interface CategoryMapper {
 
     Category searchCategoryById(Integer i);
 
-//    ÄæÏò¹¤³ÌÁíÍâÌí¼Ó
+//    ï¿½ï¿½ï¿½ò¹¤³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     long countByExample(CategoryExample example);
 
@@ -66,4 +66,6 @@ public interface CategoryMapper {
     int updateByExampleSelective(@Param("record") Category record, @Param("example") CategoryExample example);
 
     int updateByExample(@Param("record") Category record, @Param("example") CategoryExample example);
+
+    List<Category> getFilterList(@Param("count") int count);
 }

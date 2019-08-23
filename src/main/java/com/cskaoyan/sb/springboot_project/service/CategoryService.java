@@ -24,4 +24,6 @@ public interface CategoryService {
     Category queryCategoryById(int id);
 
     List<Category> queryCategoryByPid(Category category);
+
+    List<Category> getFilterList(int count);
 }

@@ -22,4 +22,6 @@
             主要生成 mapper 接口+xml，还有一些方法，复制过去   
             
     `当前类别`
-        点击之后查询当前类别                    
+        点击之后查询当前类别       
+        - filterCategoryList 不知道 filter 了什么
+        - goodsList 可以放一下                                

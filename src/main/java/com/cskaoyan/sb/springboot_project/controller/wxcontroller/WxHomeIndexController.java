@@ -1,6 +1,9 @@
 package com.cskaoyan.sb.springboot_project.controller.wxcontroller;
 
+import com.cskaoyan.sb.springboot_project.bean.Category;
 import com.cskaoyan.sb.springboot_project.bean.Goods;
+import com.cskaoyan.sb.springboot_project.service.CategoryService;
+import com.cskaoyan.sb.springboot_project.service.GoodsService;
 import com.cskaoyan.sb.springboot_project.service.WxHomeIndexService;
 import com.cskaoyan.sb.springboot_project.util.UserTokenManager;
 import com.github.pagehelper.PageHelper;
@@ -19,6 +22,12 @@ import java.util.Map;
 public class WxHomeIndexController {
     @Autowired
     WxHomeIndexService wxIndexService;
+
+    @Autowired
+    GoodsService goodsService;
+
+    @Autowired
+    CategoryService categoryService;
 
     @RequestMapping("/home/index")
     public Map<String, Object> homeIndex() {
@@ -78,14 +87,23 @@ public class WxHomeIndexController {
     }
 
     @RequestMapping("/goods/list")
-    public Map<String, Object> searchGoodslist(HttpServletRequest request, String keyword) {
+    public Map<String, Object> searchGoodslist(HttpServletRequest request, String keyword,int categoryId,int page,int size) {
         Map<String, Object> map = new HashMap<>();
         String tokenKey = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(tokenKey);
         if (userId != null) {
             wxIndexService.updateSearchHistory(userId, keyword);
         }
-        Map<String, Object> data = wxIndexService.searchGoodslist(keyword);
+
+        // 搜索和显示集合 ： 有 keywords 则搜索
+        Map<String, Object> data = null;
+        if (keyword != null) {
+            data = wxIndexService.searchGoodslist(keyword);
+            List<Category> filterCategoryList = categoryService.getFilterList(20);
+            data.put("filterCategoryList", filterCategoryList);
+        } else {
+            data = goodsService.queryGoodsById(categoryId, page, size);
+        }
         map.put("data", data);
         map.put("errmsg", "成功");
         map.put("errno", 0);

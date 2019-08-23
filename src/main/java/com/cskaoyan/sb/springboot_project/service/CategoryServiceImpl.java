@@ -97,4 +97,12 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categories;
     }
+
+    @Override
+    public List<Category> getFilterList(int count) {
+
+        List<Category> filterCategoryList = categoryMapper.getFilterList(count);
+
+        return filterCategoryList;
+    }
 }

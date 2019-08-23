@@ -17,6 +17,10 @@ public class GrouponDetail {
 
     private List<String> subGroupons;
 
+
+
+
+
     public Goods getGoods() {
         return goods;
     }
