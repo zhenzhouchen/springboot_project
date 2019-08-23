@@ -34,6 +34,14 @@ public class AddressController {
         }else{
             items = addressService.queryAddressList(name,userId,sort,order);
         }
+        for(Address i:items){
+            String area = addressService.queryNameById(i.getAreaId());
+            String city = addressService.queryNameById(i.getCityId());
+            String province = addressService.queryNameById(i.getProvinceId());
+            i.setArea(area);
+            i.setProvince(province);
+            i.setCity(city);
+        }
         //获取每页的总记录数
         PageInfo<Address> userPageInfo = new PageInfo<>(items);info_map.put("items",items);
         long total = userPageInfo.getTotal();

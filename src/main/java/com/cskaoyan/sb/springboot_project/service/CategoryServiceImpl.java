@@ -3,7 +3,9 @@ package com.cskaoyan.sb.springboot_project.service;
 import com.cskaoyan.sb.springboot_project.bean.Category;
 import com.cskaoyan.sb.springboot_project.bean.CategoryExample;
 import com.cskaoyan.sb.springboot_project.bean.CategoryList;
+import com.cskaoyan.sb.springboot_project.bean.ResponseVo;
 import com.cskaoyan.sb.springboot_project.mapper.CategoryMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -92,6 +94,16 @@ public class CategoryServiceImpl implements CategoryService {
 
         CategoryExample categoryExample = new CategoryExample();
         categoryExample.createCriteria().andPidEqualTo(category.getId());
+
+        List<Category> categories = categoryMapper.selectByExample(categoryExample);
+
+        return categories;
+    }
+
+    @Override
+    public List<Category> queryBrotherCategoryByPid(Category category) {
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.createCriteria().andPidEqualTo(category.getPid()).andIdNotEqualTo(category.getId());
 
         List<Category> categories = categoryMapper.selectByExample(categoryExample);
 

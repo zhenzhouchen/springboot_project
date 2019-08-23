@@ -3,7 +3,10 @@ package com.cskaoyan.sb.springboot_project.mapper;
 import com.cskaoyan.sb.springboot_project.bean.Brand;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -23,4 +26,6 @@ public interface BrandMapper {
     int deleteBrandById(Brand brand);
 
     int updateBrandById(Brand brand);
+
+    Brand queryBrandByBrandId(@Param("brandId") Integer brandId);
 }

@@ -5,6 +5,7 @@ import com.cskaoyan.sb.springboot_project.bean.Category;
 import com.cskaoyan.sb.springboot_project.bean.CategoryList;
 import com.cskaoyan.sb.springboot_project.bean.Goods;
 import com.cskaoyan.sb.springboot_project.bean.Popularize.BaseResp;
+import com.cskaoyan.sb.springboot_project.bean.ResponseVo;
 import com.cskaoyan.sb.springboot_project.service.CategoryService;
 import com.cskaoyan.sb.springboot_project.service.GoodsService;
 import com.cskaoyan.sb.springboot_project.util.UserTokenManager;
@@ -96,7 +97,7 @@ public class WxCategoryController {
     @RequestMapping("goods/category")
     public BaseResp<Map<String, Object>> goodsCates(int id) {
         Category category = categoryService.queryCategoryById(id);
-        List<Category> brotherCates = categoryService.queryCategoryByPid(category);
+        List<Category> brotherCates = categoryService.queryBrotherCategoryByPid(category);
         Category parentCate = categoryService.queryCategoryById(category.getPid());
 
         Map<String, Object> data = new HashMap<>();

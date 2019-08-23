@@ -29,4 +29,8 @@ public interface CartMapper {
 
     @Update("update cskaoyan_mall_cart set deleted = 1, update_time = #{updateTime} where user_id = #{userId} and product_id = #{productId}")
     int deleteCartGoodsByProductIds(@Param("productId") int productId, @Param("updateTime") Date updateTime, @Param("userId") int userId);
+    @Select("select count(id) from cskaoyan_mall_cart where user_id = #{userId} and deleted = 0")
+    int selectGoodsCount(Integer userId);
+
+    List<Cart> selectCartCheckedListByUserId(Integer userId);
 }

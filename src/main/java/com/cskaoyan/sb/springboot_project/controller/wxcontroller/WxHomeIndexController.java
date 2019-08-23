@@ -1,14 +1,15 @@
 package com.cskaoyan.sb.springboot_project.controller.wxcontroller;
 
+import com.cskaoyan.sb.springboot_project.bean.Comment;
+import com.cskaoyan.sb.springboot_project.bean.Topic;
 import com.cskaoyan.sb.springboot_project.bean.Category;
 import com.cskaoyan.sb.springboot_project.bean.Goods;
 import com.cskaoyan.sb.springboot_project.service.CategoryService;
 import com.cskaoyan.sb.springboot_project.service.GoodsService;
 import com.cskaoyan.sb.springboot_project.service.WxHomeIndexService;
 import com.cskaoyan.sb.springboot_project.util.UserTokenManager;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,7 +67,7 @@ public class WxHomeIndexController {
         Map<String, Object> map = new HashMap<>();
         String tokenKey = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(tokenKey);
-        if (userId != null){
+        if (userId != null) {
             int i = wxIndexService.clearHistory(userId);
             if (i > 0) {
                 map.put("errmsg", "成功");
@@ -140,6 +141,66 @@ public class WxHomeIndexController {
             map.put("errmsg", "成功");
             map.put("errno", 0);
         }
+        return map;
+    }
+
+    @RequestMapping("/topic/detail")
+    public Map<String, Object> topicDetail(Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> data = wxIndexService.topicDetail(id);
+        map.put("data", data);
+        map.put("errmsg", "成功");
+        map.put("errno", 0);
+        return map;
+    }
+
+    @RequestMapping("/topic/related")
+    public Map<String, Object> topicRelated(Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        List<Topic> data = wxIndexService.topicRelated(id);
+        map.put("data", data);
+        map.put("errmsg", "成功");
+        map.put("errno", 0);
+        return map;
+    }
+
+    @RequestMapping("/comment/list")
+    public Map<String, Object> commentList(Integer page, Integer valueId) {
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> data = wxIndexService.commentList(page, valueId);
+        map.put("data", data);
+        map.put("errmsg", "成功");
+        map.put("errno", 0);
+        return map;
+    }
+
+    @RequestMapping("/comment/post")
+    public Map<String, Object> commentPost(@RequestBody Comment comment) {
+        Map<String, Object> map = new HashMap<>();
+        Comment data = wxIndexService.commentPost(comment);
+        map.put("data", data);
+        map.put("errmsg", "成功");
+        map.put("errno", 0);
+        return map;
+    }
+
+    @RequestMapping("/comment/count")
+    public Map<String, Object> commentCount(Integer valueId) {
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> data = wxIndexService.commentCount(valueId);
+        map.put("data", data);
+        map.put("errmsg", "成功");
+        map.put("errno", 0);
+        return map;
+    }
+
+    @RequestMapping("/brand/detail")
+    public Map<String, Object> brandDetail(Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> data = wxIndexService.brandDetail(id);
+        map.put("data", data);
+        map.put("errmsg", "成功");
+        map.put("errno", 0);
         return map;
     }
 

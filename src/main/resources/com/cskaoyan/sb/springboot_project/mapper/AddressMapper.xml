@@ -1,10 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.sb.springboot_project.mapper.AddressMapper">
+  <insert id="insertAddressInfo">
+    insert into cskaoyan_mall_address
+    (user_id,`name`,mobile,address,is_default,province_id,city_id,area_id)
+    values (
+    #{addressInfo.userId},
+    #{addressInfo.name},
+    #{addressInfo.mobile},
+    #{addressInfo.address},
+    #{addressInfo.isDefault},
+    #{addressInfo.provinceId},
+    #{addressInfo.cityId},
+    area_id = #{addressInfo.areaId}
+    )
+  </insert>
+
+  <update id="updateAddressInfo">
+    update cskaoyan_mall_address
+    set
+    `name` = #{addressInfo.name},
+     mobile = #{addressInfo.mobile},
+     address = #{addressInfo.address},
+     is_default = #{addressInfo.isDefault},
+     province_id = #{addressInfo.provinceId},
+     city_id = #{addressInfo.cityId},
+     area_id = #{addressInfo.areaId}
+    where id = #{addressInfo.id}
+  </update>
+
+  <select id="queryAddressInfoById" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
+    select
+        id,
+        `name`,
+        province_id as provinceId,
+        city_id as cityId,
+        area_id as areaId,
+        address,
+        mobile,
+        is_default as isDefault
+    from cskaoyan_mall_address
+    where id = #{id}
+  </select>
   <resultMap id="ReceAddressMap" type="com.cskaoyan.sb.springboot_project.bean.Address_receive">
     <result column="detailedAddress" property="detailedAddress"/>
     <result column="id" property="id"/>
-    <result column="isDefault" property="isDefault" typeHandler="com.cskaoyan.sb.springboot_project.handler.Int2Boolean"/>
+    <result column="isDefault" property="isDefault" />
     <result column="mobile" property="mobile"/>
     <result column="name" property="name"/>
   </resultMap>
@@ -64,4 +105,40 @@
     #{order}
   </select>
 
+  <select id="queryDefaultAddress" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
+    SELECT
+    id,
+    `name`,
+    user_id as userId,
+    province_id as provinceId,
+    city_id as cityId,
+    area_id as areaId,
+    address,
+    mobile,
+    is_default as isDefault,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    FROM cskaoyan_mall_address
+    where user_id = #{userId} and is_default = 1 and deleted = 0
+  </select>
+
+  <select id="queryAddressReceByAddressId" resultType="com.cskaoyan.sb.springboot_project.bean.Address">
+    SELECT
+    id,
+    `name`,
+    user_id as userId,
+    province_id as provinceId,
+    city_id as cityId,
+    area_id as areaId,
+    address,
+    mobile,
+    is_default as isDefault,
+    add_time as addTime,
+    update_time as updateTime,
+    deleted
+    FROM cskaoyan_mall_address
+    where id = #{addressId} and deleted = 0
+  </select>
+  
 </mapper>

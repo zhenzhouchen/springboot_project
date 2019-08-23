@@ -34,12 +34,15 @@ public class Address_receive {
         this.id = id;
     }
 
-    public boolean isDefault() {
+    public boolean getIsDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean aDefault) {
-        isDefault = aDefault;
+    public void setIsDefault(int aDefault) {
+        if(aDefault==1)
+            isDefault = true;
+        else
+            isDefault = false;
     }
 
     public String getMobile() {

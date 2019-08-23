@@ -48,7 +48,7 @@
   <update id="updateInventory">
     update cskaoyan_mall_goods_product
     set
-    number = number - #{cart.number},
+    number = number - #{number},
     update_time = #{updateTime}
     where goods_id = #{goodsId}
   </update>

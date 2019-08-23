@@ -39,6 +39,28 @@
     and cart.deleted = 0
   </select>
 
+  <select id="selectCartCheckedListByUserId" resultMap="cartMap">
+    select
+    cart.id,
+    cart.user_id,
+    cart.goods_id,
+    cart.goods_sn,
+    cart.goods_name,
+    cart.product_id,
+    cart.price,
+    cart.`number`,
+    cart.specifications,
+    cart.checked,
+    cart.pic_url,
+    cart.add_time,
+    cart.update_time,
+    cart.deleted
+    from cskaoyan_mall_cart cart
+    where cart.user_id = #{userId}
+    and cart.deleted = 0
+    and cart.checked = 1
+  </select>
+
   <update id="updateCart">
     update cskaoyan_mall_cart
     set

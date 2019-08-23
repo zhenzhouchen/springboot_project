@@ -4,10 +4,19 @@ import java.time.LocalDateTime;
 
 public class UserToken {
     private Integer userId;
+    private String username;
     private String token;
     private String sessionKey;
     private LocalDateTime expireTime;
     private LocalDateTime updateTime;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getSessionKey() {
         return sessionKey;

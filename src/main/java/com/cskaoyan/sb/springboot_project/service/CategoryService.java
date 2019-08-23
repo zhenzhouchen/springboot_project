@@ -2,6 +2,7 @@ package com.cskaoyan.sb.springboot_project.service;
 
 import com.cskaoyan.sb.springboot_project.bean.Category;
 import com.cskaoyan.sb.springboot_project.bean.CategoryList;
+import com.cskaoyan.sb.springboot_project.bean.ResponseVo;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,9 @@ public interface CategoryService {
     Category queryCategoryById(int id);
 
     List<Category> queryCategoryByPid(Category category);
+
+    List<Category> queryBrotherCategoryByPid(Category category);
+
 
     List<Category> getFilterList(int count);
 }

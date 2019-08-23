@@ -37,6 +37,12 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
     @Autowired
     Search_historyMapper searchHistoryMapper;
 
+    @Autowired
+    CommentMapper commentMapper;
+
+    @Autowired
+    UserMapper userMapper;
+
     //    private Map<String,Object> floorGoodsList;//category-id,name;goods
     @Override
     public Map<String, Object> queryAllIndexList() {
@@ -102,7 +108,7 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
     @Override
     public Map<String, Object> searchGoods() {
         Map<String, Object> data = new HashMap<>();
-        Keyword defaultKeyword = keywordMapper.defaultKeyword();
+        List<Keyword> defaultKeyword = keywordMapper.defaultKeyword();
         List<Keyword> hotKeywordList = keywordMapper.hotKeywordList();
         List<Search_history> historyKeywordList = searchHistoryMapper.historyKeywordList();
         data.put("defaultKeyword", defaultKeyword);
@@ -140,11 +146,11 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
     }
 
     @Override
-    public void updateSearchHistory(Integer userId,String keyword) {
+    public void updateSearchHistory(Integer userId, String keyword) {
         //先在表里查找有无此搜索记录，若无则插入
-        int i = searchHistoryMapper.selectByKeyword(userId,keyword);
+        int i = searchHistoryMapper.selectByKeyword(userId, keyword);
         if (i == 0) {
-            searchHistoryMapper.insertSearchHistory(userId,keyword);
+            searchHistoryMapper.insertSearchHistory(userId, keyword);
         }
     }
 
@@ -156,11 +162,82 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
 
     @Override
     public Map<String, Object> couponMyList() {
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         int count = couponMapper.countCouponMyList();
         List<Coupon> data = couponMapper.couponMyList();
-        map.put("count",count);
-        map.put("data",data);
+        map.put("count", count);
+        map.put("data", data);
         return map;
+    }
+
+    @Override//专题详情
+    public Map<String, Object> topicDetail(Integer id) {
+        Map<String, Object> data = new HashMap<>();
+        List<Goods> goods = new ArrayList<>();
+        Topic topic = topicMapper.topicDetail(id);
+        data.put("goods", goods);
+        data.put("topic", topic);
+        return data;
+    }
+
+    @Override//专题联想
+    public List<Topic> topicRelated(Integer id) {
+        List<Topic> topics = topicMapper.topicRelated(id);
+        return topics;
+    }
+
+    @Override//专题评论
+    public Map<String, Object> commentList(Integer page, Integer valueId) {
+        Map<String, Object> map = new HashMap<>();
+        int count = commentMapper.selectCount(valueId);
+        int currentPage = page;
+        List<Object> data = new ArrayList<>();
+        List<Comment> commentList = commentMapper.queryCommentListByValueId(valueId);
+        for (Comment comment : commentList) {
+            Map<String, Object> commentmap = new HashMap<>();
+            Date addTime = comment.getAddTime();
+            String content = comment.getContent();
+            String[] picList = comment.getPicUrls();
+            User userInfo = userMapper.queryAvatarUrlAndNickNameById(comment.getUserId());
+            commentmap.put("addTime", addTime);
+            commentmap.put("content", content);
+            commentmap.put("picList", picList);
+            commentmap.put("userInfo", userInfo);
+            data.add(commentmap);
+        }
+        map.put("count", count);
+        map.put("currentPage", currentPage);
+        map.put("data", data);
+        return map;
+    }
+
+    @Override
+    public Comment commentPost(Comment comment) {
+        //插入新评论，主键id和时间均为自增
+        int i = commentMapper.insertComment(comment);
+        //返回插入后自增的主键id，通过id查询刚刚插入的记录并返回data
+        Comment comment1 = null;
+        if (i == 1) {
+            comment1 = commentMapper.selectCommentById(comment.getId());
+        }
+        return comment1;
+    }
+
+    @Override
+    public Map<String, Object> commentCount(Integer valueId) {
+        Map<String, Object> data = new HashMap<>();
+        int allCount = commentMapper.selectCount(valueId);
+        int hasPicCount = commentMapper.hasPicCountCount(valueId);
+        data.put("allCount",allCount);
+        data.put("hasPicCount",hasPicCount);
+        return data;
+    }
+
+    @Override
+    public Map<String, Object> brandDetail(Integer brandId) {
+        Map<String, Object> data = new HashMap<>();
+        Brand brand = brandMapper.queryBrandByBrandId(brandId);
+        data.put("brand",brand);
+        return data;
     }
 }

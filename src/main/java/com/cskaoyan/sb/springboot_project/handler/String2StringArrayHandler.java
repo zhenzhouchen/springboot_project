@@ -20,7 +20,10 @@ public class String2StringArrayHandler implements TypeHandler<String[]> {
         for (String string : strings) {
             stringBuffer.append(string).append(",");
         }
-        String substring = stringBuffer.toString().substring(0, stringBuffer.length() - 1);
+        String substring = null;
+        if(stringBuffer.length() > 0) {
+            substring = stringBuffer.toString().substring(0, stringBuffer.length() - 1);
+        }
         preparedStatement.setString(i, substring);
     }
 
@@ -44,12 +47,17 @@ public class String2StringArrayHandler implements TypeHandler<String[]> {
 
     private String[] transString2StringArray(String string) {
         String str = string;
+        if("".equals(str) || str == null) {
+            return new String[]{""};
+        }
         if(str.charAt(0) == '[') {
             str = str.substring(1);
         }
         if(str.charAt(str.length() - 1) == ']') {
             str = str.substring(0, str.length() - 1);
         }
+        str = str.replace("\"", "");
+        str = str.replace(" ", "");
         String[] stringArray = str.split(",");
         return stringArray;
     }

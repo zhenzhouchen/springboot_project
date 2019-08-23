@@ -24,7 +24,7 @@ public interface Goods_productMapper {
     @Select("select number from cskaoyan_mall_goods_product where goods_id = #{goodsId}")
     int selectInventoryByGoodsId(Integer goodsId);
 
-    int updateInventory(@Param("cart") Cart cart, @Param("updateTime") Date date);
+    int updateInventory(@Param("cart") Cart cart, @Param("updateTime") Date date, @Param("number") int number);
 
     Goods_product selectProductByProductId(@Param("productId") Integer productId);
 }

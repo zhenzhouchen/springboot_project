@@ -1,14 +1,15 @@
 package com.cskaoyan.sb.springboot_project.controller.wxcontroller;
 
+
+import com.cskaoyan.sb.springboot_project.bean.Address;
 import com.cskaoyan.sb.springboot_project.bean.User;
 import com.cskaoyan.sb.springboot_project.bean.UserInfo;
-import com.cskaoyan.sb.springboot_project.mapper.UserMapper;
 import com.cskaoyan.sb.springboot_project.realm.MallToken;
+import com.cskaoyan.sb.springboot_project.service.AddressService;
 import com.cskaoyan.sb.springboot_project.service.UserService;
 import com.cskaoyan.sb.springboot_project.util.UserToken;
 import com.cskaoyan.sb.springboot_project.util.UserTokenManager;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +36,9 @@ public class LoginWxController {
         //UsernamePasswordToken token = new UsernamePasswordToken(username,password);
         MallToken mallToken = new MallToken(username, password, "wx");
 
-        //通过username查出userid放入session域
         int userId = userService.queryIdByName(username);
-        UserToken userToken = UserTokenManager.generateToken(userId);
+        //使用UserTokenManager后执行SecurityUtils.getSubject().getPrincipal()将不能获取到值
+        UserToken userToken = UserTokenManager.generateToken(userId, username);
 
         //如果用户名和密码不正确会报异常，要处理
         try {
@@ -77,5 +76,6 @@ public class LoginWxController {
         map.put("errno",0);
         return map;
     }
+
 
 }

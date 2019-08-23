@@ -3,6 +3,7 @@ package com.cskaoyan.sb.springboot_project.controller.wxcontroller;
 
 import com.cskaoyan.sb.springboot_project.bean.Cart;
 import com.cskaoyan.sb.springboot_project.bean.CartChecked;
+import com.cskaoyan.sb.springboot_project.bean.ResponseVo;
 import com.cskaoyan.sb.springboot_project.service.CartWxService;
 import com.cskaoyan.sb.springboot_project.util.UserTokenManager;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +52,7 @@ public class CartWxController {
             int total = cartWxService.selectGoodsCount(userId);
             hashMap.put("data", total);
             hashMap.put("errmsg", "成功");
-            hashMap.put("errno", 808);
+            hashMap.put("errno", 0);
         }
         return hashMap;
     }
@@ -106,5 +107,19 @@ public class CartWxController {
             hashMap.put("errno", 0);
         }
         return hashMap;
+    }
+
+    @RequestMapping("goodscount")
+    public ResponseVo goodsCount(HttpServletRequest request) {
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        return cartWxService.goodsCount(userId);
+    }
+
+    @RequestMapping("checkout")
+    public ResponseVo checkoutOrder(HttpServletRequest request, int cartId, int addressId, int couponId, int grouponRulesId) {
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        return cartWxService.checkoutOrder(userId, cartId, addressId, couponId, grouponRulesId);
     }
 }
