@@ -3,6 +3,7 @@ package com.cskaoyan.sb.springboot_project.mapper;
 import com.cskaoyan.sb.springboot_project.bean.Address;
 import com.cskaoyan.sb.springboot_project.bean.AddressInfo;
 import com.cskaoyan.sb.springboot_project.bean.Address_receive;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -23,6 +24,7 @@ public interface AddressMapper {
     int updateAddressInfo(@Param("addressInfo") AddressInfo addressInfo);
 
     int insertAddressInfo(@Param("addressInfo") AddressInfo addressInfo);
-
+    @Delete("delete from cskaoyan_mall_address where id = #{id}")
+    int deleteAddress(@Param("id") int id);
 
 }

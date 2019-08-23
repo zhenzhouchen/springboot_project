@@ -22,4 +22,6 @@ public interface AddressService {
     int updateAddressInfo(AddressInfo addressInfo);
 
     int insertAddressInfo(AddressInfo addressInfo);
+
+    int deleteAddress(int id);
 }

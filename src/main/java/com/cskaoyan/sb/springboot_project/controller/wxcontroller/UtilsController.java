@@ -85,4 +85,14 @@ public class UtilsController {
         map.put("errno",0);
         return map;
     }
+
+    @RequestMapping("address/delete")
+    public Map<String,Object> address_delete(@RequestBody AddressInfo addressInfo){
+        Map<String,Object> map = new HashMap<>();
+        int result = addressService.deleteAddress(addressInfo.getId());
+        if(result==1)
+            map.put("errmsg", "成功");
+        map.put("errno",0);
+        return map;
+    }
 }
