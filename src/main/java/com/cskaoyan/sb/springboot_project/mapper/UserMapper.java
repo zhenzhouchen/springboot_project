@@ -29,4 +29,5 @@ public interface UserMapper {
     @Select("select id from cskaoyan_mall_user where username = #{username}")
     int queryIdByName(@Param("username") String username);
 
+    User queryAvatarUrlAndNickNameById(Integer userId);
 }

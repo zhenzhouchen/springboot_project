@@ -15,7 +15,16 @@
     where username = #{username}
   </select>
 
-<resultMap id="User_statistic_Map" type="com.cskaoyan.sb.springboot_project.bean.User_statistics">
+  <resultMap id="UserInMapper" type="com.cskaoyan.sb.springboot_project.bean.User">
+    <result column="avatar" property="avatar"/>
+    <result column="nickname" property="nickname"/>
+  </resultMap>
+
+  <select id="queryAvatarUrlAndNickNameById" resultMap="UserInMapper">
+    select avatar,nickname from cskaoyan_mall_user where id = #{userId} and deleted = 0
+  </select>
+
+  <resultMap id="User_statistic_Map" type="com.cskaoyan.sb.springboot_project.bean.User_statistics">
   <result column="day" property="day"/>
   <result column="users" property="users"/>
 </resultMap>

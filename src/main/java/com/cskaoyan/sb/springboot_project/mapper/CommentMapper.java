@@ -17,4 +17,14 @@ public interface CommentMapper {
     int replyComment(Comment comment);
 
     Comment queryCommentById(Comment comment);
+
+    int selectCount(Integer valueId);
+
+    List<Comment> queryCommentListByValueId(Integer valueId);
+
+    int insertComment(Comment comment);
+
+    Comment selectCommentById(Integer id);
+
+    int hasPicCountCount(Integer valueId);
 }
