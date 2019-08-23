@@ -84,7 +84,9 @@
   </select>
 
   <resultMap id="brandValueLabelMap" type="com.cskaoyan.sb.springboot_project.bean.Brand">
+    <id property="id" column="id"/>
     <id property="value" column="id"/>
+    <result property="name" column="name"/>
     <result property="label" column="name"/>
     <result property="desc" column="desc"/>
     <result property="picUrl" column="pic_url"/>
@@ -102,6 +104,7 @@
   </select>
 
   <resultMap id="brandListMap" type="com.cskaoyan.sb.springboot_project.bean.Brand">
+    <id column="id" property="id"/>
     <id column="id" property="value"/>
     <result column="name" property="name"/>
     <result column="name" property="label"/>

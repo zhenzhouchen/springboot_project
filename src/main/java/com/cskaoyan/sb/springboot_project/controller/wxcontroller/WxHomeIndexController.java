@@ -175,4 +175,14 @@ public class WxHomeIndexController {
         return map;
     }
 
+    @RequestMapping("/brand/detail")
+    public Map<String, Object> brandDetail(Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> data = wxIndexService.brandDetail(id);
+        map.put("data", data);
+        map.put("errmsg", "成功");
+        map.put("errno", 0);
+        return map;
+    }
+
 }

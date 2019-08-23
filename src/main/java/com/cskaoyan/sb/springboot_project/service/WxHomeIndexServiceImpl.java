@@ -232,4 +232,12 @@ public class WxHomeIndexServiceImpl implements WxHomeIndexService {
         data.put("hasPicCount",hasPicCount);
         return data;
     }
+
+    @Override
+    public Map<String, Object> brandDetail(Integer brandId) {
+        Map<String, Object> data = new HashMap<>();
+        Brand brand = brandMapper.queryBrandByBrandId(brandId);
+        data.put("brand",brand);
+        return data;
+    }
 }

@@ -8,7 +8,6 @@ import com.cskaoyan.sb.springboot_project.mapper.GrouponMapper;
 import com.cskaoyan.sb.springboot_project.mapper.Groupon_rulesMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Service
 public class GrouponServiceImp implements GrouponService {
@@ -30,7 +30,7 @@ public class GrouponServiceImp implements GrouponService {
     @Autowired
     GoodsMapper goodsMapper;
 
-    Logger logger = Logger.getLogger(this.getClass());
+    Logger logger = Logger.getLogger(String.valueOf(this.getClass()));
 
     /**
      * —— 查询所有 groupon ——
