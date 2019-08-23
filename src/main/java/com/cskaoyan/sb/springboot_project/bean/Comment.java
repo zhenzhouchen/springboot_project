@@ -84,15 +84,6 @@ public class Comment {
         this.hasPicture = hasPicture;
     }
 
-//    public String getPicUrls() {
-////        return picUrls;
-////    }
-////
-////    public void setPicUrls(String picUrls) {
-////        this.picUrls = picUrls == null ? null : picUrls.trim();
-////    }
-
-
     public String[] getPicUrls() {
         return picUrls;
     }

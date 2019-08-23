@@ -2,6 +2,7 @@ package com.cskaoyan.sb.springboot_project.service;
 
 import com.cskaoyan.sb.springboot_project.bean.Cart;
 import com.cskaoyan.sb.springboot_project.bean.CartChecked;
+import com.cskaoyan.sb.springboot_project.bean.ResponseVo;
 
 import java.util.Date;
 import java.util.Map;
@@ -18,4 +19,6 @@ public interface CartWxService {
     int selectGoodsCount(Integer userId);
 
     int updateCartGoods(Cart cart);
+
+    ResponseVo goodsCount(Integer userId);
 }

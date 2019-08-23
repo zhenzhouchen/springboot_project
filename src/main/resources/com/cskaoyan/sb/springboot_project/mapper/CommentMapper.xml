@@ -119,10 +119,15 @@
     <result column="deleted" property="deleted" />
   </resultMap>
 
+<<<<<<< HEAD
   <select id="selectCommentById" resultMap="ReplyResultMap">
     select id, value_id, `type`, content, user_id,
     has_picture, pic_urls, star, add_time, update_time, deleted
     from cskaoyan_mall_comment where deleted = 0 and id = #{id}
+=======
+  <select id="queryCommentByUserId" resultMap="ReplyResultMap">
+    select * from cskaoyan_mall_comment where value_id = #{goodsId}
+>>>>>>> 807db12fffc55327403d896294d823cd4896f4f3
   </select>
 
   <select id="queryCommentById" resultMap="ReplyResultMap">

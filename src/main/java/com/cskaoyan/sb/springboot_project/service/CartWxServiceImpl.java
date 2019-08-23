@@ -132,4 +132,14 @@ public class CartWxServiceImpl implements CartWxService {
     public int updateCartGoods(Cart cart) {
         return cartMapper.updateCartGoods(cart);
     }
+
+    @Override
+    public ResponseVo goodsCount(Integer userId) {
+        List<Cart> cartList = cartMapper.selectCartListByUserId(userId);
+        int count = 0;
+        for (Cart cart : cartList) {
+            count += cart.getNumber();
+        }
+        return new ResponseVo(count, "成功", 0);
+    }
 }
