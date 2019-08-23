@@ -92,9 +92,7 @@ public class WxHomeIndexController {
         Map<String, Object> map = new HashMap<>();
         String tokenKey = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(tokenKey);
-        if (userId != null) {
-            wxIndexService.updateSearchHistory(userId, keyword);
-        }
+
 
         // 搜索和显示集合 ： 有 keywords 则搜索
         Map<String, Object> data = null;
@@ -102,6 +100,10 @@ public class WxHomeIndexController {
             data = wxIndexService.searchGoodslist(keyword);
             List<Category> filterCategoryList = categoryService.getFilterList(20);
             data.put("filterCategoryList", filterCategoryList);
+
+            if (userId != null) {
+                wxIndexService.updateSearchHistory(userId, keyword);
+            }
         } else {
             data = goodsService.queryGoodsById(categoryId, page, size);
         }
