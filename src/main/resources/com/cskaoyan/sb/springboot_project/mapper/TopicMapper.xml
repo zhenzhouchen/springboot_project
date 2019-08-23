@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="read_count" jdbcType="VARCHAR" property="readCount" />
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
@@ -422,5 +423,17 @@
   <select id="topicList" resultMap="BaseResultMap">
     select id, title, subtitle, price, read_count, pic_url
      from cskaoyan_mall_topic where deleted = 0
+  </select>
+
+  <select id="topicDetail" resultMap="BaseResultMap">
+    select add_time,content,deleted,goods,id,pic_url,
+    price,read_count,sort_order,subtitle,title,update_time
+    from cskaoyan_mall_topic where deleted = 0 and id = #{id}
+  </select>
+
+  <select id="topicRelated" resultMap="BaseResultMap">
+    select add_time,content,deleted,goods,id,pic_url,
+    price,read_count,sort_order,subtitle,title,update_time
+    from cskaoyan_mall_topic where deleted = 0 and id != #{id}
   </select>
 </mapper>

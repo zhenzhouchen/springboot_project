@@ -39,4 +39,8 @@ public interface TopicMapper {
     List<Topic> listTopicByCondition(@Param("sort") String sort, @Param("order") String order);
 
     List<Topic> searchTopicByCondition(@Param("sort") String sort, @Param("order") String order, @Param("title") String title,@Param("subtitle") String subtitle);
+
+    Topic topicDetail(Integer id);
+
+    List<Topic> topicRelated(Integer id);
 }
