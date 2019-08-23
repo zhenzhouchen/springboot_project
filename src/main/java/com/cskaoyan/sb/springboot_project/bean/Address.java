@@ -19,13 +19,38 @@ public class Address {
 
     private String mobile;
 
-    private Boolean isDefault;
+    boolean isDefault;
 
     private Date addTime;
 
     private Date updateTime;
 
     private Boolean deleted;
+
+    String areaName;
+    String cityName;
+    String provinceName;
+
+    public Address() {
+    }
+
+    public Address(Integer id, String name, Integer userId, Integer provinceId, Integer cityId, Integer areaId, String address, String mobile, boolean isDefault, Date addTime, Date updateTime, Boolean deleted, String areaName, String cityName, String provinceName) {
+        this.id = id;
+        this.name = name;
+        this.userId = userId;
+        this.provinceId = provinceId;
+        this.cityId = cityId;
+        this.areaId = areaId;
+        this.address = address;
+        this.mobile = mobile;
+        this.isDefault = isDefault;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+        this.areaName = areaName;
+        this.cityName = cityName;
+        this.provinceName = provinceName;
+    }
 
     public Integer getId() {
         return id;
@@ -40,7 +65,7 @@ public class Address {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public Integer getUserId() {
@@ -80,7 +105,7 @@ public class Address {
     }
 
     public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+        this.address = address;
     }
 
     public String getMobile() {
@@ -88,15 +113,19 @@ public class Address {
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+        this.mobile = mobile;
     }
 
-    public Boolean getIsDefault() {
+    public boolean getIsDefault() {
         return isDefault;
     }
 
-    public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
+    public void setIsDefault(int aDefault) {
+        if(aDefault==1)
+        isDefault = true;
+        else
+            isDefault = false;
+
     }
 
     public Date getAddTime() {
@@ -122,4 +151,29 @@ public class Address {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+
 }
