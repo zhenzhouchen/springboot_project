@@ -68,6 +68,7 @@
     <result property="deleted" column="deleted"/>
   </resultMap>
 
+
   <select id="selectBrandList" resultMap="brandBaseMap">
     select id,`name`,`desc`,pic_url,sort_order,floor_price,add_time,update_time,deleted
     from cskaoyan_mall_brand
@@ -80,6 +81,24 @@
       </if>
     </where>
     order by #{sort} ${order}
+  </select>
+
+  <resultMap id="brandValueLabelMap" type="com.cskaoyan.sb.springboot_project.bean.Brand">
+    <id property="value" column="id"/>
+    <result property="label" column="name"/>
+    <result property="desc" column="desc"/>
+    <result property="picUrl" column="pic_url"/>
+    <result property="sortOrder" column="sort_order"/>
+    <result property="floorPrice" column="floor_price"/>
+    <result property="addTime" column="add_time"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="deleted" column="deleted"/>
+  </resultMap>
+
+  <select id="queryBrandByBrandId" resultMap="brandValueLabelMap">
+    select id,`name`,`desc`,pic_url,sort_order,floor_price,add_time,update_time,deleted
+    from cskaoyan_mall_brand
+    where id = #{brandId}
   </select>
 
   <resultMap id="brandListMap" type="com.cskaoyan.sb.springboot_project.bean.Brand">

@@ -3,6 +3,7 @@ package com.cskaoyan.sb.springboot_project.mapper;
 import com.cskaoyan.sb.springboot_project.bean.Issue;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface IssueMapper {
     int deleteIssueById(Issue issue);
 
     int insertIssue(Issue issue);
+    @Select("select * from cskaoyan_mall_issue")
+    List<Issue> queryIssueList();
 }

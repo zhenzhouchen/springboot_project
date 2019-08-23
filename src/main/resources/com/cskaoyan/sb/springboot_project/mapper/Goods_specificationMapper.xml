@@ -52,8 +52,14 @@
     <result column="deleted" property="deleted" />
   </resultMap>
 
+  <select id="querySpecificationByName" resultMap="BaseResultMap">
+    select id,goods_id,specification,`value`,pic_url,add_time,update_time,deleted
+    from cskaoyan_mall_goods_specification
+    where goods_id = #{goodsId} and deleted = 0 and specification = #{specification}
+  </select>
+
   <select id="queryByGoodsId" resultMap="BaseResultMap">
-    select id,goods_id,specification,value,pic_url,add_time,update_time,deleted
+    select id,goods_id,specification,`value`,pic_url,add_time,update_time,deleted
     from cskaoyan_mall_goods_specification
     where goods_id = #{id} and deleted = 0
   </select>
