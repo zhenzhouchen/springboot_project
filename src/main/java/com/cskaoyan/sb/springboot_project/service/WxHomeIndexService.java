@@ -33,4 +33,6 @@ public interface WxHomeIndexService {
     Comment commentPost(Comment comment);
 
     Map<String, Object> commentCount(Integer valueId);
+
+    Map<String, Object> brandDetail(Integer id);
 }
