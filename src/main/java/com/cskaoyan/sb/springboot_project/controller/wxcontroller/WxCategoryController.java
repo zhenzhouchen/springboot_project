@@ -117,6 +117,7 @@ public class WxCategoryController {
         return mapBaseResp;
     }
 
+/*
     @RequestMapping("goods/detail")
     public BaseResp<Goods> goodsDetail(int id) {
         Goods goods = goodsService.queryById(id);
@@ -133,10 +134,12 @@ public class WxCategoryController {
         return mapBaseResp;
     }
 
-    /**
+    */
+/**
      * —— 查询相关商品 ——
      * 1、按照 id 的 categoryid 查询
-     */
+     *//*
+
     @RequestMapping("goods/related")
     public BaseResp<Map<String, Object>> goodsRelated(int id) {
         Map<String,Object> data = goodsService.queryRelatedByCateId(id);
@@ -152,6 +155,7 @@ public class WxCategoryController {
 
         return mapBaseResp;
     }
+*/
 
 
 
